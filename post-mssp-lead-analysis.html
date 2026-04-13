@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What 12 Years of MSSP Data Tells Us About Long-Term ACO Performance — TRYNYTY</title>
+  <meta name="description" content="A data-driven analysis of 12 years of Medicare Shared Savings Program results — what separates consistently high-performing ACOs, what the COVID era revealed, and what it all means for the LEAD Model decision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(32,178,170,0.12); color: var(--teal); border: 1px solid rgba(32,178,170,0.25); }
+    .article-body { max-width: 800px; margin: 60px auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.65rem; color: var(--white); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--teal); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .article-body a { color: var(--teal); text-decoration: underline; }
+    .part-label { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: rgba(32,178,170,0.1); border: 1px solid rgba(32,178,170,0.2); padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; }
+    .stat-callout { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 32px 0; }
+    .stat-callout-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 20px; text-align: center; }
+    .stat-callout-num { font-family: var(--font-serif); font-size: 1.8rem; color: var(--teal); line-height: 1; margin-bottom: 6px; }
+    .stat-callout-label { font-size: 12px; color: var(--slate); line-height: 1.4; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+    .data-table th { background: var(--navy-mid); padding: 10px 14px; text-align: left; font-weight: 600; color: var(--slate-light); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .data-table td { padding: 10px 14px; color: var(--slate-light); border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
+    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .data-table .highlight { color: var(--teal); font-weight: 600; }
+    .callout-box { background: rgba(32,178,170,0.06); border: 1px solid rgba(32,178,170,0.2); border-radius: var(--radius); padding: 24px 28px; margin: 32px 0; }
+    .callout-box h4 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--white); margin-bottom: 12px; }
+    .callout-box p { font-size: 0.95rem; margin-bottom: 0; }
+    .lead-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin: 28px 0; }
+    .lead-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 20px 22px; }
+    .lead-label { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 8px; text-transform: uppercase; }
+    .lead-title { font-weight: 600; color: var(--white); margin-bottom: 6px; font-size: 14px; }
+    .lead-body { font-size: 13px; color: var(--slate-light); line-height: 1.6; }
+    .author-card { max-width: 800px; margin: 0 auto; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 32px 40px 80px; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 24px 20px 60px; }
+      .author-card { padding: 24px 20px; }
+      .stat-callout { grid-template-columns: 1fr; }
+      .lead-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <!-- Jump navigation -->
+  <div style="background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 12px 40px;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+      <span style="font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px;">Jump to:</span>
+      <a href="#part1" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Program Grew Up</a>
+      <a href="#part2" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Longevity Wins</a>
+      <a href="#part3" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Quality &amp; Savings</a>
+      <a href="#part4" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">COVID Lens</a>
+      <a href="#part5" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">What It Means for LEAD</a>
+    </div>
+  </div>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">MSSP &amp; ACOs</span>
+      <h1 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white);">What 12 Years of MSSP Data Tells Us About Long-Term ACO Performance</h1>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>April 2026</span>
+        <span>·</span>
+        <span>16 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <p>The Medicare Shared Savings Program has now produced twelve years of publicly available performance data covering more than 1,000 unique ACOs and over 5,200 ACO-years of participation. That's a dataset large enough to move beyond anecdote — to ask, with some statistical confidence, what actually separates ACOs that consistently generate value from those that don't.</p>
+
+    <p>The answers are clearer than you might expect. And for provider organizations currently evaluating their program options — MSSP, ACO REACH, or the newly released LEAD Model — understanding what the data shows about long-term performance trajectories may be the most useful analytical exercise you can do right now.</p>
+
+    <p>The analysis below draws on the full 2013–2024 MSSP Public Use File dataset, which is available to explore interactively through TRYNYTY's free <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>. The findings are organized around five questions that, in my experience advising ACOs and risk-bearing providers, are the ones that actually drive strategic decisions.</p>
+
+    <h2 id="part1"><span class="part-label">Part One</span><br/>The Program Grew Up — and CMS Helped It Get There</h2>
+
+    <p>The aggregate trajectory of the MSSP program over twelve years is one of the most compelling stories in modern healthcare policy — and one of the least told. When the program launched in 2013 with 220 ACOs, the average savings rate was 0.44% and only 23.6% of ACOs earned shared savings. Critics pointed to the program's early struggles as evidence that accountable care at scale was aspirational at best.</p>
+
+    <p>The PY 2024 data tells a materially different story.</p>
+
+    <div class="stat-callout">
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">5.92%</div>
+        <div class="stat-callout-label">Average ACO savings rate in PY 2024, vs. 0.44% in 2013</div>
+      </div>
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">75.4%</div>
+        <div class="stat-callout-label">Share of ACOs earning shared savings in PY 2024, vs. 23.6% in 2013</div>
+      </div>
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">$4.1B</div>
+        <div class="stat-callout-label">Total ACO earned savings in PY 2024 alone, vs. $316M in 2013</div>
+      </div>
+    </div>
+
+    <p>Across all twelve years, MSSP ACOs generated <strong>$18.8 billion in earned savings</strong> against $32.4 billion in gross generated savings — the gap representing quality adjustments and shared savings formulas, not wasted value. This is a program that, by the numbers, is working.</p>
+
+    <p>What's often underappreciated is the role CMS and CMMI have played in actively listening to stakeholder feedback and adjusting the program accordingly. The transition from Track 1 through Tracks 2 and 3, the introduction of the BASIC and ENHANCED tracks under the Pathways to Success rule in 2019, the SNF waiver expansion, and the ongoing quality measure updates — these weren't bureaucratic shuffles. They were structural responses to what participating organizations were telling the agency about what was and wasn't working.</p>
+
+    <p>The 2019 Pathways to Success redesign in particular had a measurable effect. ACOs that had been stuck in low-risk Track 1 arrangements were pushed toward performance-based tracks with more meaningful upside — and the data shows a corresponding improvement in program-wide savings rates. CMS's willingness to iterate on program design, informed by ACO feedback and performance data, is a feature of MSSP that doesn't get enough credit. It's also a signal worth paying attention to as the LEAD Model launches: the agency has demonstrated it will adjust when the evidence warrants it.</p>
+
+    <h2 id="part2"><span class="part-label">Part Two</span><br/>Longevity Is the Strongest Predictor of Success</h2>
+
+    <p>Of all the findings in this dataset, this one is the most actionable and the most underappreciated: <strong>how long an ACO has been in the program predicts its savings rate more reliably than almost any other factor.</strong></p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Years in Program</th>
+          <th>ACOs (n)</th>
+          <th>Avg Recent Savings Rate</th>
+          <th>Median Recent Savings Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1–2 years</td>
+          <td>235</td>
+          <td>2.07%</td>
+          <td>1.92%</td>
+        </tr>
+        <tr>
+          <td>3–5 years</td>
+          <td>360</td>
+          <td>2.08%</td>
+          <td>2.36%</td>
+        </tr>
+        <tr>
+          <td>6–9 years</td>
+          <td>271</td>
+          <td>3.57%</td>
+          <td>3.61%</td>
+        </tr>
+        <tr class="highlight">
+          <td><strong>10+ years</strong></td>
+          <td><strong>173</strong></td>
+          <td class="highlight"><strong>5.20%</strong></td>
+          <td class="highlight"><strong>5.45%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>ACOs with ten or more years in the program average 5.20% savings — more than two and a half times the rate of organizations in their first two years. The 196 ACOs that have maintained five or more consecutive years of earning shared savings represent a cohort of organizations that have fundamentally cracked the value-based care operating model. PBACO Holding, LLC has earned shared savings in every single performance year since the program launched in 2013 — thirteen consecutive years — accumulating $572 million in total earned savings at an 8.1% average savings rate.</p>
+
+    <p>This pattern didn't surprise me. It validated something I've observed in every consulting engagement I've taken on with VBC organizations: the barrier to success in value-based care is almost never clinical. It's cultural and operational.</p>
+
+    <p>Most provider organizations entering MSSP come from a fee-for-service environment where every system — from the EMR configuration to the billing workflows to the reporting tools to the KPIs that clinical leadership tracks — is optimized for volume. Maximizing revenue means maximizing encounters. The incentive structure permeates everything, including how physicians think about their days and what success looks like.</p>
+
+    <p>Value-based care requires inverting that logic. Success means keeping patients out of high-cost settings, not filling them. It means investing in outreach, care coordination, and documentation completeness for patients who aren't currently generating revenue. It means measuring things that matter for outcomes rather than things that drive billing. That is a genuine cultural shift — and cultural shifts don't happen in year one.</p>
+
+    <blockquote>
+      <p>Turning the Titanic takes time. The ACOs that struggle early and break through aren't the ones that got lucky — they're the ones that made the investment in infrastructure, clinical leadership, and the right tools, and stayed the course long enough to see it pay off.</p>
+    </blockquote>
+
+    <p>What the data also shows is that the early years aren't wasted even when savings rates are low. ACOs in years one through five are building the data pipelines, the care management workflows, the provider engagement models, and the quality reporting infrastructure that become the engine of performance in years six through ten and beyond. The investment is real and the return is delayed — which is exactly why program structure matters so much. You need enough runway to realize the payoff.</p>
+
+    <h2 id="part3"><span class="part-label">Part Three</span><br/>Quality and Financial Performance Are the Same Competency</h2>
+
+    <p>The conventional framing of quality measures in VBC programs treats them as a separate dimension from financial performance — something you track and report because you have to, alongside the savings rate you actually care about. The data suggests this framing is wrong.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Quality Score Range</th>
+          <th>ACO-Years (2022–2024)</th>
+          <th>Average Savings Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Below 75</td>
+          <td>214</td>
+          <td>2.21%</td>
+        </tr>
+        <tr>
+          <td>75–85</td>
+          <td>683</td>
+          <td>3.95%</td>
+        </tr>
+        <tr>
+          <td>85–90</td>
+          <td>345</td>
+          <td>5.63%</td>
+        </tr>
+        <tr>
+          <td class="highlight"><strong>90 and above</strong></td>
+          <td>169</td>
+          <td class="highlight"><strong>9.10%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>ACOs scoring 90 or above on the quality composite averaged <strong>9.10% savings</strong> — more than four times the 2.21% average for those below 75. The correlation is too strong and too consistent across years to be coincidental.</p>
+
+    <p>The explanation is structural. The organizational capabilities required to perform well on quality measures — complete and accurate documentation, proactive patient outreach, care gap closure, chronic disease monitoring — are exactly the same capabilities that drive cost efficiency. An ACO that has built the clinical workflows to identify and close a patient's HbA1c care gap has also built the system to prevent that patient from presenting in the ED with a diabetic crisis six months later. The quality score is measuring the infrastructure. The savings rate is measuring the output. They're the same machine.</p>
+
+    <p>This has direct implications for how ACOs should prioritize their operational investments. Organizations that treat quality reporting as a compliance exercise — doing the minimum required to meet thresholds — are leaving both quality points and financial performance on the table. The high performers in this dataset aren't gaming their quality scores; they've built systems that make high scores a natural byproduct of how they deliver care.</p>
+
+    <h2 id="part4"><span class="part-label">Part Four</span><br/>What COVID Revealed About Durable Performance</h2>
+
+    <p>PY 2020 produced the largest single-year improvement in program history. The share of ACOs earning savings jumped from 50.3% in 2019 to 67.3% in 2020, and total earned savings grew from $1.1 billion to $2.3 billion. The mechanism was straightforward: COVID-related utilization declines reduced ACO expenditures against benchmarks set before the pandemic, generating savings that weren't the result of anything the ACOs did.</p>
+
+    <p>The more interesting question is what happened next — and whether the organizations that performed well in 2020 were able to maintain that performance as utilization normalized.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Avg Savings Rate</th>
+          <th>% Earning Savings</th>
+          <th>Total Earned</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PY 2019</td>
+          <td>3.54%</td>
+          <td>52.3%</td>
+          <td>$1.45B</td>
+        </tr>
+        <tr>
+          <td>PY 2020</td>
+          <td>3.88%</td>
+          <td>67.3%</td>
+          <td>$2.28B</td>
+        </tr>
+        <tr>
+          <td>PY 2021</td>
+          <td>4.85%</td>
+          <td>57.7%</td>
+          <td>$1.96B</td>
+        </tr>
+        <tr>
+          <td>PY 2022</td>
+          <td>3.79%</td>
+          <td>62.9%</td>
+          <td>$2.52B</td>
+        </tr>
+        <tr>
+          <td>PY 2023</td>
+          <td>4.44%</td>
+          <td>69.1%</td>
+          <td>$3.08B</td>
+        </tr>
+        <tr class="highlight">
+          <td><strong>PY 2024</strong></td>
+          <td class="highlight"><strong>5.92%</strong></td>
+          <td class="highlight"><strong>75.4%</strong></td>
+          <td class="highlight"><strong>$4.10B</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>What the data shows is that ACO performance not only held post-COVID, it continued to improve. PY 2022 saw some normalization — as expected — but PY 2023 and 2024 set new program records on both average savings rate and total earned savings. The COVID windfall didn't inflate a bubble; it preceded a period of sustained improvement.</p>
+
+    <p>I think the explanation has two parts. First, the ACOs that were dedicated to value-based care over the long term stayed in the program. They weren't opportunists — they were organizations that had already made the cultural and operational shift, and they found in the COVID period what well-run VBC organizations generally find in periods of volatility: that managing a defined population proactively gives you better visibility and control than the fee-for-service alternative provides.</p>
+
+    <p>The second part is less discussed but important: the post-COVID utilization normalization was not uniform. Populations that had been managed proactively through the pandemic — ACO patients with active care coordination, regular touchpoints, and chronic disease monitoring — showed meaningfully different utilization patterns as care resumed than unmanaged populations did. Many unmanaged populations saw steep post-pandemic utilization spikes driven by deferred care and worsened chronic conditions. ACOs that had maintained engagement through COVID saw smaller spikes — because the deterioration that drives those spikes had been partially prevented.</p>
+
+    <p>The data validates a core argument for value-based care: the investment in managing a population doesn't just pay off in normal times. It pays off most clearly when conditions are volatile and unmanaged populations are most exposed.</p>
+
+    <h2 id="part5"><span class="part-label">Part Five</span><br/>What This Means for the LEAD Decision</h2>
+
+    <p>The LEAD Model — the new ACO framework released by CMMI — is generating significant attention, and rightly so. But the decision of whether to participate in LEAD, continue in MSSP, or pursue both simultaneously deserves to be grounded in data rather than driven by the novelty of a new program. The MSSP dataset offers a useful frame for evaluating what LEAD's structural features are actually worth.</p>
+
+    <div class="lead-grid">
+      <div class="lead-item">
+        <div class="lead-label">LEAD Feature</div>
+        <div class="lead-title">10-Year Agreement Term</div>
+        <div class="lead-body">The longevity data is unambiguous: ACOs with 10+ years average 5.20% savings vs. 2.07% for those in years 1–2. A 10-year term gives organizations the runway to realize the full return on their VBC investment — runway that shorter agreement periods don't provide. For organizations that are serious about building a durable value-based care model, LEAD's term structure is not a constraint; it's an asset.</div>
+      </div>
+      <div class="lead-item">
+        <div class="lead-label">LEAD Feature</div>
+        <div class="lead-title">Concurrent Risk Adjustment Enhancements</div>
+        <div class="lead-body">One of the persistent frustrations in MSSP is that prospective risk scores can fail to capture the true complexity of a panel — particularly for ACOs serving high-needs populations. Concurrent risk adjustment, which updates scores based on current-year diagnoses, addresses this directly. For organizations with complex populations, this is a meaningful correction that better aligns payment with actual risk.</div>
+      </div>
+      <div class="lead-item">
+        <div class="lead-label">LEAD Feature</div>
+        <div class="lead-title">$623 Per Beneficiary Per Year</div>
+        <div class="lead-body">The quality/savings correlation in MSSP data is clear: the organizations that invest in the infrastructure to manage their populations — care coordination, outreach, documentation completeness — consistently outperform those that don't. The $623 PBPY prevention investment under LEAD is effectively CMS funding the exact operational capabilities that the MSSP data shows are predictive of savings. It's a direct investment in the infrastructure that drives performance.</div>
+      </div>
+      <div class="lead-item">
+        <div class="lead-label">LEAD Feature</div>
+        <div class="lead-title">Phased Risk On-Ramps</div>
+        <div class="lead-body">The cultural shift required to succeed in VBC takes time. Asking organizations to assume significant downside risk before they've built the systems and culture to manage it has been a barrier to MSSP participation. LEAD's phased on-ramps address this by giving organizations time to build capability before they're fully exposed — which is consistent with what the performance data shows about the value of investing in the early years.</div>
+      </div>
+    </div>
+
+    <div class="callout-box">
+      <h4>MSSP or LEAD — or both?</h4>
+      <p style="color: var(--slate-light); margin-bottom: 12px;">The right answer depends on where your organization is in its VBC journey, your patient population complexity, your existing care management infrastructure, and your appetite for a long-term commitment. For many organizations, the question isn't MSSP vs. LEAD — it's whether LEAD's structural advantages justify the commitment required to participate well.</p>
+      <p style="color: var(--slate-light); margin-bottom: 0;">The MSSP ACO Explorer can help you benchmark your current performance against comparable organizations, understand your savings rate trajectory relative to program averages, and model what a longer program commitment might look like based on historical patterns. It's a useful starting point for any organization doing this analysis. <a href="https://mssppuf.trynytyhealth.com" target="_blank">Explore the data free here →</a></p>
+    </div>
+
+    <h2>The Bottom Line</h2>
+
+    <p>Twelve years of MSSP data supports a set of conclusions that should inform how any provider organization thinks about its value-based care strategy:</p>
+
+    <p><strong>The program works, and it works better over time.</strong> The trajectory from 2013 to 2024 — across savings rates, percentage of earners, and total program savings — is one of consistent improvement, not stagnation. Organizations that stayed the course were right to do so.</p>
+
+    <p><strong>Time in program is the most reliable predictor of performance.</strong> The gap between early-year ACOs and 10+ year participants isn't talent — it's infrastructure, culture, and accumulated operational learning. The early years are an investment, not a failure.</p>
+
+    <p><strong>Quality and financial performance are inseparable.</strong> ACOs scoring 90+ on quality averaged more than four times the savings rate of low-quality scorers. The infrastructure that drives quality is the infrastructure that drives savings.</p>
+
+    <p><strong>VBC organizations are more resilient in volatility.</strong> The COVID period, far from undermining the program's rationale, validated it. Well-managed ACO populations showed better post-pandemic utilization patterns than the unmanaged alternative.</p>
+
+    <p>For organizations evaluating the LEAD Model: the MSSP data provides a strong empirical basis for taking LEAD's structural features seriously. The 10-year term, concurrent risk adjustment, and prevention investment aren't arbitrary design choices — they address the specific barriers that the MSSP data shows have historically limited performance. The application window is short, and the analysis is worth doing now.</p>
+
+  </div>
+
+  <div class="author-card">
+    <div class="author-card-inner">
+      <img src="headshot.jpg" alt="Andrew Smithson" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(32,178,170,0.3);flex-shrink:0;" />
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. 15+ years in value-based care strategy, financial analytics, and managed care consulting across health plans, health systems, ACOs, and IPAs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="blog.html" class="btn btn-ghost">← Back to Insights</a>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-ghost">Explore the Data →</a>
+      <a href="contact.html" class="btn btn-primary">Discuss with Our Team →</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
