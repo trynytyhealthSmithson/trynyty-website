@@ -95,9 +95,22 @@
     </div>
   </div>
 
+  <!-- Jump navigation -->
+  <div style="background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 12px 40px;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+      <span style="font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px;">Jump to:</span>
+      <a href="#part1" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap;">What We Said in 2024</a>
+      <a href="#part2" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap;">Advance Notice vs. Final Rule</a>
+      <a href="#part3" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap;">Market Fallout</a>
+      <a href="#part4" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap;">2027 Notice</a>
+      <a href="#part5" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap;">Policy Failure</a>
+      <a href="#part6" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap;">What to Do Now</a>
+    </div>
+  </div>
+
   <div class="article-body">
 
-    <p>In early 2024, when CMS released its Advance Notice proposing sweeping changes to the CMS-HCC risk adjustment model, I published an analysis warning that the proposed revisions were contradictory to the agency's own stated goals. I argued that flattening coefficients for chronic conditions, removing thousands of diagnosis codes, and misreading the causation behind coding variation between Medicare Advantage and traditional FFS Medicare would reverse a decade of progress — harming the very populations and provider organizations that had made value-based care work.</p>
+    <p>In early 2024, when CMS released its Advance Notice proposing sweeping changes to the CMS-HCC risk adjustment model, I published <a href="post-v24-v28.html">an analysis warning</a> that the proposed revisions were contradictory to the agency's own stated goals. I argued that flattening coefficients for chronic conditions, removing thousands of diagnosis codes, and misreading the causation behind coding variation between Medicare Advantage and traditional FFS Medicare would reverse a decade of progress — harming the very populations and provider organizations that had made value-based care work.</p>
 
     <p>At the time, some of those warnings may have seemed like advocacy. The data since has made them look more like forecasting.</p>
 
@@ -105,7 +118,7 @@
 
     <p>This is that accounting.</p>
 
-    <h2><span class="part-label">Part One</span><br/>What We Said in 2024 — and Why</h2>
+    <h2 id="part1"><span class="part-label">Part One</span><br/>What We Said in 2024 — and Why</h2>
 
     <p>The core argument in my 2024 analysis was straightforward: CMS's proposed HCC reclassification was built on a flawed assessment. The agency identified higher rates of certain diagnoses in Medicare Advantage populations compared to traditional FFS Medicare and concluded this represented discretionary or inappropriate coding. The proposed remedy was to remove or flatten those diagnoses in the risk model.</p>
 
@@ -125,7 +138,7 @@
 
     <p>The specific concern was the downstream incentive structure these changes would create. By flattening or reducing coefficients for chronic conditions like diabetes and depression while leaving high coefficients for severe acute complications like necrotic wounds and vascular disease, the model would financially reward providers who let conditions deteriorate to crisis level and penalize those who prevented the crisis from occurring. This is the opposite of value.</p>
 
-    <h2><span class="part-label">Part Two</span><br/>What the V28 Advance Notice Proposed vs. What the Final Rule Delivered</h2>
+    <h2 id="part2"><span class="part-label">Part Two</span><br/>What the V28 Advance Notice Proposed vs. What the Final Rule Delivered</h2>
 
     <p>When the original Advance Notice was released, the proposed risk model impact was a <strong>-3.12%</strong> reduction in risk scores across the MA population. The outcry from plans, provider groups, and patient advocates was significant. America's Physician Groups, the American College of Physicians, and numerous health equity organizations submitted comments arguing — consistent with my analysis — that the changes would harm disadvantaged populations and undermine value-based care models.</p>
 
@@ -135,7 +148,7 @@
 
     <p>The result, as the market has now demonstrated, is that the phase-in bought time but not correction. The incentive misalignment was baked into the model regardless of the pace of implementation.</p>
 
-    <h2><span class="part-label">Part Three</span><br/>What Actually Happened — The Market Verdict</h2>
+    <h2 id="part3"><span class="part-label">Part Three</span><br/>What Actually Happened — The Market Verdict</h2>
 
     <p>Three years later, the outcomes are measurable. A Milliman study commissioned by America's Health Insurance Plans found that approximately <strong>10% of Medicare Advantage enrollees — roughly 3.4 million people</strong> — were forced to switch plans for 2026 due to exits, mergers, or drastic benefit reductions.<sup>1</sup></p>
 
@@ -162,7 +175,7 @@
 
     <p>This is the textbook definition of a policy that achieved its short-term accounting goal while accelerating the long-term problem it was meant to solve.</p>
 
-    <h2><span class="part-label">Part Four</span><br/>The 2027 Notice — Building on a Flawed Foundation</h2>
+    <h2 id="part4"><span class="part-label">Part Four</span><br/>The 2027 Notice — Building on a Flawed Foundation</h2>
 
     <p>Against this backdrop, CMS released the 2027 Advance Notice in January 2026 and finalized its approach in the subsequent Call Letter. The 2027 model sticks with V28's structure of 86 HCCs and its fundamental hierarchy, recalibrating coefficients using more recent data — 2023 diagnoses predicting 2024 expenditures — resulting in an overall risk score impact of <strong>-3.32%</strong>.</p>
 
@@ -229,7 +242,7 @@
 
     <p>It is worth being precise about where CMS's direction is sound. The exclusion of unlinked chart reviews — documentation not tied to an actual clinical encounter — removes a vector for gaming the risk score without providing care. Audio-only encounter exclusions similarly tighten the connection between payment and documented in-person care. These changes should be preserved and built upon. The problem is not that CMS is trying to improve data integrity; the problem is that the underlying model architecture they are refining continues to incentivize the wrong outcomes.</p>
 
-    <h2><span class="part-label">Part Five</span><br/>The Broader Context: A Bipartisan Policy Failure</h2>
+    <h2 id="part5"><span class="part-label">Part Five</span><br/>The Broader Context: A Bipartisan Policy Failure</h2>
 
     <p>It would be convenient to frame this as a story about one administration's mistakes, but the record does not support that framing. The V24-to-V28 transition began under one administration and the 2027 proposals compound those changes under another. The structural pressure to reduce MA payment rates — driven by trust fund concerns and documented fraud in corners of the market — crosses political lines. So does the failure to adequately account for the collateral damage to the legitimate, high-performing providers who are doing exactly what the program should incentivize.</p>
 
@@ -237,7 +250,7 @@
 
     <p>The solution is also bipartisan in nature. Improving data integrity, addressing genuine fraud through robust RADV auditing, and redesigning the model to appropriately reward prevention rather than reward its failure — these are goals that any administration should be able to advance. The question is whether the agency will engage seriously with the evidence that its current approach is producing the opposite of its stated outcomes.</p>
 
-    <h2><span class="part-label">Part Six</span><br/>What ACOs and Risk-Bearing Providers Should Do Now</h2>
+    <h2 id="part6"><span class="part-label">Part Six</span><br/>What ACOs and Risk-Bearing Providers Should Do Now</h2>
 
     <p>The comment period for the 2027 Final Notice has closed — and it's worth acknowledging that it worked. The advocacy by groups including America's Physician Groups, the American College of Physicians, and the American Hospital Association, alongside the broader provider and plan community, contributed to CMS stepping back from the most harmful coefficient proposals in the Final Rule. That's a meaningful win and a demonstration that organized, evidence-based advocacy can move policy.</p>
 
