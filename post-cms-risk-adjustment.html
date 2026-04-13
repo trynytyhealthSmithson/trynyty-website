@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From V24 to V28 to 2027: How CMS Risk Adjustment Policy Keeps Getting It Wrong — TRYNYTY</title>
+  <meta name="description" content="A three-year retrospective on CMS risk adjustment policy: what we warned in 2024, what actually happened, and what the 2027 proposals mean for ACOs and value-based providers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(100,120,200,0.12); color: #8899dd; border: 1px solid rgba(100,120,200,0.25); }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white); }
+    .article-body { max-width: 800px; margin: 60px auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.65rem; color: var(--white); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--teal); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .article-body sup { font-size: 0.7rem; color: var(--teal); }
+    .article-body a { color: var(--teal); text-decoration: underline; }
+    .part-label { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: rgba(32,178,170,0.1); border: 1px solid rgba(32,178,170,0.2); padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; }
+    .callout-box { background: rgba(32,178,170,0.06); border: 1px solid rgba(32,178,170,0.2); border-radius: var(--radius); padding: 24px 28px; margin: 32px 0; }
+    .callout-box h4 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--white); margin-bottom: 12px; }
+    .callout-box ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .callout-box ul li { font-size: 14px; color: var(--slate-light); padding-left: 18px; position: relative; }
+    .callout-box ul li::before { content: '→'; position: absolute; left: 0; color: var(--teal); }
+    .stat-callout { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 32px 0; }
+    .stat-callout-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 20px; text-align: center; }
+    .stat-callout-num { font-family: var(--font-serif); font-size: 1.8rem; color: var(--teal); line-height: 1; margin-bottom: 6px; }
+    .stat-callout-label { font-size: 12px; color: var(--slate); line-height: 1.4; }
+    .hcc-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+    .hcc-table th { background: var(--navy-mid); padding: 10px 14px; text-align: left; font-weight: 600; color: var(--slate-light); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .hcc-table td { padding: 10px 14px; color: var(--slate-light); border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.5; }
+    .hcc-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .hcc-table .neg { color: #e08888; }
+    .hcc-table .stable { color: var(--slate); }
+    .action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0; }
+    .action-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 20px 22px; }
+    .action-num { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .action-title { font-weight: 600; color: var(--white); margin-bottom: 6px; font-size: 14px; }
+    .action-body { font-size: 13px; color: var(--slate-light); line-height: 1.6; }
+    .footnotes { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: var(--slate); line-height: 1.7; }
+    .footnotes a { color: var(--teal); }
+    .author-card { max-width: 800px; margin: 0 auto; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-avatar { width: 56px; height: 56px; border-radius: 50%; background: rgba(32,178,170,0.15); border: 2px solid rgba(32,178,170,0.3); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.5rem; color: var(--teal); flex-shrink: 0; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 32px 40px 80px; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 24px 20px 60px; }
+      .author-card { padding: 24px 20px; }
+      .stat-callout { grid-template-columns: 1fr; }
+      .action-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">MA &amp; Risk Adjustment</span>
+      <h1 class="article-title">From V24 to V28 to 2027: How CMS Risk Adjustment Policy Keeps Getting It Wrong</h1>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>April 2026</span>
+        <span>·</span>
+        <span>18 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <p>In early 2024, when CMS released its Advance Notice proposing sweeping changes to the CMS-HCC risk adjustment model, I published an analysis warning that the proposed revisions were contradictory to the agency's own stated goals. I argued that flattening coefficients for chronic conditions, removing thousands of diagnosis codes, and misreading the causation behind coding variation between Medicare Advantage and traditional FFS Medicare would reverse a decade of progress — harming the very populations and provider organizations that had made value-based care work.</p>
+
+    <p>At the time, some of those warnings may have seemed like advocacy. The data since has made them look more like forecasting.</p>
+
+    <p>Now, with the 2027 rate notice finalized, it's worth stepping back for a full accounting: what was proposed, what was adjusted between the Advance Notice and the Final Notice, what actually happened in the market, and what the trajectory of these decisions means for ACOs, risk-bearing providers, and the future of value-based care.</p>
+
+    <p>This is that accounting.</p>
+
+    <h2><span class="part-label">Part One</span><br/>What We Said in 2024 — and Why</h2>
+
+    <p>The core argument in my 2024 analysis was straightforward: CMS's proposed HCC reclassification was built on a flawed assessment. The agency identified higher rates of certain diagnoses in Medicare Advantage populations compared to traditional FFS Medicare and concluded this represented discretionary or inappropriate coding. The proposed remedy was to remove or flatten those diagnoses in the risk model.</p>
+
+    <p>The problem is that correlation is not causation. There are at least three structural reasons why MA populations carry more documented diagnoses that have nothing to do with inappropriate coding:</p>
+
+    <p><strong>Population differences.</strong> MA plans disproportionately serve lower-income, socioeconomically disadvantaged beneficiaries — populations with higher burdens of chronic illness. You would expect to see more documented diagnoses in these populations regardless of coding behavior.</p>
+
+    <p><strong>Provider network differences.</strong> MA plans contract with high-performing, value-oriented provider networks that practice thorough documentation as part of coordinated care. Traditional FFS providers have no financial incentive to document comprehensively. The difference in coded diagnoses reflects a difference in care quality, not fraud.</p>
+
+    <p><strong>Care model differences.</strong> Value-based MA arrangements incentivize early detection, preventive care, and ongoing chronic disease management. Patients who are actively managed will have more documented conditions than patients who only seek acute care. Again, this reflects the system working as intended.</p>
+
+    <p>By treating these documented differences as evidence of fraud rather than evidence of better care, CMS proposed to punish the organizations doing the most rigorous, preventive, patient-centered work. I further noted that the proposed changes selectively applied Principle 10 of the CMS model development guidelines — which excludes discretionary coding categories — while ignoring Principle 5, which specifically calls for encouraging specific and detailed coding. The proposals were internally inconsistent with CMS's own framework.</p>
+
+    <blockquote>
+      <p>The variation in coding can be explained by sample biases. Any inappropriate coding of these conditions should be addressed through the RADV audit and oversight responsibilities of the plans — not by restructuring the risk model in ways that harm every compliant provider in the country.</p>
+    </blockquote>
+
+    <p>The specific concern was the downstream incentive structure these changes would create. By flattening or reducing coefficients for chronic conditions like diabetes and depression while leaving high coefficients for severe acute complications like necrotic wounds and vascular disease, the model would financially reward providers who let conditions deteriorate to crisis level and penalize those who prevented the crisis from occurring. This is the opposite of value.</p>
+
+    <h2><span class="part-label">Part Two</span><br/>What the V28 Advance Notice Proposed vs. What the Final Rule Delivered</h2>
+
+    <p>When the original Advance Notice was released, the proposed risk model impact was a <strong>-3.12%</strong> reduction in risk scores across the MA population. The outcry from plans, provider groups, and patient advocates was significant. America's Physician Groups, the American College of Physicians, and numerous health equity organizations submitted comments arguing — consistent with my analysis — that the changes would harm disadvantaged populations and undermine value-based care models.</p>
+
+    <p>CMS made modifications between the Advance Notice and the Final Rule. The net revenue impact was adjusted to <strong>-2.16%</strong> after those modifications, with expected average revenue rising modestly to 3.32%. A phased implementation was adopted: 33% of the new model in 2024, blended up to 100% by 2026.</p>
+
+    <p>These were meaningful concessions. But they did not address the structural problem — the coefficient flattening and hierarchy changes that rewarded acute-focused, facility-centric care over prevention-oriented, community-based care remained intact. The phase-in softened the financial blow; it did not change the direction of travel.</p>
+
+    <p>The result, as the market has now demonstrated, is that the phase-in bought time but not correction. The incentive misalignment was baked into the model regardless of the pace of implementation.</p>
+
+    <h2><span class="part-label">Part Three</span><br/>What Actually Happened — The Market Verdict</h2>
+
+    <p>Three years later, the outcomes are measurable. A Milliman study commissioned by America's Health Insurance Plans found that approximately <strong>10% of Medicare Advantage enrollees — roughly 3.4 million people</strong> — were forced to switch plans for 2026 due to exits, mergers, or drastic benefit reductions.<sup>1</sup></p>
+
+    <div class="stat-callout">
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">3.4M</div>
+        <div class="stat-callout-label">MA enrollees forced to switch plans for 2026</div>
+      </div>
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">20–35%</div>
+        <div class="stat-callout-label">Revenue drop for high-performing VBC providers</div>
+      </div>
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">2033</div>
+        <div class="stat-callout-label">Projected HI Trust Fund depletion — 3 years earlier than pre-2024 estimates</div>
+      </div>
+    </div>
+
+    <p>Premiums rose an average of 5.2%, out-of-pocket maximums climbed 3–4%, and networks narrowed — with the most pronounced impacts on low-income, rural, and minority beneficiaries. This reverses the equity gains that CMS's own 2021 study documented in the MA program from 2009 to 2018.</p>
+
+    <p>High-performing providers in value-based arrangements — precisely the organizations CMS claims to want to grow — saw revenue drops of 20–35% as the flattened coefficients failed to capture the complexity of their patient populations. These are the providers doing the work CMS's ACO REACH and MSSP programs were designed to expand. The risk model changes pulled the financial rug out from under them.</p>
+
+    <p>The one element I underestimated in my 2024 analysis was timing. I predicted the Trust Fund savings would prove illusory over time as higher utilization offset reduced payments. In reality, the cost increases materialized more quickly than anticipated — higher utilization is already pushing HI Trust Fund insolvency projections to 2033, three years earlier than pre-2024 estimates under some analyses.<sup>3</sup></p>
+
+    <p>This is the textbook definition of a policy that achieved its short-term accounting goal while accelerating the long-term problem it was meant to solve.</p>
+
+    <h2><span class="part-label">Part Four</span><br/>The 2027 Notice — Building on a Flawed Foundation</h2>
+
+    <p>Against this backdrop, CMS released the 2027 Advance Notice in January 2026 and finalized its approach in the subsequent Call Letter. The 2027 model sticks with V28's structure of 86 HCCs and its fundamental hierarchy, recalibrating coefficients using more recent data — 2023 diagnoses predicting 2024 expenditures — resulting in an overall risk score impact of <strong>-3.32%</strong>.</p>
+
+    <p>There are genuinely positive elements in the 2027 updates. Excluding unlinked chart reviews and audio-only encounters from risk score calculation improves data integrity and ties payments more directly to actual documented care. These are good-faith improvements and deserve acknowledgment.</p>
+
+    <p>But they do not address the core structural problem. The hierarchy that undervalues chronic disease management while rewarding advanced complications is unchanged. The updated coefficients, applied to the same flawed framework, deepen rather than correct the misalignment.</p>
+
+    <h3>The Coefficient Story</h3>
+
+    <p>Consider how the model values common conditions in the community non-dual aged segment:</p>
+
+    <table class="hcc-table">
+      <thead>
+        <tr>
+          <th>Condition / HCC</th>
+          <th>Pre-2024 (V24)</th>
+          <th>V28 (2024–2026)</th>
+          <th>2027 Recalibrated</th>
+          <th>Change from V28</th>
+          <th>What It Means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Depression</strong> (HCC 155)</td>
+          <td>~0.309–0.346 (nuanced by status)</td>
+          <td>0.333 (flattened)</td>
+          <td class="neg">0.258</td>
+          <td class="neg">↓ 22%</td>
+          <td>Lower reward for early screening; crisis-level episodes trigger higher-cost interactions later</td>
+        </tr>
+        <tr>
+          <td><strong>Diabetes</strong> (HCC 36–38)</td>
+          <td>Differentiated; up to 0.590 for complex</td>
+          <td>Uniform 0.166</td>
+          <td class="neg">Uniform 0.155</td>
+          <td class="neg">↓ 7%</td>
+          <td>No incentive to monitor progression; complications like vascular disease yield larger payouts downstream</td>
+        </tr>
+        <tr>
+          <td><strong>Vascular Disease</strong> (HCC 263–264)</td>
+          <td>~0.299+ for severe</td>
+          <td>1.246 (ulceration); 0.467 (complications)</td>
+          <td class="stable">No change</td>
+          <td class="stable">Stable</td>
+          <td>Prioritizes advanced stages — often hospital-detected — over the upstream diabetes management that prevents them</td>
+        </tr>
+        <tr>
+          <td><strong>Wound Care</strong> (HCC 379–382)</td>
+          <td>Varied; up to ~3.0 for necrosis</td>
+          <td>3.485 (necrosis); 1.547–0.963 lower stages</td>
+          <td class="stable">No change</td>
+          <td class="stable">Stable high</td>
+          <td>High payouts for complications reward the absence of successful preventive management</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The pattern is clear and consistent: conditions that respond to proactive primary care management — depression, diabetes — lose value. Conditions that represent the failure of that management — vascular disease, necrotic wounds — remain highly compensated.</p>
+
+    <p>If a provider optimizes for their risk score under this model, the rational behavior is to under-document early-stage chronic conditions (low coefficient) and over-invest in identifying and documenting advanced complications (high coefficient). This is precisely backwards from what value-based care is designed to achieve. Expert commentary from the American College of Physicians, the American Hospital Association, and Brookings Institution analysts has reached similar conclusions.<sup>6,7,8</sup></p>
+
+    <h3>What the 2027 Notice Got Right</h3>
+
+    <p>It is worth being precise about where CMS's direction is sound. The exclusion of unlinked chart reviews — documentation not tied to an actual clinical encounter — removes a vector for gaming the risk score without providing care. Audio-only encounter exclusions similarly tighten the connection between payment and documented in-person care. These changes should be preserved and built upon. The problem is not that CMS is trying to improve data integrity; the problem is that the underlying model architecture they are refining continues to incentivize the wrong outcomes.</p>
+
+    <h2><span class="part-label">Part Five</span><br/>The Broader Context: A Bipartisan Policy Failure</h2>
+
+    <p>It would be convenient to frame this as a story about one administration's mistakes, but the record does not support that framing. The V24-to-V28 transition began under one administration and the 2027 proposals compound those changes under another. The structural pressure to reduce MA payment rates — driven by trust fund concerns and documented fraud in corners of the market — crosses political lines. So does the failure to adequately account for the collateral damage to the legitimate, high-performing providers who are doing exactly what the program should incentivize.</p>
+
+    <p>This is a policy design problem as much as a political one. The risk adjustment model is a technical instrument that shapes clinical and financial incentives for millions of providers and patients. When it is calibrated incorrectly, the consequences are not abstract — they show up in plan exits, benefit reductions, revenue losses for community-based providers, and ultimately in patients who receive less coordinated, less preventive care.</p>
+
+    <p>The solution is also bipartisan in nature. Improving data integrity, addressing genuine fraud through robust RADV auditing, and redesigning the model to appropriately reward prevention rather than reward its failure — these are goals that any administration should be able to advance. The question is whether the agency will engage seriously with the evidence that its current approach is producing the opposite of its stated outcomes.</p>
+
+    <h2><span class="part-label">Part Six</span><br/>What ACOs and Risk-Bearing Providers Should Do Now</h2>
+
+    <p>The comment period for the 2027 Final Notice has closed, so immediate policy advocacy through that channel is no longer available. But the decisions CMS has signaled for future model years — including a continued phased approach to risk score recalibration — mean the structural issues described here will persist and potentially deepen. There is both near-term operational work to do and longer-term advocacy to pursue.</p>
+
+    <div class="action-grid">
+      <div class="action-item">
+        <div class="action-num">01 — FINANCIAL MODELING</div>
+        <div class="action-title">Model Your Risk Score Trajectory</div>
+        <div class="action-body">With the V28 model now at 100% implementation and 2027 recalibration in effect, model the impact on your specific patient population. ACOs serving high proportions of complex chronic disease patients — particularly those with diabetes, depression, and cardiovascular risk factors — face the most acute exposure. Understand your revenue trajectory before contracting cycles open.</div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">02 — CODING STRATEGY</div>
+        <div class="action-title">Prioritize Specificity Without Gaming</div>
+        <div class="action-body">The model now rewards specificity in advanced complication documentation more than early-stage chronic disease documentation. Compliant, clinically accurate coding that captures the full complexity of your population remains essential — both for appropriate payment and for RADV audit defense. Invest in provider education on documentation completeness, not selective upcoding.</div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">03 — CONTRACT REVIEW</div>
+        <div class="action-title">Reassess Value-Based Contract Terms</div>
+        <div class="action-body">If your VBC contracts were structured under V24 assumptions, revisit them. Risk-sharing arrangements calibrated to revenue expectations that no longer hold put your organization in a structurally disadvantaged position. Renegotiating floors, benchmarks, or risk-sharing percentages where possible protects your financial foundation.</div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">04 — ADVOCACY</div>
+        <div class="action-title">Engage Policymakers Directly</div>
+        <div class="action-body">CMS has signaled that further risk model phasing is forthcoming. The window to influence that trajectory is open. Engage with your Congressional representatives, participate in industry coalition comment processes for future rule-making, and contribute your organization's real-world performance data to the public record. The policy will continue to evolve — providers who engage shape that evolution; those who don't absorb whatever comes.</div>
+      </div>
+    </div>
+
+    <div class="callout-box">
+      <h4>A note on MSSP and LEAD as structural hedges</h4>
+      <ul>
+        <li>The Medicare Shared Savings Program operates on a different payment architecture than Medicare Advantage capitation — MSSP ACOs are not directly exposed to HCC coefficient changes in the same way MA plans are. For provider organizations considering their program participation strategy, MSSP and the new LEAD Model offer meaningful structural alternatives.</li>
+        <li>The LEAD Model in particular — with its 10-year term, concurrent risk adjustment enhancements for high-needs populations, and per-beneficiary prevention incentives — is designed explicitly to address some of the misalignments this piece describes. The application window is time-sensitive and evaluation of the model alongside MSSP participation is worth the investment of analysis now.</li>
+        <li>TRYNYTY's <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a> provides free, interactive access to 12 years of MSSP performance data — useful context for any organization evaluating its program options.</li>
+      </ul>
+    </div>
+
+    <h2>Conclusion</h2>
+
+    <p>Three years ago, I argued that CMS's proposed risk adjustment changes were built on a misreading of evidence and would produce outcomes contrary to the agency's stated goals. The market data since has been consistent with that warning: millions of beneficiaries disrupted, revenue losses for high-performing VBC providers, and a trust fund depletion trajectory that accelerated rather than improved.</p>
+
+    <p>The 2027 finalized notice makes targeted improvements at the edges — better data integrity provisions are genuinely welcome. But it does not correct the fundamental architecture of a model that financially rewards the failure of preventive care over its success. Until that architecture is revisited, every recalibration will refine a structure that points in the wrong direction.</p>
+
+    <p>The evidence for a better approach exists. SDoH-integrated coefficients that actually predict cost for the populations most burdened by social risk. Nuanced differentiation between early-stage and advanced chronic conditions that rewards the management preventing progression. Continued investment in RADV auditing to address actual fraud without penalizing compliant, high-performing providers across the board.</p>
+
+    <p>These are not radical proposals. They are the logical extension of CMS's own stated commitments to health equity, value, and innovation. The question is whether the agency will follow the evidence — or continue to refine a model that contradicts it.</p>
+
+    <div class="footnotes">
+      <p><strong>References</strong></p>
+      <p><sup>1</sup> Milliman study for AHIP on 2026 MA enrollee switches. <a href="https://www.beckerspayer.com/payer/medicare-advantage/10-of-medicare-advantage-enrollees-forced-to-switch-plans-for-2026-study/" target="_blank">Becker's Payer, February 2026</a>.</p>
+      <p><sup>2</sup> Milliman, "State of the 2026 Medicare Advantage Industry." <a href="https://www.milliman.com/en/insight/impact-of-medicare-advantage-plan-changes-on-enrollees-2026" target="_blank">Milliman Insight, February 2026</a>.</p>
+      <p><sup>3</sup> CMS 2025 Medicare Trustees Report. <a href="https://www.cms.gov/oact/tr/2025" target="_blank">cms.gov/oact/tr/2025</a>.</p>
+      <p><sup>4</sup> CMS, "Advance Notice of Methodological Changes for CY 2027 for Medicare Advantage Capitation Rates and Part C and Part D Payment Policies," January 2026. <a href="https://www.cms.gov/files/document/2027-advance-notice.pdf" target="_blank">CMS 2027 Advance Notice</a>.</p>
+      <p><sup>5</sup> America's Physician Groups, "2024 MA Rate Announcement Deep Dive," April 2023. <a href="https://www.apg.org/wp-content/uploads/2024/04/Washington-Update-April-5.pdf" target="_blank">APG Analysis</a>.</p>
+      <p><sup>6</sup> American College of Physicians, comments on CY 2027 policy changes, January 2026.</p>
+      <p><sup>7</sup> American Hospital Association, comments on CY 2027 proposed rule, January 2026.</p>
+      <p><sup>8</sup> Brookings Institution (Matthew Fiedler), "Comments on the 2027 Medicare Advantage and Part D proposed rule." <a href="https://www.brookings.edu/articles/comments-on-the-2027-medicare-advantage-and-part-d-proposed-rule" target="_blank">Brookings, January 2026</a>.</p>
+    </div>
+
+  </div>
+
+  <div class="author-card">
+    <div class="author-card-inner">
+      <div class="author-avatar">A</div>
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. 15+ years in value-based care strategy, financial analytics, and managed care consulting across health plans, health systems, ACOs, and IPAs. Published analysis on CMS risk adjustment methodology changes that generated significant industry discussion at the time of the V24 Advance Notice.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="blog.html" class="btn btn-ghost">← Back to Insights</a>
+    <a href="contact.html" class="btn btn-primary">Discuss with Our Team →</a>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
