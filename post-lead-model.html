@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The LEAD Model: CMS's Most Ambitious ACO Program Yet — TRYNYTY</title>
+  <meta name="description" content="The Long-term Enhanced ACO Design (LEAD) Model launches January 2027. Applications close May 17, 2026. Here's what ACOs and risk-bearing providers need to know — and what makes LEAD different from everything that came before." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(221,170,102,0.12); color: #ddaa66; border: 1px solid rgba(221,170,102,0.25); }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white); }
+    .article-body { max-width: 800px; margin: 0 auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.65rem; color: var(--white); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--teal); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .article-body a { color: var(--teal); text-decoration: underline; }
+    .section-label { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: rgba(32,178,170,0.1); border: 1px solid rgba(32,178,170,0.2); padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; }
+    .urgency-banner { background: linear-gradient(135deg, rgba(221,170,102,0.15), rgba(221,170,102,0.05)); border: 1px solid rgba(221,170,102,0.3); border-radius: var(--radius-lg); padding: 24px 28px; margin: 32px 0; display: flex; gap: 20px; align-items: flex-start; }
+    .urgency-icon { font-size: 2rem; flex-shrink: 0; }
+    .urgency-title { font-weight: 700; color: #ddaa66; margin-bottom: 6px; font-size: 15px; }
+    .urgency-body { font-size: 14px; color: var(--slate-light); line-height: 1.6; }
+    .feature-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin: 28px 0; }
+    .feature-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 22px; }
+    .feature-label { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .feature-title { font-weight: 600; color: var(--white); margin-bottom: 8px; font-size: 15px; }
+    .feature-body { font-size: 13px; color: var(--slate-light); line-height: 1.65; }
+    .stat-callout { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 32px 0; }
+    .stat-callout-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 20px; text-align: center; }
+    .stat-callout-num { font-family: var(--font-serif); font-size: 1.8rem; color: var(--teal); line-height: 1; margin-bottom: 6px; }
+    .stat-callout-label { font-size: 12px; color: var(--slate); line-height: 1.4; }
+    .timeline { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+    .timeline-item { display: flex; gap: 20px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+    .timeline-dot.urgent { background: #ddaa66; }
+    .timeline-date { font-size: 12px; font-weight: 700; color: var(--teal); width: 120px; flex-shrink: 0; padding-top: 2px; }
+    .timeline-date.urgent { color: #ddaa66; }
+    .timeline-content { font-size: 14px; color: var(--slate-light); line-height: 1.6; }
+    .risk-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+    .risk-table th { background: var(--navy-mid); padding: 12px 16px; text-align: left; font-weight: 600; color: var(--slate-light); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .risk-table td { padding: 12px 16px; color: var(--slate-light); border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.6; }
+    .risk-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .cta-box { background: linear-gradient(135deg, rgba(32,178,170,0.12), rgba(32,178,170,0.04)); border: 1px solid rgba(32,178,170,0.25); border-radius: var(--radius-lg); padding: 40px; margin: 40px 0; text-align: center; }
+    .cta-box h3 { font-family: var(--font-serif); font-size: 1.6rem; color: var(--white); margin-bottom: 12px; }
+    .cta-box p { color: var(--slate-light); margin-bottom: 24px; font-size: 1rem; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .author-card { max-width: 800px; margin: 0 auto; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 32px 40px 80px; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 24px 20px 60px; }
+      .author-card { padding: 24px 20px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .stat-callout { grid-template-columns: 1fr; }
+      .urgency-banner { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">Value-Based Care</span>
+      <h1 class="article-title">The LEAD Model: CMS's Most Ambitious ACO Program Yet</h1>
+      <p style="font-size: 1.15rem; color: var(--slate-light); font-weight: 300; margin-top: 16px; line-height: 1.7;">The Long-term Enhanced ACO Design Model launches January 2027. Applications close May 17, 2026. Here's what every ACO and risk-bearing provider needs to understand — and why this program represents a genuine evolution in how CMS thinks about accountable care.</p>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>April 2026</span>
+        <span>·</span>
+        <span>12 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jump navigation -->
+  <div style="background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 12px 40px;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+      <span style="font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px;">Jump to:</span>
+      <a href="#context" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">How We Got Here</a>
+      <a href="#whatisit" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">What Is LEAD</a>
+      <a href="#features" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Key Features</a>
+      <a href="#risk" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Risk Options</a>
+      <a href="#whoshouldapply" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Who Should Apply</a>
+      <a href="#timeline" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Timeline</a>
+    </div>
+  </div>
+
+  <div class="article-body" style="padding-top: 60px;">
+
+    <div class="urgency-banner">
+      <div class="urgency-icon">⏱</div>
+      <div>
+        <div class="urgency-title">Application Deadline: May 17, 2026</div>
+        <div class="urgency-body">The LEAD Model Request for Applications was released March 31, 2026. ACOs accepted under this RFA will begin participation January 1, 2027. The window to evaluate, prepare, and apply is short. If you're considering LEAD, the time to act is now — not after the deadline passes.</div>
+      </div>
+    </div>
+
+    <h2 id="context"><span class="section-label">Context</span><br/>How We Got Here — A Program That Kept Learning</h2>
+
+    <p>The Medicare Shared Savings Program launched in 2013 with a simple premise: bring physicians and hospitals together into Accountable Care Organizations, hold them accountable for both the quality and cost of care for their attributed Medicare population, and share in the savings when they succeed. That premise has proven durable. <a href="post-mssp-lead-analysis.html">Twelve years of MSSP data</a> shows a program that matured significantly — from 23.6% of ACOs earning savings in 2013 to 75.4% in 2024, generating $4.1 billion in shared savings in a single year.</p>
+
+    <p>But MSSP was built for a different era of value-based care — one where the primary challenge was simply getting providers into risk-based arrangements at all. Over time, its limitations became clear. The three-year rebasing cycle penalized ACOs that performed too well by raising their benchmarks. High-needs populations were inadequately captured by prospective risk adjustment. Smaller and rural providers lacked the scale and infrastructure to participate meaningfully. And the program's relatively short agreement periods didn't give organizations enough runway to fully realize the return on their VBC investments.</p>
+
+    <p>The Innovation Center responded. ACO REACH introduced stronger financial incentives, capitated payments, and better high-needs risk adjustment. It expanded participation beyond traditional provider structures. It brought in health equity as an explicit program goal. It learned. And now, building on everything MSSP and ACO REACH taught about what works and what doesn't, CMS has announced its most ambitious accountable care model to date.</p>
+
+    <p>The Long-term Enhanced ACO Design — LEAD — isn't just another iteration. It represents a genuine rethinking of what a durable, sustainable, inclusive accountable care program can look like.</p>
+
+    <h2 id="whatisit"><span class="section-label">The Model</span><br/>What Is LEAD?</h2>
+
+    <p>LEAD is a voluntary, total cost of care ACO model launching January 1, 2027, following the conclusion of ACO REACH at the end of 2026. It will run for ten years — through December 31, 2036 — making it the longest performance period CMS has ever tested in any innovation model.</p>
+
+    <div class="stat-callout">
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">10</div>
+        <div class="stat-callout-label">Year performance period — the longest CMS has ever tested</div>
+      </div>
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">45%</div>
+        <div class="stat-callout-label">Of Original Medicare beneficiaries currently aligned to an ACO — LEAD aims to expand that significantly</div>
+      </div>
+      <div class="stat-callout-item">
+        <div class="stat-callout-num">May 17</div>
+        <div class="stat-callout-label">2026 application deadline for PY 2027 participation</div>
+      </div>
+    </div>
+
+    <p>The model is designed to serve a broader mix of providers than previous Innovation Center models — explicitly including organizations new to ACOs, smaller and independent practices, rural providers, and organizations that disproportionately serve complex, high-needs, or dually eligible populations. This isn't window dressing: the program's financial architecture is specifically designed to make participation viable for these organizations in ways that MSSP and ACO REACH were not.</p>
+
+    <p>CMS's own data provides the rationale: as of January 2026, only 45% of Original Medicare beneficiaries are aligned to the Shared Savings Program or ACO REACH. Previous analyses show that providers not participating in ACOs exhibit higher per-beneficiary spend. Expanding participation isn't just a policy goal — it's where the Medicare savings potential is concentrated.</p>
+
+    <h2 id="features"><span class="section-label">Key Features</span><br/>What Makes LEAD Different</h2>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-label">Feature 01</div>
+        <div class="feature-title">10-Year Benchmark Stability — No Rebasing</div>
+        <div class="feature-body">LEAD offers a full ten-year performance period with no traditional rebasing. ACOs will not have their benchmarks reset based on their own spending history. This directly addresses one of the most significant structural barriers to sustained MSSP performance: the perverse incentive to avoid generating savings that would raise future benchmarks. Organizations that invest in care transformation early will benefit from a stable reference point for the life of the program.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-label">Feature 02</div>
+        <div class="feature-title">Concurrent Risk Adjustment for High-Needs Patients</div>
+        <div class="feature-body">First tested in ACO REACH, concurrent risk adjustment incorporates diagnoses documented during the current performance year rather than relying solely on prior-year data. For high-needs beneficiaries — who often experience rapid changes in health status — this produces significantly more accurate risk scores. ACOs serving complex populations have long been disadvantaged by prospective-only models. LEAD corrects this for all beneficiaries who meet the High Needs criteria, not just those in specialized programs.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-label">Feature 03</div>
+        <div class="feature-title">Beneficiary Engagement Incentives</div>
+        <div class="feature-body">LEAD significantly expands the tools ACOs have to drive patient engagement. These include Part B cost-sharing support; Part D premium buy-down (beginning 2029); expanded Medical Nutrition Therapy beyond diabetes and renal disease; and chronic disease prevention rewards — allowing ACOs to offer healthy food products to patients engaged in chronic disease prevention activities. These aren't peripheral benefits — they're the financial tools that enable the proactive engagement strategies that drive performance.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-label">Feature 04</div>
+        <div class="feature-title">AI-Driven Risk Adjustment Beginning 2028</div>
+        <div class="feature-body">Starting in 2028, LEAD will begin testing an AI-inferred risk adjustment model. By performance year 2031, AI-only risk scores will apply fully to aged and disabled populations. This represents a significant step toward technology-driven accuracy in risk assessment — moving beyond the HCC coefficient frameworks that have been the subject of significant controversy to a model that can more dynamically capture true patient complexity.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-label">Feature 05</div>
+        <div class="feature-title">CMS-Administered Risk Arrangements (CARA)</div>
+        <div class="feature-body">LEAD introduces CARA — a digital data-sharing and payment system that facilitates episode-based risk arrangements between ACOs and specialist providers. This includes a dedicated episode-based falls prevention program and standardized contracting frameworks. CARA enables ACOs to build more robust preferred provider relationships and extend accountability across the care continuum — including a specific focus on high-risk areas like post-acute and specialty care.</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-label">Feature 06</div>
+        <div class="feature-title">Medicare-Medicaid Integration</div>
+        <div class="feature-body">LEAD will select two states to develop a framework for ACO-Medicaid partnership arrangements, with the goal of better integrating Medicare and Medicaid services for dually eligible beneficiaries. For ACOs serving significant dual populations — who often face fragmented, poorly coordinated care across both programs — this integration component addresses one of the most consequential gaps in the current system.</div>
+      </div>
+    </div>
+
+    <h2 id="risk"><span class="section-label">Risk Options</span><br/>Choosing Your Path</h2>
+
+    <p>LEAD offers two voluntary risk-sharing options. The right choice depends on your organization's financial position, care management maturity, and appetite for accountability. Both options use mandatory capitation — ACOs receive set payments rather than payment per claim, a fundamental shift from traditional billing models.</p>
+
+    <table class="risk-table">
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Savings Shared</th>
+          <th>Loss Exposure</th>
+          <th>Best For</th>
+          <th>Additional Access</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--white)">Professional Risk</strong></td>
+          <td>Up to 50%</td>
+          <td>Up to 50%</td>
+          <td>Organizations newer to full risk; those building care management infrastructure</td>
+          <td>Core LEAD benefits and beneficiary engagement tools</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Global Risk</strong></td>
+          <td>Up to 100%</td>
+          <td>Up to 100%</td>
+          <td>Mature VBC organizations with established care management and data capabilities</td>
+          <td>Full CARA episode-based arrangements; additional benefit enhancement options</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The Global option's access to CARA is significant for organizations ready to extend their accountability framework to specialist care — it creates the infrastructure for preferred provider relationships that can meaningfully reduce downstream costs in high-expense categories like post-acute care, orthopedics, and cardiology.</p>
+
+    <h2 id="whoshouldapply"><span class="section-label">Fit Assessment</span><br/>Who Should Seriously Consider LEAD</h2>
+
+    <p><strong>Current ACO REACH participants</strong> are the most natural candidates. LEAD is explicitly designed as ACO REACH's successor, and the transition pathway is as direct as CMS has made any model transition. For organizations that have invested in the infrastructure, culture, and clinical workflows to succeed in ACO REACH, LEAD offers a longer runway to realize that investment's return — without the disruption of re-entering a different program.</p>
+
+    <p><strong>High-performing MSSP ACOs</strong> who have felt the sting of rebasing should look carefully at LEAD's ten-year, no-rebase structure. If your organization has consistently generated savings — and watched your benchmark rise in response — LEAD's stable benchmark offers a fundamentally different value proposition. The data shows that ACOs with 10+ years of experience average 5.20% savings rates. A stable benchmark lets that performance compound over time rather than being reset.</p>
+
+    <p><strong>Providers new to ACOs</strong> — particularly smaller, independent, and rural practices — are an explicit focus of LEAD's design. The lower alignment minimums for high-needs ACOs, the add-on payments for rural and smaller providers, and the phased risk on-ramps make LEAD more accessible than previous Innovation Center models for organizations that have historically been priced out of meaningful VBC participation.</p>
+
+    <p><strong>Organizations serving complex populations</strong> — high proportions of dual-eligible beneficiaries, homebound patients, or patients with significant chronic disease burden — will find that LEAD's concurrent risk adjustment, High Needs benchmarking, and Medicare-Medicaid integration work are specifically designed for their populations. The model doesn't require these organizations to fit their patients into a framework built for average Medicare beneficiaries.</p>
+
+    <blockquote>
+      <p>LEAD is CMS making an explicit bet that the future of Medicare cost control runs through long-term, stable, inclusive accountable care relationships — not through short-term payment adjustments. For organizations ready to make that bet alongside CMS, the terms have never been better.</p>
+    </blockquote>
+
+    <h2 id="timeline"><span class="section-label">Timeline</span><br/>Key Dates and Next Steps</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Dec 18, 2025</div>
+        <div class="timeline-content">CMS announces LEAD Model — model design, key features, and program goals released publicly</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Mar 31, 2026</div>
+        <div class="timeline-content">Request for Applications (RFA) released — detailed application requirements, eligibility criteria, and scoring domains published</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot urgent"></div>
+        <div class="timeline-date urgent">May 17, 2026</div>
+        <div class="timeline-content"><strong style="color:#ddaa66;">Application deadline</strong> — all applications for PY 2027 participation must be submitted by Eastern Time close of business</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Jan 1, 2027</div>
+        <div class="timeline-content">LEAD Model launches — Performance Year 2027 begins; ACO REACH concludes at end of 2026</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2028</div>
+        <div class="timeline-content">AI-inferred risk adjustment model testing begins; CARA episode-based arrangements fully operational</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2029</div>
+        <div class="timeline-content">Part D premium buy-down benefit enhancement available — ACOs can partially or fully offset beneficiary Part D premiums</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2031</div>
+        <div class="timeline-content">AI-only risk scores apply fully to aged and disabled populations — transition to next-generation risk adjustment complete</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Dec 31, 2036</div>
+        <div class="timeline-content">LEAD Model performance period concludes — a full decade of accountable care with stable benchmarks</div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h3>Evaluating LEAD for Your Organization?</h3>
+      <p>The application scoring criteria spans five domains: organizational readiness, revenue sources and payment arrangements, beneficiary and caregiver experience, data and health information, and preventive care. The window is short. We help ACOs and provider organizations assess their fit, model their financial scenarios under Professional vs. Global risk, and prepare competitive applications.</p>
+      <p style="font-size: 14px; margin-bottom: 24px;">Our team has hands-on experience across MSSP, ACO REACH, and Medicare Advantage value-based arrangements — and we've been tracking LEAD since its announcement. Whether you're a current ACO REACH participant navigating the transition, an MSSP ACO evaluating whether to add LEAD, or a provider organization exploring accountable care for the first time, reach out. The analysis is worth doing now.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Talk to Our Team →</a>
+        <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-ghost">Explore MSSP Benchmark Data →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="author-card">
+    <div class="author-card-inner">
+      <img src="headshot.jpg" alt="Andrew Smithson" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(32,178,170,0.3);flex-shrink:0;" />
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. 15+ years in value-based care strategy, financial analytics, and managed care consulting across health plans, health systems, ACOs, and IPAs — including ACO REACH and MSSP program strategy.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="blog.html" class="btn btn-ghost">← Back to Insights</a>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="post-mssp-lead-analysis.html" class="btn btn-ghost">MSSP Performance Data →</a>
+      <a href="contact.html" class="btn btn-primary">Discuss Your Application →</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
