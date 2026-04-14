@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrew Smithson — Resume | TRYNYTY health:enablement</title>
+  <meta name="description" content="Andrew Smithson — Co-Founder, TRYNYTY health:enablement. 15+ years in value-based care strategy, financial analytics, and managed care consulting." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .resume-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .resume-hero-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 36px; }
+    .resume-hero-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(32,178,170,0.4); flex-shrink: 0; }
+    .resume-hero-text h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 2.8rem); color: var(--white); margin-bottom: 6px; }
+    .resume-hero-text p { color: var(--slate-light); font-size: 1.05rem; font-weight: 300; margin-bottom: 20px; }
+    .resume-hero-contacts { display: flex; gap: 16px; flex-wrap: wrap; }
+    .resume-contact-item { font-size: 13px; color: var(--slate); display: flex; align-items: center; gap: 6px; }
+    .resume-contact-item a { color: var(--teal); text-decoration: none; }
+    .resume-download-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: var(--navy); font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: var(--radius); text-decoration: none; transition: opacity var(--transition); margin-top: 20px; }
+    .resume-download-btn:hover { opacity: 0.85; }
+    .resume-body { max-width: 860px; margin: 0 auto; padding: 48px 40px 80px; }
+    .resume-section { margin-bottom: 48px; }
+    .resume-section-title { font-family: var(--font-serif); font-size: 1.4rem; color: var(--white); margin-bottom: 24px; padding-bottom: 10px; border-bottom: 1px solid rgba(32,178,170,0.2); }
+    .resume-role { margin-bottom: 32px; }
+    .resume-role-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+    .resume-company { font-weight: 700; color: var(--white); font-size: 1rem; }
+    .resume-dates { font-size: 12px; color: var(--teal); font-weight: 600; letter-spacing: 0.05em; white-space: nowrap; }
+    .resume-title { font-size: 14px; color: var(--slate-light); font-style: italic; margin-bottom: 12px; }
+    .resume-sub-role { margin: 16px 0 0 0; padding: 12px 16px; background: rgba(255,255,255,0.03); border-left: 2px solid rgba(32,178,170,0.3); border-radius: 0 var(--radius) var(--radius) 0; }
+    .resume-sub-role-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .resume-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .resume-bullets li { font-size: 13px; color: var(--slate-light); padding-left: 18px; position: relative; line-height: 1.6; font-weight: 300; }
+    .resume-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 11px; top: 2px; }
+    .resume-highlight { background: rgba(32,178,170,0.08); border: 1px solid rgba(32,178,170,0.2); border-radius: var(--radius); padding: 14px 18px; margin: 12px 0; font-size: 13px; color: var(--white); font-weight: 500; }
+    .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+    .skill-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 12px 16px; font-size: 13px; color: var(--slate-light); }
+    .skill-category { font-size: 11px; color: var(--teal); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+    @media (max-width: 768px) {
+      .resume-hero { padding: 120px 20px 40px; }
+      .resume-hero-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .resume-body { padding: 32px 20px 60px; }
+      .resume-role-header { flex-direction: column; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link">Insights</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="resume-hero">
+    <div class="resume-hero-inner">
+      <img src="headshot.jpg" alt="Andrew Smithson" class="resume-hero-photo" />
+      <div class="resume-hero-text">
+        <h1>Andrew Smithson</h1>
+        <p>Co-Founder &amp; CEO, TRYNYTY health:enablement<br />Value-Based Care Strategy · Financial Analytics · Managed Care Consulting</p>
+        <div class="resume-hero-contacts">
+          <span class="resume-contact-item">📍 Chicago, IL</span>
+          <span class="resume-contact-item">📞 (502) 544-5278</span>
+          <span class="resume-contact-item">✉️ <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a></span>
+          <span class="resume-contact-item"><a href="https://www.linkedin.com/in/andrewsmithson" target="_blank">LinkedIn →</a></span>
+        </div>
+        <a href="Andrew_Smithson_Resume_2506.pdf" download class="resume-download-btn">
+          ↓ Download PDF Resume
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="resume-body">
+
+    <!-- Professional Experience -->
+    <div class="resume-section">
+      <div class="resume-section-title">Professional Experience</div>
+
+      <!-- TRYNYTY -->
+      <div class="resume-role">
+        <div class="resume-role-header">
+          <span class="resume-company">TRYNYTY health:enablement</span>
+          <span class="resume-dates">September 2024 – Present</span>
+        </div>
+        <div class="resume-title">Co-Founder &amp; CEO</div>
+        <ul class="resume-bullets">
+          <li>Developed a comprehensive business plan for a transformative managed care technology platform designed to reduce provider administrative burdens, enhance healthcare data integrity, and drive patient engagement to improve health outcomes.</li>
+          <li>Created a strategic roadmap for an initial product addressing critical gaps in existing VBC solutions, leveraging deep expertise in value-based care operations and designed for rapid scalability.</li>
+          <li>Authored pitch deck materials and led early-stage fundraising outreach to position TRYNYTY as a leader in innovative VBC technology solutions.</li>
+          <li>Built the MSSP ACO Explorer — a free, interactive platform covering 12 years of MSSP program data across 1,000+ ACOs, demonstrating the analytics capabilities of the TRYNYTY platform.</li>
+        </ul>
+      </div>
+
+      <!-- COPE -->
+      <div class="resume-role">
+        <div class="resume-role-header">
+          <span class="resume-company">COPE Health Solutions</span>
+          <span class="resume-dates">April 2021 – August 2024</span>
+        </div>
+        <div class="resume-title">Director, Managed Care &amp; Financial Analytics Consulting</div>
+        <ul class="resume-bullets">
+          <li>Created integrated financial models for diverse clients including Provider Sponsored Health Plans (PSHPs), aligning strategies across geographies and lines of business to support client strategic goals.</li>
+          <li>Led the redesign and implementation of financial modeling tools, transitioning from legacy Excel systems to the ARC platform, enabling scalable and consistent analytics for provider and payor clients.</li>
+          <li>Negotiated a guaranteed <strong style="color:var(--white)">$120M in additional revenue over five years</strong> for a VBC contract on behalf of a 30,000-member IPA.</li>
+          <li>Spearheaded thought leadership initiatives, including publishing an early analysis on CMS's proposed risk adjustment model changes (v24 to v28) that garnered significant industry attention and spurred industry-wide discussion.</li>
+          <li>Directed multiple simultaneous high-value client engagements including PSHP expansion strategies and VBC transformations.</li>
+        </ul>
+
+        <!-- Great Lakes sub-role -->
+        <div class="resume-sub-role">
+          <div class="resume-sub-role-title">Great Lakes Integrated Network — Vice President, Finance (Interim) · February 2022 – March 2023</div>
+          <ul class="resume-bullets">
+            <li>Conducted a comprehensive readiness assessment and restructured the Management Services Organization (MSO) to support VBC arrangements, streamlining processes and enhancing operational efficiency.</li>
+            <li>Developed a 3-year strategic roadmap for payor contracting, including securing an ACO REACH product in a competitive application process.</li>
+            <li>Renegotiated key payor contracts and led financial turnaround efforts that <strong style="color:var(--white)">converted an annual $2M loss into an $8M surplus</strong>.</li>
+            <li>Oversaw a comprehensive reorganization of the operation and led the Board of Directors Finance Subcommittee while managing multiple strategic initiatives simultaneously.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Athletico -->
+      <div class="resume-role">
+        <div class="resume-role-header">
+          <span class="resume-company">Athletico, LTD</span>
+          <span class="resume-dates">August 2020 – April 2021</span>
+        </div>
+        <div class="resume-title">Director, Managed Care</div>
+        <ul class="resume-bullets">
+          <li>Strategized the shift to a concierge and value-based reimbursement model for physical therapy services, leveraging prior experience with bundled payments.</li>
+          <li>Conducted market assessments and financial modeling to support M&amp;A and de novo expansion strategies, driving organizational growth.</li>
+        </ul>
+      </div>
+
+      <!-- UChicago -->
+      <div class="resume-role">
+        <div class="resume-role-header">
+          <span class="resume-company">University of Chicago Medical Center</span>
+          <span class="resume-dates">May 2018 – August 2020</span>
+        </div>
+        <div class="resume-title">Value-Based Payments Manager</div>
+        <ul class="resume-bullets">
+          <li>Achieved incremental successes implementing value-based arrangements, particularly with the COPD bundled payment program, delivering measurable cost savings and improved patient outcomes.</li>
+          <li>Contributed to performance improvements across joint replacement bundles, oncology care, MSSP, and Medicare Advantage risk contracts.</li>
+          <li>Negotiated and managed value-based contracts with payers, aligning terms with system strategic objectives.</li>
+          <li>Developed KPIs, a predictive risk model, and reporting to enhance transparency and accountability across value-based programs.</li>
+        </ul>
+      </div>
+
+      <!-- Humana -->
+      <div class="resume-role">
+        <div class="resume-role-header">
+          <span class="resume-company">Humana Inc.</span>
+          <span class="resume-dates">July 2010 – May 2018</span>
+        </div>
+        <div class="resume-title">Various Roles — 8 Years of Progressive Responsibility</div>
+
+        <div class="resume-sub-role">
+          <div class="resume-sub-role-title">Provider Engagement Manager — Chicago, IL · August 2016 – May 2018</div>
+          <ul class="resume-bullets">
+            <li>Championed Humana's 'Provider Simplicity' initiative for the Illinois market, driving a <strong style="color:var(--white)">20% increase in risk adjustment</strong> and achieving a 4.5-star rating through strategic collaboration with internal teams and providers.</li>
+            <li>Co-managed a <strong style="color:var(--white)">$2 billion P&amp;L</strong> with the regional CFO, delivering $400 million in revenue growth.</li>
+            <li>Created a risk adjustment reporting package to optimize clinical documentation for providers including Advocate Healthcare, Oak Street Health, and ChenMed.</li>
+          </ul>
+        </div>
+
+        <div class="resume-sub-role">
+          <div class="resume-sub-role-title">Network Contracting Finance Manager — Chicago, IL · March 2014 – August 2016</div>
+          <ul class="resume-bullets">
+            <li>Modernized contracting finance processes, cutting monthly workloads by over 50% and enabling deeper insights into provider relations and performance.</li>
+          </ul>
+        </div>
+
+        <div class="resume-sub-role">
+          <div class="resume-sub-role-title">Provider Analytics &amp; Transparency Analyst — Louisville, KY · April 2012 – March 2014</div>
+          <ul class="resume-bullets">
+            <li>Leveraged episodic groupers to optimize provider networks, generating cost savings through data-driven performance evaluations.</li>
+            <li>Advanced Humana's value-based care capabilities by developing analytics for 'Care Decision Insights', bundled payments, and narrow networks.</li>
+            <li>Created a tool to assist in mitigating <strong style="color:var(--white)">$2 billion in potential sequestration payment liabilities</strong> across U.S. markets.</li>
+          </ul>
+        </div>
+
+        <div class="resume-sub-role">
+          <div class="resume-sub-role-title">Customer Reporting Analyst — Louisville, KY · July 2010 – April 2012</div>
+          <ul class="resume-bullets">
+            <li>Delivered custom reporting and analytics to support Humana's commercial and Medicare lines of business.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="resume-section">
+      <div class="resume-section-title">Areas of Expertise</div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-category">Value-Based Care</div>
+          VBC strategy, ACO operations, MSSP, ACO REACH, Medicare Advantage risk contracts, bundled payments
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Financial Analytics</div>
+          Financial modeling, P&amp;L management, risk adjustment, Stars analytics, predictive cost modeling
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Managed Care</div>
+          Payor &amp; provider contracting, network strategy, IPA management, MSO operations, PSHP development
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Technology &amp; Data</div>
+          Healthcare data analytics, platform development, EMR optimization, population health reporting
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Leadership</div>
+          Executive consulting, Board engagement, cross-functional team leadership, strategic planning
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Policy &amp; Regulatory</div>
+          CMS risk adjustment methodology, Medicare/Medicaid policy, regulatory compliance, rate analysis
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
