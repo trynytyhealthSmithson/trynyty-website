@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Operational Barriers to Value-Based Care — And Why They Form a Vicious Cycle — TRYNYTY</title>
+  <meta name="description" content="The biggest obstacles to successful value-based care aren't clinical — they're operational. Five interconnected barriers form a self-reinforcing cycle. Here's what they are, why they persist, and what it takes to break them." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(221,170,102,0.12); color: #ddaa66; border: 1px solid rgba(221,170,102,0.25); }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white); }
+    .article-body { max-width: 800px; margin: 0 auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.65rem; color: var(--white); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--teal); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .article-body a { color: var(--teal); text-decoration: underline; }
+    .barrier-label { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .barrier-num { width: 32px; height: 32px; border-radius: 50%; background: rgba(32,178,170,0.15); border: 1px solid rgba(32,178,170,0.3); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--teal); flex-shrink: 0; }
+    .barrier-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); background: rgba(32,178,170,0.1); border: 1px solid rgba(32,178,170,0.2); padding: 3px 10px; border-radius: 20px; }
+    .proof-box { background: rgba(32,178,170,0.06); border: 1px solid rgba(32,178,170,0.2); border-radius: var(--radius); padding: 20px 24px; margin: 24px 0; }
+    .proof-box-label { font-size: 10px; font-weight: 700; color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+    .proof-box p { font-size: 0.9rem; margin-bottom: 0; color: var(--slate-light); }
+    .cycle-callout { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); padding: 32px; margin: 40px 0; text-align: center; }
+    .cycle-callout h3 { font-family: var(--font-serif); font-size: 1.3rem; color: var(--white); margin-bottom: 16px; }
+    .cycle-steps { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .cycle-step { font-size: 12px; font-weight: 600; color: var(--teal); padding: 6px 14px; border: 1px solid rgba(32,178,170,0.3); border-radius: 20px; white-space: nowrap; }
+    .cycle-arrow { color: var(--slate); font-size: 14px; }
+    .breaking-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin: 28px 0; }
+    .breaking-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius); padding: 20px 22px; }
+    .breaking-label { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .breaking-title { font-weight: 600; color: var(--white); margin-bottom: 6px; font-size: 14px; }
+    .breaking-body { font-size: 13px; color: var(--slate-light); line-height: 1.6; }
+    .author-card { max-width: 800px; margin: 0 auto; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 32px 40px 80px; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 24px 20px 60px; }
+      .author-card { padding: 24px 20px; }
+      .breaking-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <!-- Jump navigation -->
+  <div style="background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 12px 40px;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+      <span style="font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px;">Jump to:</span>
+      <a href="#barrier1" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Misaligned Incentives</a>
+      <a href="#barrier2" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Administrative Burden</a>
+      <a href="#barrier3" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Poor Data</a>
+      <a href="#barrier4" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Reactive Care</a>
+      <a href="#barrier5" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Patient Disengagement</a>
+      <a href="#breaking" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Breaking the Cycle</a>
+    </div>
+  </div>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">Value-Based Care</span>
+      <h1 class="article-title">Five Operational Barriers to Value-Based Care — And Why They Form a Vicious Cycle</h1>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>April 2026</span>
+        <span>·</span>
+        <span>14 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-body" style="padding-top: 60px;">
+
+    <p>The conversation about value-based care in the United States has been going on for decades. The evidence that it works — when implemented correctly — is overwhelming. ChenMed patients average 33% fewer hospitalizations and ER visits than comparable patients served by other healthcare organizations. Oak Street Health has achieved a 44% reduction in hospital admissions compared to Medicare benchmarks. Twelve years of MSSP data shows <a href="post-mssp-lead-analysis.html">a program that delivered $4.1 billion in earned savings in 2024 alone</a>, with the most experienced ACOs averaging nearly 5.5% savings rates.</p>
+
+    <p>So why, with this much evidence, do so many provider organizations still struggle to make value-based care work?</p>
+
+    <p>The answer isn't clinical. Provider organizations that fail in VBC aren't failing because their physicians don't care about patients or because the clinical protocols don't exist. They're failing because of five deeply interconnected operational barriers that most organizations underestimate — and that most point solutions don't adequately address.</p>
+
+    <p>These aren't five separate problems. They're one self-reinforcing system. Each barrier compounds the others, creating a cycle that keeps organizations trapped in the fee-for-service operating model even when leadership is genuinely committed to the VBC transition. Understanding the cycle is the first step to breaking it.</p>
+
+    <div class="cycle-callout">
+      <h3>Healthcare's Vicious Cycle</h3>
+      <p style="color: var(--slate-light); font-size: 14px; margin-bottom: 16px;">Stakeholder misalignment distracts from patient care — and each barrier feeds the next.</p>
+      <div class="cycle-steps">
+        <span class="cycle-step">Misaligned Incentives</span>
+        <span class="cycle-arrow">→</span>
+        <span class="cycle-step">Administrative Burden</span>
+        <span class="cycle-arrow">→</span>
+        <span class="cycle-step">Poor Data</span>
+        <span class="cycle-arrow">→</span>
+        <span class="cycle-step">Reactive Care</span>
+        <span class="cycle-arrow">→</span>
+        <span class="cycle-step">Patient Disengagement</span>
+        <span class="cycle-arrow">→</span>
+        <span class="cycle-step" style="border-color: rgba(221,170,102,0.4); color: #ddaa66;">Back to Start</span>
+      </div>
+    </div>
+
+    <h2 id="barrier1">
+      <div class="barrier-label"><span class="barrier-num">1</span><span class="barrier-tag">Barrier One</span></div>
+      Misaligned Incentives
+    </h2>
+
+    <p>The fee-for-service critique is well-worn: pay for volume, get volume. But the real problem runs deeper than the headline, and understanding the depth of it is essential to understanding why VBC transitions are so difficult for the typical provider organization.</p>
+
+    <p>Consider what a primary care physician's professional reality actually looks like. They are contracted with multiple insurance carriers across multiple lines of business — commercial employer group, ACA individual market, Medicaid, Medicare, Medicare Advantage — each paying differently, with different quality metrics, different administrative requirements, and different incentive structures. For most of these contracts, and for most of a practice's revenue, the dominant logic is still fee-for-service volume. The more patients seen, the more procedures performed, the more referrals generated — the more revenue produced.</p>
+
+    <p>Now ask that practice to redirect clinical energy toward a subset of their population in a value-based arrangement. The math is uncomfortable: the VBC patient population is a portion of the panel, the returns are deferred, the metrics are different, and the operational changes required — proactive outreach, care gap closure, documentation completeness — don't align with the workflows optimized for everything else the practice does to pay its bills.</p>
+
+    <p>This is why the most successful VBC organizations tend to be those with a singular focus. <strong>ChenMed, Oak Street Health (now part of CVS Health), CenterWell</strong> — these organizations operate exclusively within a VBC model for a defined population. Their incentive structure is not divided. Every clinical decision, every workflow, every KPI, every dollar of physician compensation is aligned around the same goal: keep patients healthy, manage costs, earn the capitation. There is no competing pull from FFS volume logic because there is no FFS volume.</p>
+
+    <p>The same pattern holds in commercially-focused VBC models. <strong>One Medical</strong> (now part of Amazon) and <strong>Forward</strong> built practices centered entirely on a membership model that incentivizes keeping patients healthy and engaged rather than driving visit volume. The singular focus produces singular alignment.</p>
+
+    <blockquote>
+      <p>The organizations that perform best in value-based care aren't necessarily the ones with the best clinicians. They're the ones whose entire operating model — every incentive, every workflow, every metric — points in the same direction.</p>
+    </blockquote>
+
+    <p>For the typical multi-payer, multi-product provider organization, achieving that alignment requires more than signing a VBC contract. It requires a strategic decision about population mix, a deliberate approach to contract negotiation that builds genuine partnership with payors, and a willingness to restructure operational priorities in ways that may feel counterintuitive to a practice built around FFS logic. The toe-in-the-water approach — piloting VBC for a subset of the population while running everything else on volume — works to some degree, but it captures only a fraction of the potential value and perpetuates the incentive conflict rather than resolving it.</p>
+
+    <h2 id="barrier2">
+      <div class="barrier-label"><span class="barrier-num">2</span><span class="barrier-tag">Barrier Two</span></div>
+      Administrative Burden
+    </h2>
+
+    <p>The misaligned incentive structure described above has a direct operational consequence: it creates an enormous and largely redundant administrative workload that consumes the time and attention that should be directed at patient care.</p>
+
+    <p>Consider what a mid-sized independent practice actually manages on the administrative side. Roster management — maintaining accurate lists of attributed patients — is a monthly obligation across every VBC contract. United Healthcare wants its roster in one format. Cigna requires a different format. Each payor has its own credentialing requirements, its own contract management portal, its own quality reporting specifications. The underlying data is largely the same; the formats, timelines, and submission processes are entirely different.</p>
+
+    <p>That's before you get to what most people think of as healthcare administration: clinical documentation for every encounter, billing for every service, prior authorization requests for specialist referrals and procedures, appeals for denied claims, reconciliation of explanation of benefits statements, enrollment and eligibility verification. Each of these functions exists because the system requires it — and each requires staff time that could otherwise be directed at patient care.</p>
+
+    <p>The burden is particularly acute for smaller organizations. A solo practitioner or small group practice is often managing most of this work themselves or with minimal administrative staff. Physicians trained to diagnose and treat become de facto data entry clerks, billing specialists, and compliance managers — roles they were never trained for and that progressively crowd out the clinical work they entered medicine to do. Physician burnout, which affects <strong>over 50% of physicians</strong> according to Medscape's research, is in significant part an administrative burden problem masquerading as a clinical one.</p>
+
+    <div class="proof-box">
+      <div class="proof-box-label">The administrative math</div>
+      <p>Studies consistently find that U.S. physicians spend nearly two hours on administrative tasks for every hour of direct patient care. In a fee-for-service environment, that overhead is baked into the volume model. In a value-based environment, where the goal is proactive engagement and prevention, it's a direct competitor for the time and attention that drives performance.</p>
+    </div>
+
+    <p>The administrative burden also compounds the incentive misalignment problem. When a practice is already stretched thin managing administrative requirements across multiple FFS payers, the incremental burden of a new VBC contract — new reporting, new quality metrics, new care management workflows — can push it past the breaking point. The result is VBC participation that is nominal rather than operational: the contract is signed but the workflows aren't rebuilt, the culture doesn't shift, and the performance never materializes.</p>
+
+    <h2 id="barrier3">
+      <div class="barrier-label"><span class="barrier-num">3</span><span class="barrier-tag">Barrier Three</span></div>
+      Poor Healthcare Data
+    </h2>
+
+    <p>Administrative burden and data quality are directly connected. When providers are overwhelmed with administrative tasks, data suffers. When data suffers, every downstream function — claims processing, analytics, care management, quality reporting — becomes harder, more expensive, and less reliable.</p>
+
+    <p>The problem starts at the point of data entry. Physicians weren't trained to be data input specialists, and the documentation burden in the current system frequently produces records that are incomplete, inconsistent, or optimized for billing rather than for clinical utility. A diagnosis documented in the way that maximizes reimbursement is not necessarily documented in the way that enables accurate risk stratification, care gap identification, or population health analytics.</p>
+
+    <p>The downstream consequences are significant. Incomplete or inaccurate demographic data causes claims to be denied on eligibility mismatches — which then require staff time to appeal and correct, compounding the administrative burden. Inconsistent clinical documentation makes it impossible to accurately forecast future costs for a population, which undermines financial planning for risk-bearing arrangements. Missing diagnoses in the risk adjustment model produce underpayments that cannot be corrected retroactively.</p>
+
+    <p>For analytics teams trying to support VBC operations, the data quality problem is fundamental. <strong>Predictive analytics, care gap identification, and proactive outreach all depend on having a reasonably complete and accurate picture of the patient population.</strong> When documentation is inconsistent — some providers documenting extensively, others leaving gaps — the population health model has black holes. You can't manage what you can't see, and you can't see what isn't documented.</p>
+
+    <p>The variation in provider documentation patterns is one of the most underappreciated barriers in value-based care. Two practices serving demographically similar populations can produce radically different data profiles, not because their patients are different but because their documentation cultures are different. Closing that gap — standardizing documentation practices, investing in tools that reduce documentation burden while improving completeness, and creating feedback loops that help providers understand how their documentation affects care management and financial performance — is foundational infrastructure for VBC success.</p>
+
+    <h2 id="barrier4">
+      <div class="barrier-label"><span class="barrier-num">4</span><span class="barrier-tag">Barrier Four</span></div>
+      Reactive Care
+    </h2>
+
+    <p>The first three barriers — misaligned incentives, administrative overload, and poor data — converge on a predictable outcome: a care delivery model that is structurally reactive rather than proactive.</p>
+
+    <p>In a reactive care environment, the patient controls the timing of clinical contact. They appear when they're sick, when they've had an acute event, or when a condition has progressed to the point of requiring intervention. Between those touchpoints, the provider has limited visibility into how the patient is doing. The annual wellness visit, if the patient shows up for it, provides a snapshot. Everything else is inference.</p>
+
+    <p>This model works tolerably in a fee-for-service environment because every encounter generates revenue regardless of whether it was preventable. It fails catastrophically in a value-based environment, where the financial model depends on preventing the high-cost events that reactive care allows to develop. A diabetic patient who misses their quarterly A1C check, whose medication adherence isn't monitored, who doesn't get timely podiatry referrals — that patient is a predictable future hospitalization. In FFS, that hospitalization generates revenue. In VBC, it generates loss.</p>
+
+    <p>The data confirms this at scale. Oak Street Health's panel of about 500 patients per physician — compared to a typical FFS panel of 2,500 — isn't just a service quality choice. For the top 5% of their highest-risk patients, they successfully project 30% of acute events that occur in the next 30 days. That predictive capability, built on better data and more frequent contact, is what allows proactive intervention rather than reactive response. It requires the infrastructure investment that FFS economics don't reward and that administrative burden crowds out.</p>
+
+    <p>The reactive care trap is self-reinforcing. Providers busy with administrative tasks have less time for proactive outreach. Poor data makes it harder to identify which patients need that outreach. And without engagement, the data stays incomplete — closing the loop back to barrier three.</p>
+
+    <h2 id="barrier5">
+      <div class="barrier-label"><span class="barrier-num">5</span><span class="barrier-tag">Barrier Five</span></div>
+      Patient Disengagement
+    </h2>
+
+    <p>Patient disengagement is both a consequence of the previous four barriers and a barrier in its own right — and it's where the vicious cycle closes.</p>
+
+    <p>When patients don't have strong relationships with their primary care providers — when care is episodic rather than continuous, reactive rather than proactive, transactional rather than relational — they disengage. They miss appointments. They don't follow up on referrals. They manage chronic conditions on their own terms, which frequently means not managing them at all until a crisis develops. They don't complete quality surveys, which drives down HEDIS scores and Stars ratings. And critically, they don't provide the ongoing clinical data that population health analytics depends on.</p>
+
+    <p>The populations most affected by patient disengagement are often the ones with the highest clinical need. Low-income patients, patients with limited English proficiency, patients facing housing or food insecurity — these populations are precisely the ones that value-based care is most designed to serve and precisely the ones most likely to disengage from a healthcare system that feels unwelcoming, inconvenient, or inaccessible.</p>
+
+    <p>The organizations that have cracked this problem share a common approach: they meet patients where they are, both literally and figuratively. ChenMed's model of monthly patient visits, on-site specialists and medications, and transportation support isn't peripheral to the VBC model — it's the VBC model. ChenMed has successfully reduced hospital admissions among its patient population in large part because its engagement model keeps patients connected to primary care before acute events develop, not after.</p>
+
+    <p>The behavioral dimension of engagement is equally important and more frequently overlooked. Getting a patient to show up for their annual wellness visit is one thing. Getting them to take their medications consistently, modify their diet, exercise regularly, and follow up on care plan recommendations requires a different kind of engagement — one that accounts for human psychology, not just logistics. The organizations that do this well use behavioral incentives, relationship-based care teams, and ongoing communication strategies that create habitual engagement rather than episodic compliance.</p>
+
+    <p>When patient disengagement is high, every other barrier gets worse. Data is more incomplete. Proactive care becomes impossible. Administrative burden increases as the practice chases unresponsive patients. And the financial case for VBC deteriorates as the population's health outcomes — and the practice's savings rate — underperform.</p>
+
+    <h2 id="breaking">Breaking the Cycle</h2>
+
+    <p>The five barriers described above are individually challenging. As a self-reinforcing system, they're formidable. This is why point solutions — tools that address one or two aspects of the problem in isolation — so frequently underdeliver on their promise.</p>
+
+    <p>A roster management tool that reduces administrative burden doesn't fix the incentive misalignment that makes providers ambivalent about VBC. A risk stratification platform built on incomplete data produces inaccurate risk scores. A patient engagement app deployed in an organization without the clinical workflows to act on engagement signals creates activity without outcomes. The sum of five partial solutions is not a whole.</p>
+
+    <p>Breaking the cycle requires addressing all five barriers in an integrated way — and doing it in the right sequence:</p>
+
+    <div class="breaking-grid">
+      <div class="breaking-item">
+        <div class="breaking-label">Start Here</div>
+        <div class="breaking-title">Align Incentives Strategically</div>
+        <div class="breaking-body">Evaluate your population mix, VBC contract terms, and organizational strategy before adding tools or workflows. The right contract structure — with genuine payor-provider partnership, appropriate shared savings rates, and population-level accountability — is the foundation everything else builds on.</div>
+      </div>
+      <div class="breaking-item">
+        <div class="breaking-label">Then</div>
+        <div class="breaking-title">Reduce Administrative Friction</div>
+        <div class="breaking-body">Streamline the workflows that consume provider time without generating clinical value. Standardize data formats, automate roster management and eligibility verification, and reduce the documentation burden that crowds out clinical work. Time freed from administration becomes time available for proactive care.</div>
+      </div>
+      <div class="breaking-item">
+        <div class="breaking-label">Then</div>
+        <div class="breaking-title">Build Data Integrity</div>
+        <div class="breaking-body">Invest in documentation completeness and consistency across the provider network. Create feedback loops that connect documentation quality to financial and clinical outcomes — so providers understand how their records affect care management and performance. Better data enables everything downstream.</div>
+      </div>
+      <div class="breaking-item">
+        <div class="breaking-label">Then</div>
+        <div class="breaking-title">Enable Proactive Care</div>
+        <div class="breaking-body">Use clean data to identify care gaps, risk-stratify populations, and prioritize outreach. Build the workflows that turn insights into action — care management protocols, provider alerts, care coordination processes — so that clinical teams can act on what the data shows before patients deteriorate.</div>
+      </div>
+    </div>
+
+    <p>Patient engagement runs through all four steps — but it is most durable when it's built on the foundation of the first three. Organizations that invest in engagement before they've fixed their incentive structure and administrative workflows often find that engagement improves activity metrics without improving outcomes, because the clinical infrastructure to act on engaged patients isn't in place.</p>
+
+    <p>The other essential ingredient is time. <a href="post-mssp-lead-analysis.html">Twelve years of MSSP data</a> shows clearly that ACOs with ten or more years of program experience average more than twice the savings rate of organizations in their first two years. The cultural shift required to move a provider organization from volume logic to value logic takes time — not because the people aren't capable, but because habits, workflows, and incentives are deeply embedded and don't change overnight. Organizations that stay committed through the early years, invest in the right infrastructure, and have the runway to let that investment mature are the ones that break through.</p>
+
+    <p>That's what the evidence from the highest-performing VBC organizations consistently shows — and it's what TRYNYTY was built to support: not a point solution for one aspect of the problem, but an integrated platform that addresses the data quality, administrative burden, stakeholder alignment, and patient engagement barriers together, using behavioral economics to drive the culture change that makes the clinical and financial results sustainable.</p>
+
+    <p>The cycle is vicious. But it's not unbreakable.</p>
+
+  </div>
+
+  <div class="author-card">
+    <div class="author-card-inner">
+      <img src="headshot.jpg" alt="Andrew Smithson" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(32,178,170,0.3);flex-shrink:0;" />
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. 15+ years in value-based care strategy, financial analytics, and managed care consulting across health plans, health systems, ACOs, and IPAs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="blog.html" class="btn btn-ghost">← Back to Insights</a>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="post-mssp-lead-analysis.html" class="btn btn-ghost">MSSP Performance Data →</a>
+      <a href="contact.html" class="btn btn-primary">Discuss with Our Team →</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
