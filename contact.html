@@ -9,6 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZG2KKV4BG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GZG2KKV4BG');
+  </script>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -86,24 +96,56 @@
           </div>
         </div>
 
-        <div class="contact-form-card" style="display: flex; flex-direction: column; justify-content: center;">
+        <div class="contact-form-card">
           <h3>Send us a message</h3>
-          <div class="form-sub" style="margin-bottom: 32px;">Email us directly — we'll follow up within one business day to set up a time to connect.</div>
+          <div class="form-sub">We'll follow up by email to set up a time to connect.</div>
+          <form class="contact-form" action="https://formsubmit.co/Andrew@trynytyhealth.com" method="POST">
+            <input type="hidden" name="_subject" value="TRYNYTY Website Inquiry" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://trynytyhealth.com/thanks.html" />
+            <input type="hidden" name="_template" value="table" />
 
-          <a href="mailto:Andrew@trynytyhealth.com?subject=TRYNYTY%20Website%20Inquiry" class="btn btn-primary btn-lg" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 28px; font-size: 1.05rem; text-decoration: none;">
-            <span style="font-size: 1.3rem;">✉</span> Andrew@trynytyhealth.com
-          </a>
-
-          <div style="margin-top: 24px; padding: 20px; background: rgba(32,178,170,0.06); border: 1px solid rgba(32,178,170,0.15); border-radius: var(--radius);">
-            <div style="font-size: 11px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;">What to include</div>
-            <div style="font-size: 13px; color: var(--slate-light); line-height: 1.7;">
-              A quick note about your organization, what you're navigating, or any specific questions — so we can tailor the follow-up to what's actually useful for you.
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">First Name *</label>
+                <input type="text" name="first_name" class="form-input" placeholder="Jane" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Last Name *</label>
+                <input type="text" name="last_name" class="form-input" placeholder="Smith" required />
+              </div>
             </div>
-          </div>
 
-          <div style="margin-top: 20px; font-size: 12px; color: var(--slate); text-align: center;">
-            Clicking the button above will open your email client with a new message pre-addressed to Andrew.
-          </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" name="email" class="form-input" placeholder="jane@healthsystem.org" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Organization</label>
+              <input type="text" name="organization" class="form-input" placeholder="Your ACO, health system, or health plan" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">I'm interested in</label>
+              <select name="interest" class="form-select">
+                <option value="">Select one...</option>
+                <option value="demo">MSSP Explorer Demo</option>
+                <option value="consulting">Consulting Engagement</option>
+                <option value="custom-tool">Custom Analytics / Tool</option>
+                <option value="mailing-list">Joining the Mailing List</option>
+                <option value="other">Something Else</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea name="message" class="form-textarea" placeholder="Tell us about your organization, what you're working on, or what questions you have..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">Send Message →</button>
+            <div class="form-privacy">We respect your privacy. Your information is only used to respond to your inquiry.</div>
+          </form>
         </div>
 
       </div>
