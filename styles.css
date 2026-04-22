@@ -44,6 +44,22 @@ a { color: inherit; text-decoration: none; }
 .section-header { text-align: center; margin-bottom: 60px; }
 .section-header h2 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 2.8rem); color: var(--white); line-height: 1.2; margin-top: 8px; }
 
+/* ── Section Divider (logo mark between sections) ── */
+.section-divider {
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 0; gap: 20px;
+  background: var(--navy);
+}
+.section-divider::before,
+.section-divider::after {
+  content: ''; flex: 0 0 80px; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(32,178,170,0.25), transparent);
+}
+.section-divider img {
+  width: 28px; height: 28px; object-fit: contain;
+  opacity: 0.55;
+}
+
 /* ── Buttons ── */
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
@@ -128,6 +144,14 @@ a { color: inherit; text-decoration: none; }
   width: 300px; height: 300px; left: 10%; top: 30%;
   background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
   opacity: 0.03;
+}
+/* Large faded logo watermark in hero */
+.hero-logo-watermark {
+  position: absolute; right: 6%; top: 50%;
+  transform: translateY(-50%);
+  width: 520px; height: 520px; object-fit: contain;
+  opacity: 0.06; pointer-events: none;
+  filter: drop-shadow(0 0 40px rgba(32,178,170,0.2));
 }
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
 
@@ -336,11 +360,12 @@ a { color: inherit; text-decoration: none; }
 .node-label { font-size: 9px; font-weight: 600; color: var(--slate-light); text-transform: uppercase; letter-spacing: 0.06em; }
 .trinity-center {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -30%);
-  width: 56px; height: 56px; background: var(--teal); border-radius: 12px;
+  width: 78px; height: 78px; background: var(--teal); border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(32,178,170,0.35);
 }
 .tc-logo { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--navy); }
-.trinity-center img { width: 40px; height: 40px; object-fit: contain; }
+.trinity-center img { width: 58px; height: 58px; object-fit: contain; }
 
 /* ── CTA / Lead Capture ── */
 .cta-section {
@@ -383,11 +408,11 @@ a { color: inherit; text-decoration: none; }
   padding: 60px 0 32px;
 }
 .footer-inner { display: grid; grid-template-columns: 1fr auto; gap: 60px; margin-bottom: 40px; }
-.footer-brand .footer-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-.footer-brand .logo-mark-img { width: 52px; height: 52px; }
-.footer-brand .logo-text { font-size: 20px; }
-.footer-brand .logo-sub { font-size: 13px; margin-top: 2px; }
-.footer-tagline { font-size: 15px; color: var(--slate-light); max-width: 320px; line-height: 1.6; }
+.footer-brand .footer-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.footer-brand .logo-mark-img { width: 60px; height: 60px; }
+.footer-brand .logo-text { font-size: 22px; }
+.footer-brand .logo-sub { font-size: 14px; margin-top: 3px; }
+.footer-tagline { font-size: 15px; color: var(--slate-light); max-width: 340px; line-height: 1.6; }
 .footer-links { display: flex; gap: 60px; }
 .footer-col { display: flex; flex-direction: column; gap: 10px; }
 .footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
@@ -397,6 +422,12 @@ a { color: inherit; text-decoration: none; }
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
   font-size: 12px; color: var(--slate);
+}
+
+/* ── Author card (blog posts) brand mark ── */
+.author-brand-mark {
+  width: 18px; height: 18px; object-fit: contain;
+  vertical-align: -3px; margin-right: 4px; opacity: 0.9;
 }
 
 /* ── About page ── */
@@ -507,6 +538,7 @@ a { color: inherit; text-decoration: none; }
   .about-portrait { max-width: 280px; }
   .contact-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+  .hero-logo-watermark { width: 380px; height: 380px; right: -5%; opacity: 0.05; }
 }
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
@@ -523,9 +555,11 @@ a { color: inherit; text-decoration: none; }
   .hero-content { padding: 60px 20px; }
   .hero-stats { gap: 20px; }
   .stat-div { display: none; }
+  .hero-logo-watermark { display: none; }
   .feature-preview { display: none; }
   .trinity-nodes { display: none; }
   .trinity-inner { grid-template-columns: 1fr; }
   .footer-links { flex-direction: column; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .section-divider::before, .section-divider::after { flex-basis: 40px; }
 }
