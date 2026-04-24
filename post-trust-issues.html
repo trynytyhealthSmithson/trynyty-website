@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Let's Get Honest: Healthcare Has Trust Issues — TRYNYTY</title>
+  <meta name="description" content="The root cause of nearly every dysfunction in U.S. healthcare — costs, burnout, administrative bloat — is a breakdown of trust between patients, providers, payers, employers, and regulators. A 15-year practitioner's view on how we got here and what rebuilding looks like." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Open Graph / LinkedIn / iMessage / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="TRYNYTY health:enablement" />
+  <meta property="og:url" content="https://www.trynytyhealth.com/post-trust-issues.html" />
+  <meta property="og:title" content="Let's Get Honest: Healthcare Has Trust Issues" />
+  <meta property="og:description" content="The root cause of nearly every healthcare dysfunction is a breakdown of trust. A practitioner's view on how we got here — and what rebuilding looks like." />
+  <meta property="og:image" content="https://www.trynytyhealth.com/post-trust-issues-og.png" />
+  <meta property="og:image:secure_url" content="https://www.trynytyhealth.com/post-trust-issues-og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Let's Get Honest: Healthcare Has Trust Issues — by Andrew Smithson, TRYNYTY health:enablement" />
+  <meta property="article:author" content="Andrew Smithson" />
+  <meta property="article:published_time" content="2026-04-25" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Let's Get Honest: Healthcare Has Trust Issues" />
+  <meta name="twitter:description" content="The root cause of nearly every healthcare dysfunction is a breakdown of trust. A practitioner's view on how we got here — and what rebuilding looks like." />
+  <meta name="twitter:image" content="https://www.trynytyhealth.com/post-trust-issues-og.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(100,120,200,0.12); color: #8899dd; border: 1px solid rgba(100,120,200,0.25); }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white); }
+    .article-body { max-width: 800px; margin: 60px auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.6rem; color: var(--white); margin: 44px 0 16px; }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--white); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .article-body a:hover { color: #3dd6ce; }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .pull-stat { margin: 32px 0; padding: 20px 28px; background: rgba(32,178,170,0.06); border-left: 3px solid var(--teal); border-radius: 0 var(--radius) var(--radius) 0; }
+    .pull-stat p { margin: 0; font-family: var(--font-serif); font-size: 1.25rem; color: var(--white); font-weight: 400; line-height: 1.5; }
+    .article-body .references { margin-top: 56px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .article-body .references h3 { font-size: 1rem; color: var(--slate-light); text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 20px; }
+    .article-body .references .ref-group { margin-bottom: 20px; }
+    .article-body .references .ref-group-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 8px; }
+    .article-body .references p { font-size: 12px; color: var(--slate); line-height: 1.6; margin-bottom: 8px; }
+    .article-body .references a { color: var(--teal); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 0 40px 80px; gap: 16px; flex-wrap: wrap; }
+    .author-card { max-width: 800px; margin: 0 auto 0; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 0 20px 60px; }
+      .author-card { padding: 24px 20px; }
+      .pull-stat { padding: 16px 20px; }
+      .pull-stat p { font-size: 1.1rem; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZG2KKV4BG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GZG2KKV4BG');
+  </script>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">Industry Perspective</span>
+      <h1 class="article-title">Let's Get Honest: Healthcare Has Trust Issues</h1>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>April 2026</span>
+        <span>·</span>
+        <span>8 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <p>It can feel overwhelming, what's happening in healthcare right now.</p>
+
+    <p>LEAD Model applications are due in three weeks. TEAM bundled payments just launched. The CMS-HCC v28 risk-adjustment model finished its three-year phase-in. Part D out-of-pocket caps ticked up again. Vaccine schedules are shifting. Conferences, white papers, and reimbursement debates fill the calendar.</p>
+
+    <p>Each of these is presented as a meaningful step forward. And on paper, some of them are.</p>
+
+    <p>Yet the deeper I look, the more I'm convinced we're solving the wrong problem. Every one of these reforms is downstream of something nobody wants to name.</p>
+
+    <p><strong>We have a trust problem.</strong> And we've built a fortress to protect against betrayal — never realizing the fortress itself is what's grinding the system to a halt.</p>
+
+    <p>I've spent the last fifteen years on every side of this table — health plans, health systems, IPAs, MSOs. The problems from organization to organization differ in nuance, but they're almost always rooted in a lack of communication or trust amongst stakeholders who should, in theory, be on the same side.</p>
+
+    <p>Clayton Christensen captured the pattern exactly in the introduction to <em>The Innovator's Prescription</em>:</p>
+
+    <blockquote>
+      <p>"Almost every day somewhere in the United States, a group of health-care reformers convenes a conference. We've attended many of these. Nearly without exception the participants talk past each other. This one focuses on the uninsured poor, that one on prescription drug coverage for the elderly, another on overuse of expensive diagnostics technology, and still someone else on the cost of end-of-life care. Someone decries the perversions of fee-for-service reimbursement, while someone else bewails the failings of capitation.</p>
+      <p>They talk past one another because they don't share a common language and common understanding of the root causes of these problems. Unable to agree on the problem, and without a language for understanding one another, they find it impossible to articulate and agree upon promising solutions."</p>
+    </blockquote>
+
+    <p>We still don't have that shared language. And without it, the real problem stays hidden in plain sight.</p>
+
+    <h2>The Trust Crisis: The Quiet Collapse at the Heart of Healthcare</h2>
+
+    <p>Healthcare is uniquely relational. Patients come to us at their most vulnerable — often literally placing their lives in our hands. Providers hold asymmetric information and a fiduciary duty that goes far beyond a typical commercial transaction. Payers and regulators are meant to steward shared resources on behalf of all of us.</p>
+
+    <p>When trust erodes between any of these parties, the entire ecosystem turns adversarial. Cooperation becomes a liability. Self-preservation becomes the rational response.</p>
+
+    <p>The numbers are sobering.</p>
+
+    <div class="pull-stat">
+      <p>Public trust in U.S. physicians and hospitals fell from <strong style="color:var(--teal)">71.5%</strong> in April 2020 to <strong style="color:var(--teal)">40.1%</strong> in January 2024 — a drop of more than 31 percentage points in under four years.</p>
+    </div>
+
+    <p>That finding comes from a landmark <em>JAMA Network Open</em> study tracking trust across 24 survey waves. The decline cut across every demographic: age, gender, race, education, income, geography. Gallup polls have shown similar erosion in ratings of doctors' ethics. Even among clinicians themselves, confidence in the <em>systems</em> they work within — hospitals, health plans, regulators — has declined sharply.</p>
+
+    <p>The pandemic accelerated fractures that were already forming, but it did not create them. Patients feel like data points in a transaction. Clinicians feel micromanaged by prior authorizations, metrics, and audits. Payers feel gamed by coding practices and risk-adjustment strategies. Employers watch premiums climb while outcomes stagnate.</p>
+
+    <p>Almost every dysfunction we complain about — skyrocketing costs, chronic-disease mismanagement, administrative bloat, clinician burnout — traces back to this breakdown of trust between patients, providers, payers, employers, and regulators.</p>
+
+    <h2>Why Trust Eroded: Many Roots, One Common Soil</h2>
+
+    <p>These fractures did not appear overnight. Western medicine has been evolving for centuries — from a deeply relational, community-based healing art to a highly industrialized, transactional system. The soil was tilled long ago. Today's acute crisis simply made the erosion impossible to ignore.</p>
+
+    <p>The roots are interconnected, and good intentions exist on every side:</p>
+
+    <h3>Incentive misalignment</h3>
+    <p>Fee-for-service still rewards volume over value; payers respond with layers of controls. Providers feel pressured to do more; payers feel they must protect against overutilization. Mutual suspicion follows.</p>
+
+    <h3>Radical opacity</h3>
+    <p>Pricing remains opaque, quality data fragmented, and risk-adjustment models subject to endless debate and gaming. When no one can see the full picture clearly, trust suffers. The <a href="post-v24-v28.html">v28 risk adjustment model transition</a> is a recent case in point — changes that have created an uneven regulatory field and particularly challenge value-based care providers trying to operate in good faith.</p>
+
+    <h3>Fragmentation and data silos</h3>
+    <p>Different stakeholders see only pieces of the patient's story. Coordination fails. Errors happen. Blame circulates. Variation in documentation practices and record-keeping across EHR systems creates a mess of inconsistent, incomplete data that prevents real actionable analysis at scale.</p>
+
+    <h3>Financialization and consolidation</h3>
+    <p>Private equity ownership, hospital mergers, insurer concentration — many driven by legitimate scale and efficiency goals — have created a widespread perception that profit has eclipsed care. Corporate practice of medicine (CPOM) laws in many states, originally designed to shield clinical judgment from corporate influence, have in practice pushed physicians into greater business leadership and administrative roles rather than allowing them to focus on patient care.</p>
+
+    <h3>Regulatory and policy whiplash</h3>
+    <p>Constant rule changes make it hard to believe the game is fair or stable. The LEAD Model's 10-year horizon stands out precisely because it is such a rare exception.</p>
+
+    <h3>Cultural and historical wounds</h3>
+    <p>Surprise billing scars, opioid crisis fallout, media narratives of greed — and more recently, pandemic-era moments when patients felt profoundly unheard. Early Long Covid patients described lengthy diagnostic odysseys, symptoms dismissed or attributed to anxiety, and a system that wasn't equipped to listen at scale to novel, patient-reported realities. It became a vivid illustration of what happens when the patient voice gets sidelined in a system that has drifted away from its relational roots.</p>
+
+    <h3>Information asymmetry and vulnerability</h3>
+    <p>Economist Kenneth Arrow pointed this out more than sixty years ago: healthcare's inherent uncertainty makes trust economically different from every other market. Yet we have built systems — rules, audits, and technology — that often amplify the very uncertainty and power imbalance they were meant to correct.</p>
+
+    <p>Trust is not a soft virtue. It is the social capital that lets complex systems function. When it is gone, we layer on more rules, more audits, and more technology that only deepen the distrust. Prior authorizations, narrow networks, and endless audits create far more friction than they prevent the abuses they were intended to stop. <strong>The fortress itself is what keeps everyone on edge.</strong></p>
+
+    <h2>The Vicious Cycles This Creates</h2>
+
+    <p>The erosion is self-reinforcing.</p>
+
+    <p>Defensive medicine and over-testing drive higher costs. Tighter payer controls follow. Clinician burnout rises. Patient experience worsens. Adherence drops. Populations get sicker. Costs climb even higher.</p>
+
+    <p>Chronic conditions — which still account for roughly 90% of U.S. healthcare spending — remain tragically unmanaged because no stakeholder fully trusts the others enough to invest seriously in prevention and coordination. Administrative waste, estimated at 25–30% of total spending, becomes "necessary self-defense" against perceived gaming.</p>
+
+    <p>Even well-intentioned value-based care experiments often falter — not because the clinical intent is wrong, but because the infrastructure for <em>fair, transparent</em> risk-sharing does not yet exist at scale. I've written separately about <a href="post-vbc-barriers.html">the structural barriers that keep value-based care stuck</a>.</p>
+
+    <p>The result? Greater distrust. Another round of rules. Another fortress wall.</p>
+
+    <h2>Rebuilding Trust: The Honest Path Forward</h2>
+
+    <p>At the center of every stakeholder sits the same person — the patient, the shared consumer. Physicians, hospitals, payers, suppliers, and employers are all links in one supply chain whose end product is human health. When trust breaks down between any links in that chain, the customer suffers: degraded quality, inflated costs, broken service.</p>
+
+    <p>Real solutions begin when we treat one another as true partners and prioritize the health of the patient above all. That requires a new kind of leadership — servant leaders inside every organization who drive partnerships instead of protecting turf.</p>
+
+    <p>We need shared diagnosis — echoing Christensen — plus mechanisms that make cooperation rational and rewarding again: long-term alignment (the LEAD Model's decade-long stable benchmarks are a promising step), radical transparency, friction reduction, and a relentless focus on outcomes over process.</p>
+
+    <p>Technology and AI are powerful tools — but only when they enable <em>human</em> relationships and accountability, not replace them.</p>
+
+    <p>The fortress won't fall on its own. But every time stakeholders sit down with the same facts, the same definitions, and the honest goal of making each other succeed, one more brick comes down.</p>
+
+    <p>Healthcare can be relational again. It starts with the courage to diagnose the real problem — together — and then do the work.</p>
+
+    <div class="references">
+      <h3>References</h3>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Policy Announcements (2026)</div>
+        <p>Centers for Medicare &amp; Medicaid Services (CMS). "2026 Medicare Advantage and Part D Advance Notice Fact Sheet" and CY 2026 Rate Announcement. January 2025 / April 2026 implementation.</p>
+        <p>Centers for Medicare &amp; Medicaid Services (CMS). "Transforming Episode Accountability Model (TEAM)." Launched January 1, 2026.</p>
+        <p>Centers for Medicare &amp; Medicaid Services (CMS). "Long-term Enhanced ACO Design (LEAD) Model." Applications due May 17, 2026; launch January 1, 2027.</p>
+        <p>Medicare.gov / official Part D guidance. Out-of-pocket cap adjustment to $2,100 for 2026.</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Trust in Physicians and Hospitals</div>
+        <p>Perlis RH, Ognyanova K, Uslu A, et al. Trust in Physicians and Hospitals During the COVID-19 Pandemic in a 50-State Survey of US Adults. <em>JAMA Network Open.</em> 2024;7(7):e2424984. doi:10.1001/jamanetworkopen.2024.24984.</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Chronic Disease Spending</div>
+        <p>Centers for Disease Control and Prevention (CDC). "Fast Facts: Health and Economic Costs of Chronic Conditions." Updated 2025.</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Administrative Waste</div>
+        <p>Shrank WH, Rogstad TL, Parekh N. Waste in the US Health Care System: Estimated Costs and Potential for Savings. <em>JAMA.</em> 2019;322(15):1501-1509. doi:10.1001/jama.2019.13978.</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Corporate Practice of Medicine (CPOM) and Physician Roles</div>
+        <p>Milbank Memorial Fund. Brief on Management Services Organizations (MSOs) and Corporate Practice of Medicine laws. 2025.</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Long COVID and Medical Gaslighting</div>
+        <p>Plastina AF. Long COVID patients' reconstruction of medical gaslighting discourse in online epistemic communities. <em>Patient Education and Counseling.</em> 2025;134:108665. doi:10.1016/j.pec.2025.108665.</p>
+        <p>Au L, Capotescu C, Eyal G, Finestone G. Long covid and medical gaslighting: Dismissal, delayed diagnosis, and deferred treatment. <em>Sociology.</em> 2025.</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Information Asymmetry in Healthcare</div>
+        <p>Arrow KJ. Uncertainty and the Welfare Economics of Medical Care. <em>American Economic Review.</em> 1963;53(5):941-973.</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">Value-Based Care and Regulatory Context</div>
+        <p>CMS documentation on the 2024 CMS-HCC v28 risk-adjustment model changes and their impact on value-based care providers. See also: <a href="post-v24-v28.html">TRYNYTY health:enablement post on v28 navigation</a>.</p>
+        <p>CMS. "Long-term Enhanced ACO Design (LEAD) Model" Request for Applications (stable 10-year benchmarks as a structural exception to policy whiplash).</p>
+      </div>
+
+      <div class="ref-group">
+        <div class="ref-group-title">TRYNYTY health:enablement Tools and Data</div>
+        <p>MSSP ACO Explorer: 2013–2024 public performance data across 1,038 ACOs. Available at <a href="https://mssppuf.trynytyhealth.com" target="_blank">mssppuf.trynytyhealth.com</a>. (2025 performance year data expected from CMS in mid-to-late 2026.)</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Author card -->
+  <div class="author-card">
+    <div class="author-card-inner">
+      <img src="headshot.jpg" alt="Andrew Smithson" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(32,178,170,0.3);flex-shrink:0;" />
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. 15+ years in value-based care strategy, financial analytics, and managed care consulting across health plans, health systems, ACOs, and IPAs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="blog.html" class="btn btn-ghost">← Back to Insights</a>
+    <a href="post-vbc-barriers.html" class="btn btn-primary">Read: Barriers to Value-Based Care →</a>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2025 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
