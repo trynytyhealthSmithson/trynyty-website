@@ -69,7 +69,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GZG2KKV4BG');
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -294,7 +298,7 @@
       <ul>
         <li>The Medicare Shared Savings Program operates on a different payment architecture than Medicare Advantage capitation — MSSP ACOs are not directly exposed to HCC coefficient changes in the same way MA plans are. For provider organizations considering their program participation strategy, MSSP and the new LEAD Model offer meaningful structural alternatives.</li>
         <li>The LEAD Model in particular — with its 10-year term, concurrent risk adjustment enhancements for high-needs populations, and per-beneficiary prevention incentives — is designed explicitly to address some of the misalignments this piece describes. The application window is time-sensitive and evaluation of the model alongside MSSP participation is worth the investment of analysis now.</li>
-        <li>TRYNYTY's <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a> provides free, interactive access to 12 years of MSSP performance data — useful context for any organization evaluating its program options.</li>
+        <li>TRYNYTY's <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a> provides free, interactive access to 12 years of MSSP performance data — useful context for any organization evaluating its program options.</li>
       </ul>
     </div>
 
@@ -359,7 +363,7 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Tools &amp; Insights</div>
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
             <a href="blog.html">Insights</a>
           </div>
           <div class="footer-col">

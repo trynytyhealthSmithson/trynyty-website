@@ -59,7 +59,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GZG2KKV4BG');
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -304,7 +308,7 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Tools &amp; Insights</div>
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
             <a href="blog.html">Insights</a>
           </div>
           <div class="footer-col">

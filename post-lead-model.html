@@ -78,7 +78,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GZG2KKV4BG');
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -247,7 +251,7 @@
       <div style="font-size: 11px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 8px;">Free Tool</div>
       <div style="font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 8px;">Explore the ACO REACH Data Behind This Analysis</div>
       <p style="color: var(--slate-light); font-size: 0.95rem; margin-bottom: 16px;">The ACO REACH → LEAD Explorer is a free, interactive analytics platform covering all three performance years of ACO REACH (PY2021–2023). Search any of the 150 participating ACOs, explore their savings rate trajectory, quality scores, capitation payment breakdown, and get a personalized LEAD Model transition guide based on their actual performance.</p>
-      <a href="https://reachpuf.trynytyhealth.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: var(--navy); padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none;">Launch the ACO REACH → LEAD Explorer →</a>
+      <a href="https://reachpuf.trynytyhealth.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: var(--navy); padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none;" class="explorer-launch" data-explorer="reach">Launch the ACO REACH → LEAD Explorer →</a>
     </div>
 
     <p><strong>Current ACO REACH participants</strong> are the most natural candidates. LEAD is explicitly designed as ACO REACH's successor, and the transition pathway is as direct as CMS has made any model transition. For organizations that have invested in the infrastructure, culture, and clinical workflows to succeed in ACO REACH, LEAD offers a longer runway to realize that investment's return — without the disruption of re-entering a different program.</p>
@@ -313,7 +317,7 @@
       <p style="font-size: 14px; margin-bottom: 24px;">Our team has hands-on experience across MSSP, ACO REACH, and Medicare Advantage value-based arrangements — and we've been tracking LEAD since its announcement. Whether you're a current ACO REACH participant navigating the transition, an MSSP ACO evaluating whether to add LEAD, or a provider organization exploring accountable care for the first time, reach out. The analysis is worth doing now.</p>
       <div class="cta-buttons">
         <a href="contact.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:var(--radius);font-weight:600;font-size:14px;background:var(--teal);color:var(--navy);text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Talk to Our Team →</a>
-        <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-ghost">Explore MSSP Benchmark Data →</a>
+        <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-ghost explorer-launch" data-explorer="mssp">Explore MSSP Benchmark Data →</a>
       </div>
     </div>
 
@@ -356,7 +360,7 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Tools &amp; Insights</div>
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
             <a href="blog.html">Insights</a>
           </div>
           <div class="footer-col">

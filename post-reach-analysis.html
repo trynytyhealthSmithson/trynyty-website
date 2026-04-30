@@ -18,7 +18,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GZG2KKV4BG');
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -112,7 +116,7 @@
 
     <p>The honest answer is that the data is more clarifying than most program-level summaries suggest. Configuration mattered enormously. Experience compounded in ways the headline numbers obscure. And a small subset of ACOs captured a disproportionate share of the savings — not randomly, but in ways that are largely predictable from the structural choices each organization made before the performance year began.</p>
 
-    <p>We built the <a href="https://reachpuf.trynytyhealth.com" target="_blank">ACO REACH → LEAD Explorer</a> to make this data accessible. What follows is what we found when we looked at all 150 ACOs across all three years.</p>
+    <p>We built the <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH → LEAD Explorer</a> to make this data accessible. What follows is what we found when we looked at all 150 ACOs across all three years.</p>
 
     <!-- Jump navigation -->
     <div style="background:var(--navy-mid);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:20px 24px;margin:32px 0;">
@@ -252,7 +256,7 @@
       <h3>Explore the Data Yourself</h3>
       <p>The ACO REACH → LEAD Explorer gives you free, interactive access to all three years of ACO REACH performance data — including savings trajectory, peer comparison, Rate/Volume/Mix analysis, and a LEAD readiness assessment for every participating ACO. No login required.</p>
       <div class="cta-buttons">
-        <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="btn btn-primary" style="color:var(--navy);">Launch the REACH Explorer →</a>
+        <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="btn btn-primary explorer-launch" style="color:var(--navy);" data-explorer="reach">Launch the REACH Explorer →</a>
         <a href="contact.html" class="btn btn-ghost" style="color:var(--white);border-color:rgba(255,255,255,0.3);">Schedule a Conversation</a>
       </div>
     </div>
@@ -296,8 +300,8 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Tools</div>
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
-            <a href="https://reachpuf.trynytyhealth.com" target="_blank">ACO REACH → LEAD Explorer</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
+            <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH → LEAD Explorer</a>
             <a href="tools.html">All Tools</a>
             <a href="blog.html">Insights</a>
           </div>

@@ -37,7 +37,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GZG2KKV4BG');
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -191,7 +195,7 @@
             <div class="fh">✓ Free &amp; publicly accessible</div>
           </div>
           <div class="feature-actions">
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-primary">Launch the Explorer →</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-primary explorer-launch" data-explorer="mssp">Launch the Explorer →</a>
             <a href="contact.html" class="btn btn-ghost">Request a Demo</a>
           </div>
         </div>
@@ -334,8 +338,8 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Tools</div>
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
-            <a href="https://reachpuf.trynytyhealth.com" target="_blank">ACO REACH → LEAD Explorer</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
+            <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH → LEAD Explorer</a>
             <a href="tools.html">All Tools</a>
             <a href="blog.html">Insights</a>
           </div>

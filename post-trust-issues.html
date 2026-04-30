@@ -79,7 +79,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GZG2KKV4BG');
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -261,7 +265,7 @@
 
       <div class="ref-group">
         <div class="ref-group-title">TRYNYTY health:enablement Tools and Data</div>
-        <p>MSSP ACO Explorer: 2013–2024 public performance data across 1,038 ACOs. Available at <a href="https://mssppuf.trynytyhealth.com" target="_blank">mssppuf.trynytyhealth.com</a>. (2025 performance year data expected from CMS in mid-to-late 2026.)</p>
+        <p>MSSP ACO Explorer: 2013–2024 public performance data across 1,038 ACOs. Available at <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">mssppuf.trynytyhealth.com</a>. (2025 performance year data expected from CMS in mid-to-late 2026.)</p>
       </div>
     </div>
 
@@ -302,7 +306,7 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Tools &amp; Insights</div>
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
             <a href="blog.html">Insights</a>
           </div>
           <div class="footer-col">

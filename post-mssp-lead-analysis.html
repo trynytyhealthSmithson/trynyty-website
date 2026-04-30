@@ -61,7 +61,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GZG2KKV4BG');
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -115,7 +119,7 @@
 
     <p>The answers are clearer than you might expect. And for provider organizations currently evaluating their program options — MSSP, ACO REACH, or the newly released LEAD Model — understanding what the data shows about long-term performance trajectories may be the most useful analytical exercise you can do right now.</p>
 
-    <p>The analysis below draws on the full 2013–2024 MSSP Public Use File dataset, which is available to explore interactively through TRYNYTY's free <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>. The findings are organized around five questions that, in my experience advising ACOs and risk-bearing providers, are the ones that actually drive strategic decisions.</p>
+    <p>The analysis below draws on the full 2013–2024 MSSP Public Use File dataset, which is available to explore interactively through TRYNYTY's free <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>. The findings are organized around five questions that, in my experience advising ACOs and risk-bearing providers, are the ones that actually drive strategic decisions.</p>
 
     <h2 id="part1"><span class="part-label">Part One</span><br/>The Program Grew Up — and CMS Helped It Get There</h2>
 
@@ -334,7 +338,7 @@
     <div class="callout-box">
       <h4>MSSP or LEAD — or both?</h4>
       <p style="color: var(--slate-light); margin-bottom: 12px;">The right answer depends on where your organization is in its VBC journey, your patient population complexity, your existing care management infrastructure, and your appetite for a long-term commitment. For many organizations, the question isn't MSSP vs. LEAD — it's whether LEAD's structural advantages justify the commitment required to participate well.</p>
-      <p style="color: var(--slate-light); margin-bottom: 0;">The MSSP ACO Explorer can help you benchmark your current performance against comparable organizations, understand your savings rate trajectory relative to program averages, and model what a longer program commitment might look like based on historical patterns. It's a useful starting point for any organization doing this analysis. <a href="https://mssppuf.trynytyhealth.com" target="_blank">Explore the data free here →</a></p>
+      <p style="color: var(--slate-light); margin-bottom: 0;">The MSSP ACO Explorer can help you benchmark your current performance against comparable organizations, understand your savings rate trajectory relative to program averages, and model what a longer program commitment might look like based on historical patterns. It's a useful starting point for any organization doing this analysis. <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">Explore the data free here →</a></p>
     </div>
 
     <h2>The Bottom Line</h2>
@@ -366,7 +370,7 @@
   <div class="article-nav">
     <a href="blog.html" class="btn btn-ghost">← Back to Insights</a>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-ghost">Explore the Data →</a>
+      <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="btn btn-ghost explorer-launch" data-explorer="mssp">Explore the Data →</a>
       <a href="contact.html" class="btn btn-primary">Discuss with Our Team →</a>
     </div>
   </div>
@@ -390,7 +394,7 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Tools &amp; Insights</div>
-            <a href="https://mssppuf.trynytyhealth.com" target="_blank">MSSP ACO Explorer</a>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
             <a href="blog.html">Insights</a>
           </div>
           <div class="footer-col">
