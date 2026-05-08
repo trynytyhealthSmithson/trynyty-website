@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We Need Better Intelligence in Healthcare Before We Can Make It Artificial — TRYNYTY</title>
+  <meta name="description" content="Healthcare AI works in radiology and drug discovery. It's failing at population health for one structural reason: the data foundation isn't ready. A look at where AI delivers, where it doesn't, and why the data substrate is the binding constraint." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Open Graph / LinkedIn / iMessage / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="TRYNYTY health:enablement" />
+  <meta property="og:url" content="https://www.trynytyhealth.com/post-intelligence-first" />
+  <meta property="og:title" content="We Need Better Intelligence in Healthcare Before We Can Make It Artificial" />
+  <meta property="og:description" content="Healthcare AI works in radiology and drug discovery. It's failing at population health for one structural reason: the data foundation isn't ready." />
+  <meta property="og:image" content="https://www.trynytyhealth.com/og-image.png" />
+  <meta property="og:image:secure_url" content="https://www.trynytyhealth.com/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="We Need Better Intelligence in Healthcare Before We Can Make It Artificial — by Andrew Smithson, TRYNYTY health:enablement" />
+  <meta property="article:author" content="Andrew Smithson" />
+  <meta property="article:published_time" content="2026-05-08" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="We Need Better Intelligence in Healthcare Before We Can Make It Artificial" />
+  <meta name="twitter:description" content="Healthcare AI works in radiology and drug discovery. It's failing at population health for one structural reason: the data foundation isn't ready." />
+  <meta name="twitter:image" content="https://www.trynytyhealth.com/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(100,120,200,0.12); color: #8899dd; border: 1px solid rgba(100,120,200,0.25); }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white); }
+    .article-body { max-width: 800px; margin: 60px auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.65rem; color: var(--white); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--teal); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .article-body sup { font-size: 0.7rem; color: var(--teal); }
+    .article-body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .article-body a:hover { color: #3dd6ce; }
+    .article-body ul { list-style: none; margin-bottom: 22px; padding-left: 0; }
+    .article-body ul li { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; padding-left: 24px; position: relative; margin-bottom: 8px; }
+    .article-body ul li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--teal); }
+    .footnotes { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: var(--slate); line-height: 1.7; }
+    .footnotes p { font-size: 12px; color: var(--slate); margin-bottom: 10px; }
+    .footnotes a { color: var(--teal); }
+    .footnotes-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--slate-light); margin-bottom: 14px; }
+    .author-card { max-width: 800px; margin: 0 auto; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 32px 40px 80px; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 24px 20px 60px; }
+      .author-card { padding: 24px 20px; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZG2KKV4BG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
+  </script>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">Industry Perspective</span>
+      <h1 class="article-title">We Need Better Intelligence in Healthcare Before We Can Make It Artificial</h1>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>May 2026</span>
+        <span>·</span>
+        <span>9 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <p>Intelligence&mdash;human or otherwise&mdash;is only as good as the data it's built on. In healthcare, most of the data is collected for billing, incomplete, or just does not exist.</p>
+
+    <p>That's the contradiction at the heart of the current AI moment in healthcare. The industry celebrates breakthroughs in narrow, well-structured domains while the applications that could materially bend the cost curve&mdash;preventive care, accurate risk stratification, proactive patient engagement&mdash;keep falling short. The reason isn't a lack of talent, funding, or good intentions. It is a failure in the foundational data.</p>
+
+    <h2>Where AI Is Actually Working&mdash;and Why</h2>
+
+    <p>Look at the domains where AI is delivering measurable, scaled impact:</p>
+
+    <p>Radiology stands out first. Through the end of 2025, the FDA had authorized 1,104 AI-enabled radiology devices&mdash;roughly 76% of all AI-enabled medical device authorizations to date.<sup>1</sup> That dominance has remained remarkably stable for years. The reason is the data substrate: DICOM-standardized images, abundant labeled datasets, and verifiable ground truth in the form of the actual pathology report or biopsy result. The model isn't guessing. It is pattern-matching against millions of high-fidelity examples.</p>
+
+    <p>The same structural advantages explain breakthroughs in pharmacology and drug discovery. AlphaFold 3, recognized in part by the 2024 Nobel Prize in Chemistry, can predict how a candidate drug molecule will lock into its target protein with at least 50% greater accuracy than traditional docking methods&mdash;the central computational problem in drug discovery, and one AI is genuinely solving.<sup>2</sup> Its predecessor, AlphaFold 2, has been cited more than 20,000 times. Here again the inputs are formal, mathematical objects with measurable outcomes. The search space is computationally tractable.</p>
+
+    <p>The pattern is unmistakable: AI thrives where data is structured, standardized, labeled, and tied directly to verifiable clinical ground truth. Not where it is a billing artifact or a fragmented snapshot.</p>
+
+    <p>Computers can see what the human eye misses in an image. They cannot see what was never recorded&mdash;and most of what matters in population health never gets recorded.</p>
+
+    <h2>Where It Isn't Working&mdash;and Why</h2>
+
+    <p>Contrast that foundation with the data feeding population-health and preventive-care models. The opportunity isn't being ignored. The U.S. healthcare analytics market alone is projected to grow from roughly $21 billion in 2024 to over $67 billion by 2033, much of it tied to the shift to value-based care.<sup>3</sup> Data analytics firms have proliferated alongside the VBC movement, and health systems have invested aggressively in population-health platforms, predictive risk models, and AI-enabled care management tools. The intent is there. The investment is there. The returns have not been.</p>
+
+    <p>The reason is upstream of any of those tools: the underlying data is insufficient for what's being asked of it.</p>
+
+    <p><strong>First, population health and risk stratification almost universally rely on claims and EHR data&mdash;both of which are snapshots, not records of actual health.</strong> Claims reflect what was reimbursable. An EHR encounter reflects what was discussed in a fifteen-minute visit. Even functional medicine practices, which run more labs and diagnostics than most, are still capturing point-in-time observations. None of these sources establish individual baselines, track variation over time, or reveal what's actually changing in a patient's biology. Diagnosis codes reflect what got billed&mdash;not the holistic health status of the patient or what actually drove cost. Sophisticated math layered on top still produces sophisticated guesses.</p>
+
+    <p>CMS's V24-to-V28 transition is a useful illustration of the limits. The recalibration was framed as a fix for coding intensity, but the data CMS has access to can't actually distinguish between gaming the codes and identifying chronic disease early through good VBC practice. When a regulator with all of the leverage in healthcare can't make that distinction from existing data, computers running models on the same data will reach similarly logical but incorrect conclusions. (For a deeper look at the V28 changes and their downstream effects on high-performing VBC organizations, see our earlier analysis <a href="https://www.trynytyhealth.com/post-cms-risk-adjustment">here</a>.)</p>
+
+    <p>The next move is more concerning. Under the LEAD model, CMS has signaled its intention to phase in an AI-inferred risk score&mdash;shadow testing in 2028, a one-third blend in 2029, two-thirds in 2030, and a full replacement of HCC-based risk scoring for the Aged and Disabled population by 2031.<sup>4</sup> The agency has shared remarkably little about how the model will work. It will be trained on the same claims data that produced the coding-intensity problem in the first place. Building an AI model on top of data that can't separate good practice from gaming is exactly the pattern this article is warning about&mdash;and CMS is about to make it the system of record for hundreds of billions of dollars in payments.</p>
+
+    <p>The same dynamic shows up in financial modeling for VBC programs. When a high-performing organization invests in proactive risk identification&mdash;finding chronic conditions earlier and intervening before acuity escalates&mdash;bottom-up actuarial models register the new diagnoses as cost growth and project higher spending. The reality is the opposite: the right work is being done, but the data alone can't tell you so. The systems built to measure and price clinical risk assume documentation reflects passive observation. They break down when documentation reflects active intervention. To interpret the numbers correctly, you need intelligence <em>outside</em> the data&mdash;context about what the organization is doing, why coding patterns shifted, what interventions are in flight. That's the problem AI is sold to solve, yet the problem AI is least equipped to solve.</p>
+
+    <p><strong>Second, the data we do collect leaves out most of what actually shapes health.</strong> Behavioral patterns, social determinants, environmental factors, daily decisions&mdash;these drive outcomes more than the contents of any claim or chart, and they're the least likely to be captured reliably or in any structured way.</p>
+
+    <p>The reason is structural. ICD-10 includes Z-codes specifically designed to capture social determinants&mdash;housing instability, food insecurity, transportation barriers, lack of social support. CMS strongly encourages their use. But Z-codes are systematically underutilized, and the reason is not negligence. They generally do not affect risk-adjusted reimbursement under the HCC model.<sup>5</sup> They add documentation burden in workflows that are already overloaded. And they fall outside most clinicians' training and primary focus. Programs that pay providers separately for SDoH screening have helped at the margin, but they create yet another parallel reporting workflow on top of clinical work, rather than aligning with it.</p>
+
+    <p>The fix would have been to integrate behavioral and SDoH capture directly into the HCC risk model itself&mdash;creating a single workflow and a single incentive that rewards the documentation healthcare actually wants. Instead, the system asks providers to do extra administrative work in exchange for thin or indirect financial returns, and predictably gets thin and indirect data in response. The signals that would predict who's getting sicker over the next year are mostly absent from the data a model would train on&mdash;not because they're hard to capture in principle, but because the system never made it worth capturing them.</p>
+
+    <p><strong>Third, even the limited data we do collect misses a meaningful slice of the population entirely.</strong> Roughly a third of Americans&mdash;over 100 million people&mdash;do not have a primary care provider.<sup>6</sup> For many of them, the healthcare system effectively does not exist outside urgent and emergency care. There's no longitudinal record to work with, no encounter history, no baseline to predict from. A predictive model has nothing from which to predict until they show up in the ED with an acute episode.</p>
+
+    <p>Wearables are starting to close some of these gaps for engaged patients, but integration and standardization lag the hardware by years. And the disengaged-by-default population is the one that needs predictive support most&mdash;and the one least visible to any of the data sources a model would train on.</p>
+
+    <p>You cannot build reliable predictive models on data that wasn't collected for prediction. What you can build&mdash;and what's being built today, at scale&mdash;is confident wrong answers.</p>
+
+    <h2>AI Is Coming Either Way</h2>
+
+    <p>Whether AI proves to be a net positive for population health or a net negative is a separate question from whether it's happening. It is happening, now.</p>
+
+    <p>The conversations about whether AI can replace physicians, surgeons, anesthesiologists, or care managers tend to focus on the parts of the job most resistant to automation&mdash;clinical judgment, outlier cases, workflow complexity, the human relationship at the bedside. The assumption is that these are the moats. But they are not the moats they used to be.</p>
+
+    <p>Take outlier cases. The standard defense is that physicians handle the unusual presentation, the unexpected complication, the patient who doesn't fit the textbook. But AI is structurally good at <em>reducing</em> outliers by enforcing standardization upstream&mdash;and an algorithm that does the same thing every time has an obvious advantage over humans whose performance varies with sleep, caseload, and the call schedule.</p>
+
+    <p>Clinical judgment is harder to dismiss, but worth examining honestly. An MIT Media Lab study found that participants rated AI-generated medical responses as more thorough and easier to understand than physician-written answers. When the AI was accurate, it scored higher than human doctors across every measure of trust and satisfaction. When the AI was <em>wrong</em>, it still rated about the same as the human responses.<sup>7</sup> The trust gap is closing&mdash;not because patients have done a careful technical evaluation, but because AI tends to communicate with confidence and clarity that many clinical encounters don't match.</p>
+
+    <p>Workflow complexity, the supposed last refuge of the irreplaceable specialist, is exactly the kind of structured, multi-variable optimization problem AI handles easily. So is dosing precision: the FDA approved Sedasys to autonomously administer propofol in routine endoscopic procedures years ago, and closed-loop anesthesia systems have maintained total intravenous anesthesia without manual intervention in roughly 80% of cases in some cardiac surgery studies.<sup>8</sup> The anesthesiologist isn't gone, but a meaningful share of the work is.</p>
+
+    <p>Surgery is further along than most physicians acknowledge. Autonomous robotic systems have been performing venipuncture, intestinal anastomosis, knot tying, certain knee replacements, and cochlear implants for years.<sup>9</sup> AI-assisted surgical platforms have demonstrated meaningful reductions in operative time and complications across recent studies. The trajectory is one human supervising parallel cases rather than performing every procedure end-to-end.</p>
+
+    <p>None of this is to say AI is about to replace every clinical role. The point is that the disruption is happening, the technology is improving rapidly, and the parts of the job clinicians often cite as protected are precisely the parts AI is positioned to address&mdash;sometimes well, sometimes poorly, but in both cases at scale.</p>
+
+    <p>Which makes the data foundation question urgent rather than optional. If the substrate isn't ready, AI accelerates the existing problems&mdash;codifying claim-based assumptions into models, scaling confident wrong answers, deepening inequities the data already encodes. If it is ready, AI becomes the leverage that finally makes population health, preventive care, and proactive intervention work the way they've been promising to work for a decade.</p>
+
+    <p>The work outlined next isn't a defensive crouch against AI. It's the difference between AI being the most useful tool VBC has ever had and the most expensive mistake healthcare has ever made.</p>
+
+    <h2>What "Intelligence First" Actually Looks Like</h2>
+
+    <p>The right path is straightforward, if uncomfortable. Build intelligence first.</p>
+
+    <p>That begins with patient-centric data infrastructure that reconciles payor and provider sources in something closer to real time, creating a single source of truth instead of competing versions of the patient. Today, claims data, EHR data, lab data, and pharmacy data tell different stories about the same person&mdash;and most of the analytic work in healthcare is spent reconciling those stories rather than acting on them. Healthcare ends up reactive by default&mdash;not because reactive care is the intent, but because by the time the data is pieced together, the moment for proactive intervention has already passed.</p>
+
+    <p>It requires standardized process metrics that track adherence to foundational VBC workflows&mdash;the tasks that actually move the needle on documentation, attribution, and engagement&mdash;rather than lagging claims-based KPIs that arrive months after the decisions that drove them.</p>
+
+    <p>It demands behavioral and SDoH data integrated into daily operations, not bolted on as an afterthought. A patient's behavior, environment, and circumstances shape outcomes more than most of what shows up in a claim&mdash;and yet that information is the least likely to be present, structured, and actionable when a clinician actually needs it.</p>
+
+    <p>And it needs tooling that lets clinicians and analysts see their own data clearly, with transparency and auditability, before any model ever touches it. You cannot trust a predictive output if you can't first trust&mdash;or even examine&mdash;the descriptive picture underneath it.</p>
+
+    <p>Only when these prerequisites are in place can AI move beyond narrow, high-stakes domains and begin delivering on its population-health promises.</p>
+
+    <p>The technology is mature enough. The data substrate is not&mdash;and that's the binding constraint, not the algorithms.</p>
+
+    <h2>Let's Talk</h2>
+
+    <p>If you're wrestling with the gap between AI ambition and operational reality, we'd welcome the conversation. Our MSSP and ACO REACH Explorers (<a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">mssppuf.trynytyhealth.com</a> and <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">reachpuf.trynytyhealth.com</a>) put analytic transparency on top of CMS's public ACO performance data&mdash;a useful illustration of the principle, even if the harder work is extending that transparency to the reconciled clinical and claims data most organizations don't yet have.</p>
+
+    <p>The future of healthcare doesn't belong to the organizations with the flashiest AI models. It belongs to those who first build the intelligence the models can actually trust.</p>
+
+    <div class="footnotes">
+      <div class="footnotes-title">References</div>
+      <p><sup>1</sup> U.S. Food and Drug Administration, "Artificial Intelligence and Machine Learning (AI/ML)-Enabled Medical Devices," updated through Q4 2025. As reported by The Imaging Wire, "FDA Updates AI List with New Clearances," March 2026. <a href="https://theimagingwire.com/2026/03/11/numbers-from-the-fda-show-radiology-is-maintaining-its-lead/" target="_blank">theimagingwire.com</a>.</p>
+      <p><sup>2</sup> Abramson, J., Adler, J., Dunger, J. et al. "Accurate structure prediction of biomolecular interactions with AlphaFold 3." <em style="font-style:italic;color:var(--slate-light);">Nature</em> 630, 493&ndash;500 (2024). <a href="https://www.nature.com/articles/s41586-024-07487-w" target="_blank">nature.com</a>. See also Isomorphic Labs, "AlphaFold 3 predicts the structure and interactions of all of life's molecules," May 2024.</p>
+      <p><sup>3</sup> Grand View Research, "U.S. Healthcare Analytics Market Size, Share &amp; Trends Analysis Report, 2025&ndash;2033." <a href="https://www.grandviewresearch.com/industry-analysis/us-healthcare-analytics-market-report" target="_blank">grandviewresearch.com</a>.</p>
+      <p><sup>4</sup> Centers for Medicare &amp; Medicaid Services, "Improving ACO Performance and Outcomes for Beneficiaries (LEAD) Model" Request for Applications, 2026. See also COPE Health Solutions, "Inside the LEAD Model Benchmarking Methodology," 2026, and Arcadia, "CMS LEAD Model: The Shift to AI-Inferred Risk Adjustment," 2026, for analysis of the AI risk adjustment phase-in timeline.</p>
+      <p><sup>5</sup> Wilcox, A., "SDoH Improves Reimbursement and Risk Scores," HCC Coder. See also AAPC, "The Power of CDI Strategies in Addressing SDOH," 2024, for analysis of Z-code underutilization and the structural reasons behind it.</p>
+      <p><sup>6</sup> National Association of Community Health Centers, <em style="font-style:italic;color:var(--slate-light);">Closing the Primary Care Gap</em> report, 2023. As covered by USA Today, "A Third of Americans Don't Have a Primary Care Provider," 2023, and PBS NewsHour, "Why More Americans Are Putting Off Going to the Doctor," 2023.</p>
+      <p><sup>7</sup> Massachusetts Institute of Technology Media Lab study on patient trust in AI-generated medical responses, 2024. <a href="https://arxiv.org/html/2408.15266v1" target="_blank">arxiv.org/html/2408.15266v1</a>.</p>
+      <p><sup>8</sup> U.S. Food and Drug Administration approval of the Sedasys Computer-Assisted Personalized Sedation system. Performance data on closed-loop anesthesia delivery from Giri R, Firdhos SH, Vida TA, "Artificial Intelligence in Anesthesia: Enhancing Precision, Safety, and Global Access Through Data-Driven Systems," <em style="font-style:italic;color:var(--slate-light);">Journal of Clinical Medicine</em> 14(19):6900 (2025). <a href="https://www.mdpi.com/2077-0383/14/19/6900" target="_blank">mdpi.com</a>.</p>
+      <p><sup>9</sup> "Autonomous Robotic Surgery: Has the Future Arrived?" <em style="font-style:italic;color:var(--slate-light);">Cureus</em> (2024). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10862530/" target="_blank">pmc.ncbi.nlm.nih.gov</a>. See also "The Rise of Robotics and AI-Assisted Surgery in Modern Healthcare," <em style="font-style:italic;color:var(--slate-light);">PMC</em> (2025), for performance data on AI-assisted surgical platforms.</p>
+    </div>
+
+  </div>
+
+  <div class="author-card">
+    <div class="author-card-inner">
+      <img src="headshot.jpg" alt="Andrew Smithson" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(32,178,170,0.3);flex-shrink:0;" />
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. 15+ years in value-based care strategy, financial analytics, and managed care consulting across health plans, health systems, ACOs, and IPAs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="blog.html" class="btn btn-ghost">&larr; Back to Insights</a>
+    <a href="post-cms-risk-adjustment.html" class="btn btn-primary">Read: How CMS Risk Adjustment Keeps Getting It Wrong &rarr;</a>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
+            <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH &rarr; LEAD Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>

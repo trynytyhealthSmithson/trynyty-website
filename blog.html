@@ -13,7 +13,12 @@
   <meta property="og:image" content="logo.png" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; padding: 60px 0; }
+    .blog-section { padding: 40px 0 20px; scroll-margin-top: 80px; }
+    .blog-section:first-of-type { padding-top: 60px; }
+    .blog-section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; gap: 12px; }
+    .blog-section-title { font-family: var(--font-serif); font-size: 1.6rem; color: var(--white); }
+    .blog-section-count { font-size: 12px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
     .blog-card {
       background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07);
       border-radius: var(--radius-lg); overflow: hidden;
@@ -51,16 +56,6 @@
       min-height: 200px; padding: 40px;
     }
     .blog-card--featured .blog-card-visual { min-height: auto; }
-    .visual-icon { font-size: 5rem; opacity: 0.25; }
-    .coming-soon-overlay {
-      position: relative; overflow: hidden;
-    }
-    .coming-soon-overlay::after {
-      content: 'Coming Soon'; position: absolute; top: 16px; right: -24px;
-      background: var(--slate); color: white; font-size: 10px; font-weight: 700;
-      padding: 4px 32px; transform: rotate(45deg); letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
     .filter-bar {
       display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px;
     }
@@ -71,9 +66,77 @@
       transition: all var(--transition);
     }
     .filter-btn:hover, .filter-btn.active { border-color: var(--teal); color: var(--teal); background: rgba(32,178,170,0.08); }
+    .blog-toolbar {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      padding: 20px 0; margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .blog-search { flex: 1; min-width: 240px; max-width: 360px; position: relative; }
+    .blog-search-input {
+      width: 100%; padding: 10px 14px 10px 40px; border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+      color: var(--white); font-family: var(--font-sans); font-size: 14px;
+      transition: border-color var(--transition);
+    }
+    .blog-search-input::placeholder { color: var(--slate); }
+    .blog-search-input:focus { outline: none; border-color: var(--teal); }
+    .blog-search-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 16px; height: 16px; color: var(--slate); pointer-events: none;
+    }
+    .jump-nav { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .jump-nav-label { font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 4px; }
+    .jump-pill {
+      font-size: 12px; color: var(--teal); padding: 5px 12px;
+      border: 1px solid rgba(32,178,170,0.25); border-radius: 20px;
+      white-space: nowrap; transition: all var(--transition); cursor: pointer;
+    }
+    .jump-pill:hover { background: rgba(32,178,170,0.08); border-color: var(--teal); }
+    .blog-empty {
+      text-align: center; padding: 60px 20px; color: var(--slate);
+      font-size: 14px; font-style: italic; display: none;
+    }
+    .blog-empty.show { display: block; }
+    details.earlier-archive {
+      margin: 20px 0 60px;
+      background: var(--navy-mid);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      padding: 0;
+    }
+    details.earlier-archive > summary {
+      cursor: pointer; padding: 24px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      list-style: none; border-radius: var(--radius-lg);
+      transition: background var(--transition);
+    }
+    details.earlier-archive > summary::-webkit-details-marker { display: none; }
+    details.earlier-archive > summary:hover { background: rgba(255,255,255,0.02); }
+    details.earlier-archive[open] > summary {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .earlier-summary-title { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    .earlier-summary-title h3 {
+      font-family: var(--font-serif); font-size: 1.4rem; color: var(--white); margin: 0;
+    }
+    .earlier-summary-title .blog-section-count { font-size: 12px; }
+    .earlier-summary-toggle {
+      font-size: 12px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .earlier-summary-toggle::after { content: '+'; font-size: 18px; line-height: 1; transition: transform var(--transition); }
+    details.earlier-archive[open] .earlier-summary-toggle::after { content: '\2212'; }
+    .earlier-content { padding: 28px 32px 32px; }
     @media (max-width: 768px) {
       .blog-card--featured { grid-template-columns: 1fr; }
       .blog-card--featured .blog-card-visual { display: none; }
+      .blog-section-header { flex-direction: column; align-items: flex-start; }
+      .blog-toolbar { flex-direction: column; align-items: stretch; gap: 16px; }
+      .blog-search { max-width: none; }
+      details.earlier-archive > summary { padding: 20px 24px; }
+      .earlier-content { padding: 20px 24px 24px; }
     }
   </style>
   <!-- Google Analytics -->
@@ -102,7 +165,7 @@
       <a href="index.html" class="nav-link">Home</a>
       <a href="tools.html" class="nav-link">Tools</a>
       <a href="blog.html" class="nav-link active">Insights</a>
-            <a href="about.html" class="nav-link">About</a>
+      <a href="about.html" class="nav-link">About</a>
       <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
     </div>
     <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
@@ -112,7 +175,7 @@
     <div class="page-hero-inner">
       <div class="section-eyebrow">Insights &amp; Analysis</div>
       <h1>Thinking clearly<br /><em>about complex problems.</em></h1>
-      <p>Original analysis on Medicare Advantage, MSSP, value-based care policy, and the financial dynamics shaping healthcare's future — written by operators, for operators.</p>
+      <p>Original analysis on Medicare Advantage, MSSP, value-based care policy, and the financial dynamics shaping healthcare's future &mdash; written by operators, for operators.</p>
       <div class="filter-bar">
         <button class="filter-btn active" onclick="filterPosts('all', this)">All Topics</button>
         <button class="filter-btn" onclick="filterPosts('policy', this)">MA &amp; Risk Adjustment</button>
@@ -123,176 +186,200 @@
   </div>
 
   <div class="container">
-    <div class="blog-grid" id="blog-grid">
-
-      <!-- Article: Trust Issues — Industry Perspective (newest) -->
-      <div class="blog-card blog-card--featured" data-tag="vbc">
-        <div class="blog-card-body">
-          <span class="blog-tag blog-tag--vbc">Industry Perspective</span>
-          <div class="blog-meta">
-            <span>By Andrew Smithson | TRYNYTY health:enablement</span>
-            <span>·</span>
-            <span>April 2026</span>
-            <span>·</span>
-            <span>8 min read</span>
-          </div>
-          <h2><a href="post-trust-issues.html">Let's Get Honest: Healthcare Has Trust Issues</a></h2>
-          <p class="blog-excerpt">The root cause of nearly every dysfunction in U.S. healthcare — skyrocketing costs, clinician burnout, administrative bloat, chronic-disease mismanagement — is a breakdown of trust between patients, providers, payers, employers, and regulators. A fifteen-year practitioner's view on how we got here and what rebuilding looks like.</p>
-          <a href="post-trust-issues.html" class="blog-read-more">Read the essay →</a>
-        </div>
-        <div class="blog-card-visual" style="padding: 0; overflow: hidden;">
-          <img src="post-trust-issues-card.png" alt="Let's Get Honest: Healthcare Has Trust Issues" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+    <div class="blog-toolbar">
+      <div class="blog-search">
+        <svg class="blog-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="blog-search-input" class="blog-search-input" placeholder="Search insights..." oninput="searchPosts(this.value)" aria-label="Search insights" />
       </div>
-
-      <!-- Article 1: Featured — combined risk adjustment retrospective -->
-      <div class="blog-card blog-card--featured" data-tag="acos">
-        <div class="blog-card-body">
-          <span class="blog-tag blog-tag--acos">MSSP &amp; ACOs</span>
-          <div class="blog-meta">
-            <span>By Andrew Smithson | TRYNYTY health:enablement</span>
-            <span>·</span>
-            <span>April 2026</span>
-            <span>·</span>
-            <span>10 min read</span>
-          </div>
-          <h2><a href="post-reach-analysis.html">Three Years of ACO REACH: What the Data Actually Shows</a></h2>
-          <p class="blog-excerpt">ACO REACH generated $1.48 billion in shared savings across 150 ACOs. Here's what the data reveals about who succeeded, why configuration mattered more than effort, and what it means for LEAD.</p>
-          <a href="post-reach-analysis.html" class="blog-read-more">Read the analysis →</a>
-        </div>
-        <div class="blog-card-visual" style="padding: 0; overflow: hidden;">
-          <img src="ACOREACH-explorer-preview.png" alt="ACO REACH to LEAD Explorer dashboard showing three years of performance data" style="width:100%;height:100%;object-fit:cover;object-position:top left;" />
-        </div>
+      <div class="jump-nav">
+        <span class="jump-nav-label">Jump to:</span>
+        <a href="#may-2026" class="jump-pill">May 2026</a>
+        <a href="#april-2026" class="jump-pill">April 2026</a>
+        <a href="#earlier" class="jump-pill">Earlier</a>
       </div>
-
-      <div class="blog-card blog-card--featured" data-tag="policy">
-        <div class="blog-card-body">
-          <span class="blog-tag blog-tag--policy">MA &amp; Risk Adjustment</span>
-          <div class="blog-meta">
-            <span>By Andrew Smithson | TRYNYTY health:enablement</span>
-            <span>·</span>
-            <span>April 2026</span>
-            <span>·</span>
-            <span>18 min read</span>
-          </div>
-          <h2>From V24 to V28 to 2027: How CMS Risk Adjustment Policy Keeps Getting It Wrong</h2>
-          <p>A three-year retrospective on CMS risk adjustment policy — what was warned in 2024, what changed between the Advance Notice and Final Rule, what actually happened in the market, and what the 2027 trajectory means for ACOs and value-based providers. The predictions proved out. The structural problems remain.</p>
-          <a href="post-cms-risk-adjustment.html" class="blog-read-more">Read the full analysis →</a>
-        </div>
-        <div class="blog-card-visual" style="background: #0B1829; padding: 24px; display: flex; align-items: center; justify-content: center;">
-          <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;">
-            <text x="12" y="18" font-family="DM Sans,sans-serif" font-size="10" fill="#20B2AA" font-weight="600" letter-spacing="1" text-anchor="start">HCC COEFFICIENT CHANGES</text>
-            <text x="12" y="32" font-family="DM Sans,sans-serif" font-size="9" fill="#8899bb">V24 → V28 → 2027 Recalibrated</text>
-            <line x1="12" y1="48" x2="308" y2="48" stroke="#1a3a5c" stroke-width="1"/>
-            <text x="12" y="70" font-family="DM Sans,sans-serif" font-size="10" fill="#ccddee">Depression (HCC 155)</text>
-            <rect x="12" y="78" width="140" height="10" rx="2" fill="#20B2AA" opacity="0.9"/>
-            <rect x="12" y="78" width="100" height="10" rx="2" fill="#20B2AA" opacity="0.6"/>
-            <rect x="12" y="78" width="78" height="10" rx="2" fill="#e08888" opacity="0.9"/>
-            <text x="156" y="87" font-family="DM Sans,sans-serif" font-size="9" fill="#e08888">↓ 22%</text>
-            <text x="12" y="112" font-family="DM Sans,sans-serif" font-size="10" fill="#ccddee">Diabetes (HCC 36–38)</text>
-            <rect x="12" y="120" width="240" height="10" rx="2" fill="#20B2AA" opacity="0.9"/>
-            <rect x="12" y="120" width="68" height="10" rx="2" fill="#20B2AA" opacity="0.6"/>
-            <rect x="12" y="120" width="62" height="10" rx="2" fill="#e08888" opacity="0.9"/>
-            <text x="156" y="129" font-family="DM Sans,sans-serif" font-size="9" fill="#e08888">↓ 7%</text>
-            <text x="12" y="154" font-family="DM Sans,sans-serif" font-size="10" fill="#ccddee">Wound Care / Necrosis</text>
-            <rect x="12" y="162" width="120" height="10" rx="2" fill="#20B2AA" opacity="0.9"/>
-            <rect x="12" y="162" width="280" height="10" rx="2" fill="#ddaa66" opacity="0.8"/>
-            <rect x="12" y="162" width="280" height="10" rx="2" fill="#ddaa66" opacity="0.8"/>
-            <text x="156" y="171" font-family="DM Sans,sans-serif" font-size="9" fill="#ddaa66">Stable high</text>
-            <line x1="12" y1="190" x2="308" y2="190" stroke="#1a3a5c" stroke-width="1"/>
-            <rect x="12" y="198" width="10" height="8" rx="1" fill="#20B2AA" opacity="0.9"/>
-            <text x="26" y="206" font-family="DM Sans,sans-serif" font-size="9" fill="#8899bb">V24</text>
-            <rect x="60" y="198" width="10" height="8" rx="1" fill="#20B2AA" opacity="0.6"/>
-            <text x="74" y="206" font-family="DM Sans,sans-serif" font-size="9" fill="#8899bb">V28</text>
-            <rect x="108" y="198" width="10" height="8" rx="1" fill="#e08888" opacity="0.9"/>
-            <text x="122" y="206" font-family="DM Sans,sans-serif" font-size="9" fill="#8899bb">2027</text>
-            <rect x="164" y="198" width="10" height="8" rx="1" fill="#ddaa66" opacity="0.8"/>
-            <text x="178" y="206" font-family="DM Sans,sans-serif" font-size="9" fill="#8899bb">Stable/↑</text>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Article 2: MSSP/LEAD data analysis -->
-      <div class="blog-card blog-card--featured" data-tag="mssp">
-        <div class="blog-card-body">
-          <span class="blog-tag blog-tag--mssp">MSSP &amp; ACOs</span>
-          <div class="blog-meta">
-            <span>By Andrew Smithson | TRYNYTY health:enablement</span>
-            <span>·</span>
-            <span>April 2026</span>
-            <span>·</span>
-            <span>16 min read</span>
-          </div>
-          <h2>What 12 Years of MSSP Data Tells Us About Long-Term ACO Performance</h2>
-          <p>A data-driven analysis of 12 years of MSSP results across 1,000+ ACOs — what separates consistently high-performing organizations, what the COVID era revealed about VBC resilience, and what it all means for the LEAD Model decision. Built on the full 2013–2024 Public Use File dataset.</p>
-          <a href="post-mssp-lead-analysis.html" class="blog-read-more">Read the analysis →</a>
-        </div>
-        <div class="blog-card-visual" style="padding: 0; overflow: hidden;">
-          <img src="mssp-explorer-preview.png" alt="MSSP ACO Explorer dashboard showing 12 years of program performance data" style="width:100%;height:100%;object-fit:cover;object-position:top left;" />
-        </div>
-      </div>
-
-      <!-- Article 3: Original 2024 v24-v28 piece -->
-      <div class="blog-card" data-tag="policy">
-        <div class="blog-card-body">
-          <span class="blog-tag blog-tag--policy">MA &amp; Risk Adjustment</span>
-          <div class="blog-meta">
-            <span>By Andrew Smithson | TRYNYTY health:enablement</span>
-            <span>·</span>
-            <span>February 2024</span>
-            <span>·</span>
-            <span>12 min read</span>
-          </div>
-          <h2>CMS's Proposed Risk Adjustment Changes Are Contradictory to the Agency's Own Goals</h2>
-          <p>The original 2024 analysis: why CMS's proposed CMS-HCC model changes were built on a misreading of the evidence, how they conflated correlation with causation, and what the downstream consequences would be for value-based providers and the populations they serve.</p>
-          <a href="post-v24-v28.html" class="blog-read-more">Read the original analysis →</a>
-        </div>
-      </div>
-
-
-
-      <!-- Article 4: VBC Barriers — Live -->
-      <div class="blog-card" data-tag="vbc">
-        <div class="blog-card-body">
-          <span class="blog-tag blog-tag--vbc">Value-Based Care</span>
-          <div class="blog-meta">
-            <span>By Andrew Smithson | TRYNYTY health:enablement</span>
-            <span>·</span>
-            <span>April 2026</span>
-            <span>·</span>
-            <span>14 min read</span>
-          </div>
-          <h2>Five Operational Barriers to Value-Based Care — And Why They Form a Vicious Cycle</h2>
-          <p>The biggest obstacles to VBC success aren't clinical — they're five deeply interconnected operational barriers that form a self-reinforcing cycle. Misaligned incentives, administrative overload, poor data, reactive care, and patient disengagement don't just coexist. Each one makes the others worse.</p>
-          <a href="post-vbc-barriers.html" class="blog-read-more">Read the analysis →</a>
-        </div>
-      </div>
-
-      <!-- Article 5: LEAD Model — Live -->
-      <div class="blog-card" data-tag="vbc">
-        <div class="blog-card-body">
-          <span class="blog-tag blog-tag--vbc">Value-Based Care</span>
-          <div class="blog-meta">
-            <span>By Andrew Smithson | TRYNYTY health:enablement</span>
-            <span>·</span>
-            <span>April 2026</span>
-            <span>·</span>
-            <span>12 min read</span>
-          </div>
-          <h2>The LEAD Model: CMS's Most Ambitious ACO Program Yet</h2>
-          <p>The Long-term Enhanced ACO Design Model launches January 2027 — with a 10-year term, no rebasing, concurrent risk adjustment for high-needs patients, and beneficiary engagement incentives that no prior ACO program has offered. Applications close May 17, 2026.</p>
-          <a href="post-lead-model.html" class="blog-read-more">Read the overview →</a>
-        </div>
-      </div>
-
     </div>
+
+    <div class="blog-empty" id="blog-empty">No insights match that search.</div>
+
+    <!-- ===== May 2026 ===== -->
+    <section class="blog-section" id="may-2026">
+      <div class="blog-section-header">
+        <div class="blog-section-title">May 2026</div>
+        <div class="blog-section-count">1 article</div>
+      </div>
+      <div class="blog-grid">
+
+        <!-- Featured: Intelligence First -->
+        <div class="blog-card blog-card--featured" data-tag="policy" data-search="we need better intelligence in healthcare before we can make it artificial ai data foundation radiology alphafold cms v28 lead model risk adjustment sdoh z-codes population health primary care wearables anesthesia surgery andrew smithson industry perspective">
+          <div class="blog-card-body">
+            <span class="blog-tag blog-tag--policy">Industry Perspective</span>
+            <div class="blog-meta">
+              <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+              <span>&middot;</span>
+              <span>May 2026</span>
+              <span>&middot;</span>
+              <span>9 min read</span>
+            </div>
+            <h2><a href="post-intelligence-first.html">We Need Better Intelligence in Healthcare Before We Can Make It Artificial</a></h2>
+            <p class="blog-excerpt">Healthcare AI works in radiology and drug discovery. It's failing at population health for one structural reason: the data foundation isn't ready. A look at where AI delivers, where it doesn't, why CMS's plan to AI-infer risk adjustment by 2031 is built on the same broken substrate, and what "intelligence first" actually means.</p>
+            <a href="post-intelligence-first.html" class="blog-read-more">Read the analysis &rarr;</a>
+          </div>
+          <div class="blog-card-visual" style="padding: 0; overflow: hidden;">
+            <img src="post-intelligence-first-card.svg" alt="Intelligence First &mdash; AI is only as good as the data it's built on" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== April 2026 ===== -->
+    <section class="blog-section" id="april-2026">
+      <div class="blog-section-header">
+        <div class="blog-section-title">April 2026</div>
+        <div class="blog-section-count">6 articles</div>
+      </div>
+      <div class="blog-grid">
+
+        <div class="blog-card" data-tag="vbc" data-search="let's get honest healthcare has trust issues patients providers payers employers regulators trust crisis breakdown industry perspective andrew smithson">
+          <div class="blog-card-body">
+            <span class="blog-tag blog-tag--vbc">Industry Perspective</span>
+            <div class="blog-meta">
+              <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+              <span>&middot;</span>
+              <span>April 2026</span>
+              <span>&middot;</span>
+              <span>8 min read</span>
+            </div>
+            <h2><a href="post-trust-issues.html">Let's Get Honest: Healthcare Has Trust Issues</a></h2>
+            <p class="blog-excerpt">The root cause of nearly every dysfunction in U.S. healthcare &mdash; skyrocketing costs, clinician burnout, administrative bloat, chronic-disease mismanagement &mdash; is a breakdown of trust between patients, providers, payers, employers, and regulators. A fifteen-year practitioner's view on how we got here and what rebuilding looks like.</p>
+            <a href="post-trust-issues.html" class="blog-read-more">Read the essay &rarr;</a>
+          </div>
+        </div>
+
+        <div class="blog-card" data-tag="mssp" data-search="three years of aco reach what the data actually shows shared savings 150 acos py2021 py2022 py2023 lead model transition configuration global professional cisep andrew smithson">
+          <div class="blog-card-body">
+            <span class="blog-tag blog-tag--mssp">MSSP &amp; ACOs</span>
+            <div class="blog-meta">
+              <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+              <span>&middot;</span>
+              <span>April 2026</span>
+              <span>&middot;</span>
+              <span>10 min read</span>
+            </div>
+            <h2><a href="post-reach-analysis.html">Three Years of ACO REACH: What the Data Actually Shows</a></h2>
+            <p class="blog-excerpt">ACO REACH generated $1.48 billion in shared savings across 150 ACOs. Here's what the data reveals about who succeeded, why configuration mattered more than effort, and what it means for LEAD.</p>
+            <a href="post-reach-analysis.html" class="blog-read-more">Read the analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="blog-card" data-tag="policy" data-search="from v24 to v28 to 2027 cms risk adjustment policy keeps getting it wrong hcc model coefficient changes value-based care medicare advantage three year retrospective andrew smithson">
+          <div class="blog-card-body">
+            <span class="blog-tag blog-tag--policy">MA &amp; Risk Adjustment</span>
+            <div class="blog-meta">
+              <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+              <span>&middot;</span>
+              <span>April 2026</span>
+              <span>&middot;</span>
+              <span>18 min read</span>
+            </div>
+            <h2><a href="post-cms-risk-adjustment.html">From V24 to V28 to 2027: How CMS Risk Adjustment Policy Keeps Getting It Wrong</a></h2>
+            <p class="blog-excerpt">A three-year retrospective on CMS risk adjustment policy &mdash; what was warned in 2024, what changed between the Advance Notice and Final Rule, what actually happened in the market, and what the 2027 trajectory means for ACOs and value-based providers. The predictions proved out. The structural problems remain.</p>
+            <a href="post-cms-risk-adjustment.html" class="blog-read-more">Read the full analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="blog-card" data-tag="mssp" data-search="what 12 years of mssp data tells us about long-term aco performance medicare shared savings program quality scores covid lead model decision longevity andrew smithson">
+          <div class="blog-card-body">
+            <span class="blog-tag blog-tag--mssp">MSSP &amp; ACOs</span>
+            <div class="blog-meta">
+              <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+              <span>&middot;</span>
+              <span>April 2026</span>
+              <span>&middot;</span>
+              <span>16 min read</span>
+            </div>
+            <h2><a href="post-mssp-lead-analysis.html">What 12 Years of MSSP Data Tells Us About Long-Term ACO Performance</a></h2>
+            <p class="blog-excerpt">A data-driven analysis of 12 years of MSSP results across 1,000+ ACOs &mdash; what separates consistently high-performing organizations, what the COVID era revealed about VBC resilience, and what it all means for the LEAD Model decision. Built on the full 2013&ndash;2024 Public Use File dataset.</p>
+            <a href="post-mssp-lead-analysis.html" class="blog-read-more">Read the analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="blog-card" data-tag="vbc" data-search="five operational barriers to value-based care vicious cycle misaligned incentives administrative burden poor data reactive care patient disengagement chenmed oak street andrew smithson">
+          <div class="blog-card-body">
+            <span class="blog-tag blog-tag--vbc">Value-Based Care</span>
+            <div class="blog-meta">
+              <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+              <span>&middot;</span>
+              <span>April 2026</span>
+              <span>&middot;</span>
+              <span>14 min read</span>
+            </div>
+            <h2><a href="post-vbc-barriers.html">Five Operational Barriers to Value-Based Care &mdash; And Why They Form a Vicious Cycle</a></h2>
+            <p class="blog-excerpt">The biggest obstacles to VBC success aren't clinical &mdash; they're five deeply interconnected operational barriers that form a self-reinforcing cycle. Misaligned incentives, administrative overload, poor data, reactive care, and patient disengagement don't just coexist. Each one makes the others worse.</p>
+            <a href="post-vbc-barriers.html" class="blog-read-more">Read the analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="blog-card" data-tag="vbc" data-search="lead model cms most ambitious aco program long-term enhanced aco design 10-year term concurrent risk adjustment cara global professional benchmark stability andrew smithson">
+          <div class="blog-card-body">
+            <span class="blog-tag blog-tag--vbc">Value-Based Care</span>
+            <div class="blog-meta">
+              <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+              <span>&middot;</span>
+              <span>April 2026</span>
+              <span>&middot;</span>
+              <span>12 min read</span>
+            </div>
+            <h2><a href="post-lead-model.html">The LEAD Model: CMS's Most Ambitious ACO Program Yet</a></h2>
+            <p class="blog-excerpt">The Long-term Enhanced ACO Design Model launches January 2027 &mdash; with a 10-year term, no rebasing, concurrent risk adjustment for high-needs patients, and beneficiary engagement incentives that no prior ACO program has offered. Applications close May 17, 2026.</p>
+            <a href="post-lead-model.html" class="blog-read-more">Read the overview &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Earlier (collapsed archive) ===== -->
+    <details class="earlier-archive" id="earlier">
+      <summary>
+        <div class="earlier-summary-title">
+          <h3>Earlier</h3>
+          <span class="blog-section-count">1 article &middot; archived</span>
+        </div>
+        <span class="earlier-summary-toggle">Show</span>
+      </summary>
+      <div class="earlier-content">
+        <div class="blog-grid">
+
+          <div class="blog-card" data-tag="policy" data-search="cms's proposed risk adjustment changes are contradictory to the agency's own goals 2024 advance notice cms-hcc model health equity innovation affordability andrew smithson">
+            <div class="blog-card-body">
+              <span class="blog-tag blog-tag--policy">MA &amp; Risk Adjustment</span>
+              <div class="blog-meta">
+                <span>By Andrew Smithson | TRYNYTY health:enablement</span>
+                <span>&middot;</span>
+                <span>February 2024</span>
+                <span>&middot;</span>
+                <span>12 min read</span>
+              </div>
+              <h2><a href="post-v24-v28.html">CMS's Proposed Risk Adjustment Changes Are Contradictory to the Agency's Own Goals</a></h2>
+              <p class="blog-excerpt">The original 2024 analysis: why CMS's proposed CMS-HCC model changes were built on a misreading of the evidence, how they conflated correlation with causation, and what the downstream consequences would be for value-based providers and the populations they serve.</p>
+              <a href="post-v24-v28.html" class="blog-read-more">Read the original analysis &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </details>
 
     <!-- Newsletter CTA -->
     <div style="margin: 0 0 80px; padding: 48px; background: var(--navy-mid); border-radius: var(--radius-lg); border: 1px solid rgba(32,178,170,0.15); display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: center;">
       <div>
         <div class="section-eyebrow">Stay Current</div>
         <h2 style="font-family: var(--font-serif); font-size: 1.8rem; margin: 8px 0 12px;">Get new analysis in your inbox.</h2>
-        <p style="color: var(--slate-light); font-size: 1rem; font-weight: 300;">When we publish new analysis on Medicare Advantage, MSSP performance, or value-based care strategy — you'll be the first to know. No noise, just signal.</p>
+        <p style="color: var(--slate-light); font-size: 1rem; font-weight: 300;">When we publish new analysis on Medicare Advantage, MSSP performance, or value-based care strategy &mdash; you'll be the first to know. No noise, just signal.</p>
       </div>
       <form action="https://formsubmit.co/Andrew@trynytyhealth.com" method="POST" style="display: flex; flex-direction: column; gap: 12px;">
         <input type="hidden" name="_subject" value="TRYNYTY Insights Signup" />
@@ -300,7 +387,7 @@
         <input type="hidden" name="_next" value="https://trynytyhealth.com/thanks.html" />
         <input type="text" name="name" placeholder="Your name" required class="signup-input" />
         <input type="email" name="email" placeholder="Your email" required class="signup-input" />
-        <button type="submit" class="btn btn-primary" style="justify-content: center;">Subscribe to Insights →</button>
+        <button type="submit" class="btn btn-primary" style="justify-content: center;">Subscribe to Insights &rarr;</button>
       </form>
     </div>
   </div>
@@ -328,7 +415,7 @@
           <div class="footer-col">
             <div class="footer-col-title">Tools &amp; Insights</div>
             <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
-            <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH → LEAD Explorer</a>
+            <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH &rarr; LEAD Explorer</a>
             <a href="tools.html">All Tools</a>
             <a href="blog.html">Insights</a>
           </div>
@@ -339,7 +426,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div>© 2025 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>&copy; 2026 TRYNYTY health:enablement. All rights reserved.</div>
         <div>Chicago, IL</div>
       </div>
     </div>
@@ -347,16 +434,64 @@
 
   <script src="nav.js"></script>
   <script>
-    function filterPosts(tag, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.blog-card').forEach(card => {
-        if (tag === 'all' || card.dataset.tag === tag) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
+    var currentTag = 'all';
+    var currentSearch = '';
+
+    function applyFilters() {
+      var anyVisible = false;
+      document.querySelectorAll('.blog-card').forEach(function (card) {
+        var matchesTag = (currentTag === 'all' || card.dataset.tag === currentTag);
+        var searchHaystack = (card.dataset.search || '').toLowerCase()
+          + ' ' + (card.querySelector('h2') ? card.querySelector('h2').textContent.toLowerCase() : '')
+          + ' ' + (card.querySelector('.blog-excerpt') ? card.querySelector('.blog-excerpt').textContent.toLowerCase() : '')
+          + ' ' + (card.querySelector('.blog-tag') ? card.querySelector('.blog-tag').textContent.toLowerCase() : '');
+        var matchesSearch = (currentSearch === '' || searchHaystack.indexOf(currentSearch) !== -1);
+        var visible = matchesTag && matchesSearch;
+        card.style.display = visible ? '' : 'none';
+        if (visible) anyVisible = true;
       });
+
+      // Hide section headers if all their cards are hidden
+      document.querySelectorAll('.blog-section').forEach(function (section) {
+        var visibleCards = section.querySelectorAll('.blog-card');
+        var anyCardVisible = false;
+        visibleCards.forEach(function (c) { if (c.style.display !== 'none') anyCardVisible = true; });
+        section.style.display = anyCardVisible ? '' : 'none';
+      });
+
+      // Earlier archive: open it automatically when search is active and matches
+      var earlier = document.getElementById('earlier');
+      if (earlier) {
+        var earlierVisibleCards = earlier.querySelectorAll('.blog-card');
+        var anyEarlierVisible = false;
+        earlierVisibleCards.forEach(function (c) { if (c.style.display !== 'none') anyEarlierVisible = true; });
+        earlier.style.display = anyEarlierVisible ? '' : 'none';
+        if (currentSearch !== '' && anyEarlierVisible) {
+          earlier.open = true;
+        }
+      }
+
+      // Empty state
+      var emptyEl = document.getElementById('blog-empty');
+      if (emptyEl) {
+        if (anyVisible) {
+          emptyEl.classList.remove('show');
+        } else {
+          emptyEl.classList.add('show');
+        }
+      }
+    }
+
+    function filterPosts(tag, btn) {
+      currentTag = tag;
+      document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function searchPosts(value) {
+      currentSearch = (value || '').trim().toLowerCase();
+      applyFilters();
     }
   </script>
 </body>
