@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Can't Move Care Upstream by Dropping People Back Above the Rapids — TRYNYTY</title>
+  <meta name="description" content="Most of what the healthcare industry calls 'moving care upstream' is just reactive care made more efficient. A look at what genuine upstream care would require — the economics, the data, the culture, and the engagement models that have to change first." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Open Graph / LinkedIn / iMessage / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="TRYNYTY health:enablement" />
+  <meta property="og:url" content="https://www.trynytyhealth.com/post-moving-care-upstream" />
+  <meta property="og:title" content="You Can't Move Care Upstream by Dropping People Back Above the Rapids" />
+  <meta property="og:description" content="Most of what the healthcare industry calls 'moving care upstream' is just reactive care made more efficient. A look at what genuine upstream care would actually require." />
+  <meta property="og:image" content="https://www.trynytyhealth.com/post-moving-care-upstream-1.png" />
+  <meta property="og:image:secure_url" content="https://www.trynytyhealth.com/post-moving-care-upstream-1.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1248" />
+  <meta property="og:image:height" content="832" />
+  <meta property="og:image:alt" content="River metaphor for healthcare's upstream problem — kayaker going over a waterfall, ambulance boat in the pool below, patients being carried back up to relaunch into the rapids." />
+  <meta property="article:author" content="Andrew Smithson" />
+  <meta property="article:published_time" content="2026-05-19" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="You Can't Move Care Upstream by Dropping People Back Above the Rapids" />
+  <meta name="twitter:description" content="Most of what the healthcare industry calls 'moving care upstream' is just reactive care made more efficient. What genuine upstream care would actually require." />
+  <meta name="twitter:image" content="https://www.trynytyhealth.com/post-moving-care-upstream-1.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(100,120,200,0.12); color: #8899dd; border: 1px solid rgba(100,120,200,0.25); }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white); }
+    .article-body { max-width: 800px; margin: 60px auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.65rem; color: var(--white); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--teal); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .article-body sup { font-size: 0.7rem; color: var(--teal); }
+    .article-body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .article-body a:hover { color: #3dd6ce; }
+    .article-body ul { list-style: none; margin-bottom: 22px; padding-left: 0; }
+    .article-body ul li { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; padding-left: 24px; position: relative; margin-bottom: 8px; }
+    .article-body ul li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--teal); }
+    .article-figure { margin: 36px 0 36px; }
+    .article-figure img { width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.06); }
+    .article-figure figcaption { margin-top: 10px; font-size: 12px; color: var(--slate); font-style: italic; text-align: center; line-height: 1.5; }
+    .pullquote { border-left: 3px solid var(--teal); padding: 18px 26px; margin: 36px 0; background: rgba(32,178,170,0.06); border-radius: 0 var(--radius) var(--radius) 0; }
+    .pullquote p { font-family: var(--font-serif); font-size: 1.25rem; font-style: italic; color: var(--white); line-height: 1.55; margin: 0; }
+    .footnotes { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: var(--slate); line-height: 1.7; }
+    .footnotes p { font-size: 12px; color: var(--slate); margin-bottom: 10px; }
+    .footnotes a { color: var(--teal); }
+    .footnotes-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--slate-light); margin-bottom: 14px; }
+    .author-card { max-width: 800px; margin: 0 auto; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 32px 40px 80px; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 24px 20px 60px; }
+      .author-card { padding: 24px 20px; }
+      .pullquote { padding: 14px 18px; margin: 28px 0; }
+      .pullquote p { font-size: 1.1rem; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZG2KKV4BG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
+  </script>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">Industry Perspective</span>
+      <h1 class="article-title">You Can't Move Care Upstream by Dropping People Back Above the Rapids</h1>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>May 2026</span>
+        <span>·</span>
+        <span>10 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jump navigation -->
+  <div style="background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 12px 40px;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+      <span style="font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 8px;">Jump to:</span>
+      <a href="#industry-upstream" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Industry "Upstream"</a>
+      <a href="#what-upstream-means" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">What It Means</a>
+      <a href="#barriers" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">Barriers</a>
+      <a href="#what-works" style="font-size: 12px; color: var(--teal); padding: 4px 10px; border: 1px solid rgba(32,178,170,0.25); border-radius: 20px; white-space: nowrap; text-decoration: none;">What Works</a>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <figure class="article-figure">
+      <img src="post-moving-care-upstream-1.png" alt="A river canyon with a kayaker going over a waterfall, an ambulance boat waiting in the pool below to rescue them, and rescued figures being carried back up the canyon trail to relaunch into the river. The rescue loop is the visual argument." loading="eager" />
+    </figure>
+
+    <p>The healthcare industry has been talking about "moving care upstream" for as long as anyone in value-based care can remember. It is the metaphor of choice in every keynote, every investor deck, every CMMI model rollout&mdash;deployed by executives explaining why their latest initiative will finally do the thing the industry has been promising for decades. They likely believe it. The buzzword is a comfortable fit for almost any work an organization wants to describe.</p>
+
+    <p>And yet&mdash;measured by what actually matters, the rates of preventable chronic disease, lifestyle-related morbidity, behavioral health crises&mdash;almost nothing about the trajectory of population health has changed.</p>
+
+    <p>The metaphor itself explains the problem if you span out to see the whole picture. Most medical intervention happens after the patient has already experienced an adverse physical event&mdash;the heart attack, the stroke, the diabetic complication, the depressive episode. Think of it as the pool at the bottom of a waterfall. There is the violent drop-off, then the water calms. The pool is where most healthcare intervention is happening today: stabilize the patient, manage the chronic condition, prevent the next acute episode.</p>
+
+    <p>The industry's current "upstream" initiatives pull patients out of the pool and place them back into the rapids above the waterfall. The patient is alive, the fall is over, they get a little more navigable water before the next adverse event. But the rapids are still there. The waterfall is still ahead.</p>
+
+    <figure class="article-figure">
+      <img src="post-moving-care-upstream-2.png" alt="The view has spanned out to show the upstream territory. A dam is under construction in the calm waters far above the rapids, with cranes and scaffolding visible. The original waterfall and rescue scene are now compressed into the bottom-right of the frame, no longer the dominant feature." loading="lazy" />
+    </figure>
+
+    <p>Genuine upstream care means going further up the river&mdash;all the way to the calmer waters above the rapids. There, we can build a dam and create a navigable route around the disruption entirely. Fewer patients ever reach the rapids in the first place.</p>
+
+    <div class="pullquote">
+      <p>Moving care upstream means promoting health, not making reactive care more efficient. Earlier detection, different settings, different licenses&mdash;these are improvements to reactive care. They are not upstream of the hazards.</p>
+    </div>
+
+    <h2 id="industry-upstream">What the industry currently calls "upstream"</h2>
+
+    <p>Three patterns dominate the industry lingo around "upstream" care. Each is real work. None of them is upstream care in the sense the word implies.</p>
+
+    <p><strong>Top-of-license and expanded primary care.</strong> Primary care physicians are taking on more chronic disease management, more care coordination, more behavioral health screening. Medical assistants and nurses are absorbing work that physicians used to do. Nurse practitioners and physician assistants are running independent panels. This is genuinely valuable work, and it improves access in a system that desperately needs it. But the patient already has the chronic condition. The disease is already present. The intervention is downstream of the etiology&mdash;the chronic kidney disease, the type 2 diabetes, the heart failure, the depression&mdash;has already developed by the time the expanded primary care team gets to work.</p>
+
+    <p><strong>Site-of-service shifts.</strong> Procedures move from inpatient to outpatient. Outpatient procedures move to ambulatory surgical centers. ASC procedures move to physician offices. Total knee replacements that required a five-day hospital stay in 2005 now happen as same-day discharges. There are real cost savings, real patient experience improvements, real quality gains in these shifts. But the surgery, the infusion, the procedure was already predetermined at the point of intervention. The intervention point has not moved upstream&mdash;only the location has changed.</p>
+
+    <p><strong>Earlier disease detection.</strong> Risk stratification tools identify chronic conditions in earlier stages. Annual wellness visits surface conditions that would have gone undiagnosed for years. Panel management catches the patient with prediabetes before they progress to type 2. This is closer to genuine upstream than the other two, but it is still operating on a disease that has already developed. The metabolic dysfunction has already started its decade-long drift. The depression has already taken hold. The hypertension is already damaging the cardiovascular system. Catching disease earlier is better than catching it later. But disease prevention is the standard upstream framing&mdash;catch the metabolic markers before diabetes develops. Health promotion is the framing past that&mdash;build the lifestyle, environment, and behavioral conditions where the metabolic markers don't drift in the first place. Disease prevention is great. Health promotion is better.</p>
+
+    <p>Each of these is real work and worth doing. None of them is upstream care in the sense the word implies. They are reactive care made more efficient.</p>
+
+    <h2 id="what-upstream-means">What upstream actually means</h2>
+
+    <p>Upstream isn't a single intervention. It's a time horizon.</p>
+
+    <p>Reactive care operates on a timeline of weeks to months&mdash;the acute episode, the chronic exacerbation, the hospitalization, the recovery. Industry-upstream care operates on months to years&mdash;the screening cycle, the chronic disease management plan, the care coordination across the trailing edge of disease. Genuine upstream care operates on years to decades. It intervenes on the conditions that, left alone, will eventually drive someone into the reactive healthcare system.</p>
+
+    <p>That framing matters because it clarifies what upstream care is and isn't. Upstream care isn't anti-healthcare-system. People should be engaged with the system&mdash;they should be in regular contact with primary care, they should have someone who knows them medically, and they should have a relationship with their care team. What needs to change is the mode of that engagement: from acute and reactive, which is what consumes nearly all of healthcare's current capacity, to proactive, promotional, and preventive.</p>
+
+    <p>Concretely, genuine upstream care looks like this:</p>
+
+    <ul>
+      <li>Identifying metabolic function and dysfunction&mdash;insulin resistance markers, inflammatory signatures, sleep patterns&mdash;years before someone is diagnosed with type 2 diabetes (a use case AI is well-positioned to support, given the right longitudinal data substrate)</li>
+      <li>Detecting cognitive decline trajectories years before Alzheimer's symptoms become clinically apparent</li>
+      <li>Recognizing the behavioral and environmental patterns that predict cardiovascular events in people who currently have no clinical heart disease</li>
+      <li>Addressing the social determinants&mdash;food access, housing stability, economic security, environmental exposures&mdash;that the National Academy of Medicine estimates account for 80 to 90 percent of the modifiable contributors to health outcomes, while medical care accounts for only 10 to 20 percent.<sup>1</sup></li>
+    </ul>
+
+    <p>The healthcare system isn't structurally set up to do any of this at scale. That's the problem.</p>
+
+    <h2 id="barriers">Barriers to building the dam</h2>
+
+    <p>Four interlocking problems prevent the healthcare system from doing genuine upstream care. None of them is solvable in isolation. Each is a real constraint, and each reinforces the others.</p>
+
+    <h3>Economics</h3>
+
+    <p>The economics of upstream care are at odds with the economics of the healthcare system in four distinct ways.</p>
+
+    <p>First, fee-for-service reimbursement structurally doesn't reward care that prevents the need for care. The model pays for events&mdash;visits, procedures, admissions. Upstream care produces non-events&mdash;the diabetes that doesn't develop, the heart attack that doesn't happen, the hospitalization that's avoided. FFS has no mechanism for paying for things that didn't occur. Value-based care arrangements try to fix this, with varying degrees of success.</p>
+
+    <p>Second, physician compensation is inverted. Specialists earn two to three times what primary care physicians earn. The talent flows downstream because that's where the money is. Until the compensation scale inverts&mdash;until the doctors doing the upstream work are paid as well as the doctors doing the downstream work&mdash;the workforce that would do upstream care at scale doesn't get built.</p>
+
+    <p>Third, supply and demand are mismatched at the structural level. The primary care physician shortage is well documented. Residency match rates for primary care specialties have been declining for years. Burnout is driving experienced PCPs out of the field. The supply side is contracting while demand for upstream-capable primary care is growing. Even organizations that want to do upstream care can't reliably staff it.</p>
+
+    <p>Fourth&mdash;and this is the sharpest point&mdash;patient mobility across insurance products breaks the longitudinal economics of upstream care. A patient cycles through commercial insurance during their working years, possibly through the ACA marketplace during a transition, possibly through Medicaid during a period of low income, and eventually onto Medicare. Within each phase, they may change insurers multiple times. The problem isn't that risk contracts need to follow patients across insurers&mdash;patients don't change primary care providers as often as they change insurance. The problem is that providers don't have value-based contracts with <em>every</em> insurer their patients move through. Outside Medicare Advantage and select Medicaid markets, commercial insurance's value-based care ecosystem is underdeveloped. That means a primary care organization committed to upstream care still loses the financial benefit of those investments every time a patient transitions to a payer the organization doesn't have a risk contract with. Until value-based contracting penetrates commercial insurance the way it has penetrated Medicare Advantage, the longitudinal economics of upstream care don't close.</p>
+
+    <h3>Data &mdash; the chicken-and-egg problem</h3>
+
+    <p>You can't deliver the right upstream care without the right data. Claims and EHR snapshots don't capture the years of metabolic drift, behavioral patterns, dietary choices, sleep quality, social connection, financial stress, and environmental exposure that predict disease. The signals that matter for genuine upstream care exist almost entirely outside today's clinical data infrastructure.</p>
+
+    <p>But you can't capture that data without sustained patient engagement. And you can't get sustained engagement without already doing the upstream care that builds the relationship. The loop is the problem.</p>
+
+    <p>Returning to the river analogy: think of the dam as the data infrastructure. You can't build it without continuous engagement, and you can't get continuous engagement without partial dam-building already underway. The way out isn't a single intervention. It's sequencing&mdash;building the infrastructure in stages, with each stage enabling the next stage of engagement, which enables the next stage of infrastructure. This is what we mean when we say <a href="https://www.trynytyhealth.com/post-intelligence-first">intelligence first</a> is the precondition for upstream care. The data substrate has to be built before the rest of it works.</p>
+
+    <h3>Culture</h3>
+
+    <p>The healthcare system has lost ground in the upstream conversation, and physicians know it. The common refrain from medical organizations is some version of this:</p>
+
+    <div class="pullquote">
+      <p>"Patients are getting their health advice from podcasters and supplement salesmen instead of their doctors."</p>
+    </div>
+
+    <p>That framing isn't always fair&mdash;much of the wellness and functional medicine ecosystem is doing serious work on diet, sleep, stress, and longitudinal monitoring that primary care doesn't have the time, training, or reimbursement to do. But the underlying observation is right: the upstream conversation patients want to be having about their long-term health is happening almost anywhere except in their fifteen-minute clinical encounter.</p>
+
+    <p>"Sick care" is another tired phrase&mdash;tired because it's right. The healthcare system is structurally oriented around the clinical encounter and procedural volume. Genuine upstream care happens between encounters, often without one. The current operating model has no good place to put the work, no good way to compensate the people doing it, and no good way to measure the outcomes over the time horizons that matter. The orientation has to invert.</p>
+
+    <h3>Patient engagement</h3>
+
+    <p>Roughly a third of Americans don't have a primary care provider.<sup>2</sup> Genuine upstream care requires sustained engagement with the population most disconnected from the system. The disengagement problem isn't peripheral to upstream care&mdash;it's central. You cannot do upstream care for people who don't have a relationship with the system, and the people most likely to benefit from upstream care are disproportionately the people without that relationship.</p>
+
+    <p>But&mdash;and this is where the constructive turn begins&mdash;some primary care models have figured out how to solve this.</p>
+
+    <h2 id="what-works">What upstream-ready actually looks like</h2>
+
+    <figure class="article-figure">
+      <img src="post-moving-care-upstream-3.png" alt="The full navigable waterway, from the completed dam in the upper portion of the frame down through a calm, controlled channel. Kayakers move in sequence along the route. The original waterfall is visible but bypassed by the new path. The upstream-ready system is operational." loading="lazy" />
+    </figure>
+
+    <p>A handful of primary care organizations have already figured out what the system as a whole hasn't. They're navigating their patients' diet, exercise, sleep, social connection, and financial stress as the central work of primary care&mdash;not as adjacent services. The check-points along their patients' route are visible in the model itself:</p>
+
+    <ul>
+      <li><strong>Capitated economics</strong> that align incentives with health outcomes rather than visit volume</li>
+      <li><strong>Care teams that go beyond the physician-MA dyad</strong>&mdash;health coaches, behavioral health specialists, community health workers, social workers, pharmacists, and care navigators</li>
+      <li><strong>Community programming that builds engagement outside the clinical encounter</strong>&mdash;tai chi classes, yoga, group medical visits, social gatherings, diet education, fitness programs, and healthy incentive programs</li>
+      <li><strong>Continuous access models</strong>&mdash;same-day appointments, longer visits, twenty-four-hour patient support lines, asynchronous communication, and connected wearable devices</li>
+      <li><strong>Population-level investments</strong> rather than encounter-level economics&mdash;investing in the longitudinal conditions and relationships that produce health, on a time horizon that doesn't show up in any single quarter's P&amp;L</li>
+    </ul>
+
+    <p>The named examples are familiar. ChenMed reports that its patients have 33 percent fewer hospitalizations and ER visits than comparable patients.<sup>3</sup> Oak Street Health reports a 44 percent reduction in hospital admissions compared to Medicare benchmarks.<sup>4</sup> CenterWell, Humana's senior-focused primary care subsidiary, publishes similar outcomes data through its parent company's value-based care reports. The direct primary care movement is demonstrating that engagement at scale is possible outside traditional reimbursement structures.</p>
+
+    <p>The model works. The barriers to scaling it aren't clinical&mdash;they are the four interlocking economic, data, cultural, and engagement problems described above. The clinical model is established. The infrastructure is not.</p>
+
+    <h2>The work ahead</h2>
+
+    <p>There's a trilogy of arguments emerging across our recent writing. Intelligence first&mdash;the data substrate that everything else depends on. Upstream care&mdash;the goal that data substrate enables. And, coming next, evidence-based and value-based medicine working in tandem as the operational model that makes both possible and enables a Kaizen-style continuous improvement loop driven by data.</p>
+
+    <p>We keep pulling people out of the pool below the waterfall and dropping them back above the rapids. It is real work, and it is not the same thing as moving care upstream.</p>
+
+    <p>Building the dam&mdash;the data infrastructure, the longitudinal economics, the cultural shift, the engagement models&mdash;is the actual work. None of it is happening at scale yet. Most of it is being built piece by piece by a small number of organizations who have the patience and the capital to wait for results that show up over years instead of quarters.</p>
+
+    <p>The MSSP and ACO REACH Explorers exist to help organizations understand where they sit in that progression. If you want to talk about where your organization fits in the upstream conversation, or where your data infrastructure is and isn't ready for the work ahead, <a href="contact.html">we'd like to talk</a>.</p>
+
+    <div class="footnotes">
+      <div class="footnotes-title">References</div>
+      <p><sup>1</sup> Magnan, S. "Social Determinants of Health 101 for Health Care: Five Plus Five." National Academy of Medicine, October 2017. <a href="https://nam.edu/perspectives/social-determinants-of-health-101-for-health-care-five-plus-five/" target="_blank" rel="noopener">https://nam.edu/perspectives/social-determinants-of-health-101-for-health-care-five-plus-five/</a></p>
+      <p><sup>2</sup> National Association of Community Health Centers, "Closing the Primary Care Gap" (2023). The widely cited estimate that roughly one-third of Americans lack a regular primary care provider draws on this analysis and related NACHC reporting.</p>
+      <p><sup>3</sup> ChenMed, "Our Practice Model." <a href="https://www.chenmed.com/physicians/our-practice-model" target="_blank" rel="noopener">https://www.chenmed.com/physicians/our-practice-model</a></p>
+      <p><sup>4</sup> Oak Street Health, "Advanced Primary Care for Medicare Beneficiaries" white paper (May 2025). <a href="https://www.cvshealth.com/content/dam/enterprise/cvs-enterprise/pdfs/2025/Oak-Street-White-Paper-2025-v2.pdf" target="_blank" rel="noopener">https://www.cvshealth.com/content/dam/enterprise/cvs-enterprise/pdfs/2025/Oak-Street-White-Paper-2025-v2.pdf</a></p>
+    </div>
+
+  </div>
+
+  <div class="author-card">
+    <div class="author-card-inner">
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. Writing on Medicare Advantage, MSSP, value-based care, and the data infrastructure healthcare actually needs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="post-intelligence-first.html" class="btn btn-ghost">&larr; Part 1: Intelligence First</a>
+    <a href="blog.html" class="btn btn-primary">Back to Insights &rarr;</a>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
+            <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH &rarr; LEAD Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
