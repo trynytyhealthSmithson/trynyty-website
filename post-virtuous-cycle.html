@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare's Next Decade: Vicious or Virtuous Cycle? — TRYNYTY</title>
+  <meta name="description" content="Healthcare has spent two decades half-assed attempting or outright resisting value-based care. The headwinds are no longer something the industry can ignore. A look at the framework for value creation, what it produces once it's running, and why finding a starting place matters more than perfecting the plan." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Open Graph / LinkedIn / iMessage / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="TRYNYTY health:enablement" />
+  <meta property="og:url" content="https://www.trynytyhealth.com/post-virtuous-cycle" />
+  <meta property="og:title" content="Healthcare's Next Decade: Vicious or Virtuous Cycle?" />
+  <meta property="og:description" content="Healthcare has spent two decades half-assed attempting or outright resisting value-based care. The headwinds are no longer something the industry can ignore. A look at the framework for value creation and where to start." />
+  <meta property="og:image" content="https://www.trynytyhealth.com/post-vicious-or-virtuous-cycle-hero.png" />
+  <meta property="og:image:secure_url" content="https://www.trynytyhealth.com/post-vicious-or-virtuous-cycle-hero.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1408" />
+  <meta property="og:image:height" content="768" />
+  <meta property="og:image:alt" content="Painterly landscape with a signpost at a fork in the path: 'Virtuous' arrow pointing right toward a sunlit village with solar panels and wind turbines, 'Vicious' arrow pointing left toward a dark forest with bare trees and ruins. Two figures stand at the fork contemplating the choice." />
+  <meta property="article:author" content="Andrew Smithson" />
+  <meta property="article:published_time" content="2026-05-28" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Healthcare's Next Decade: Vicious or Virtuous Cycle?" />
+  <meta name="twitter:description" content="Healthcare has spent two decades half-assed attempting or outright resisting value-based care. The headwinds are no longer something the industry can ignore." />
+  <meta name="twitter:image" content="https://www.trynytyhealth.com/post-vicious-or-virtuous-cycle-hero.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .article-hero { padding: 140px 40px 60px; background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; }
+    .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 16px 0 0; font-size: 13px; color: var(--slate); }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(100,120,200,0.12); color: #8899dd; border: 1px solid rgba(100,120,200,0.25); }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.15; color: var(--white); }
+    .article-body { max-width: 800px; margin: 60px auto; padding: 0 40px 80px; }
+    .article-body p { font-size: 1.05rem; color: var(--slate-light); font-weight: 300; line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.65rem; color: var(--white); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; color: var(--teal); margin: 32px 0 12px; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body em { font-style: italic; color: var(--teal); font-family: var(--font-serif); }
+    .article-body blockquote { border-left: 3px solid var(--teal); padding: 16px 24px; margin: 28px 0; background: rgba(32,178,170,0.05); border-radius: 0 var(--radius) var(--radius) 0; }
+    .article-body blockquote p { font-size: 0.95rem; margin-bottom: 0; font-style: italic; }
+    .article-body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .article-body a:hover { color: #3dd6ce; }
+    .article-figure { margin: 36px 0 36px; }
+    .article-figure img { width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.06); }
+    .article-figure figcaption { margin-top: 10px; font-size: 12px; color: var(--slate); font-style: italic; text-align: center; line-height: 1.5; }
+    .pullquote { border-left: 3px solid var(--teal); padding: 18px 26px; margin: 36px 0; background: rgba(32,178,170,0.06); border-radius: 0 var(--radius) var(--radius) 0; }
+    .pullquote p { font-family: var(--font-serif); font-size: 1.25rem; font-style: italic; color: var(--white); line-height: 1.55; margin: 0; }
+    .series-links { margin-top: 48px; padding: 24px 28px; background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); }
+    .series-links-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--slate-light); margin-bottom: 14px; }
+    .series-links ol { list-style: none; padding-left: 0; margin: 0; }
+    .series-links li { font-size: 14px; color: var(--slate-light); margin-bottom: 10px; line-height: 1.5; }
+    .series-links li:last-child { margin-bottom: 0; }
+    .series-links li strong { color: var(--white); font-weight: 600; margin-right: 6px; }
+    .series-links a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .author-card { max-width: 800px; margin: 0 auto; padding: 32px 40px; background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .author-card-inner { display: flex; gap: 20px; align-items: center; }
+    .author-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .author-bio { font-size: 13px; color: var(--slate-light); }
+    .article-nav { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 32px 40px 80px; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 20px 40px; }
+      .article-body { padding: 0 20px 60px; }
+      .article-nav { padding: 24px 20px 60px; }
+      .author-card { padding: 24px 20px; }
+      .pullquote { padding: 14px 18px; margin: 28px 0; }
+      .pullquote p { font-size: 1.1rem; }
+      .series-links { padding: 20px 22px; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZG2KKV4BG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GZG2KKV4BG', {
+      linker: {
+        domains: ['mssppuf.trynytyhealth.com', 'reachpuf.trynytyhealth.com']
+      }
+    });
+  </script>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+      <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="tools.html" class="nav-link">Tools</a>
+      <a href="blog.html" class="nav-link active">Insights</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <span class="article-tag">Industry Perspective</span>
+      <h1 class="article-title">Healthcare's Next Decade: Vicious or Virtuous Cycle?</h1>
+      <div class="article-meta">
+        <span>By <strong style="color:var(--white)">Andrew Smithson</strong> | TRYNYTY health:enablement</span>
+        <span>·</span>
+        <span>May 2026</span>
+        <span>·</span>
+        <span>6 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <figure class="article-figure">
+      <img src="post-vicious-or-virtuous-cycle-hero.png" alt="Painterly landscape with a signpost at a fork in the path: 'Virtuous' arrow pointing right toward a sunlit village with solar panels and wind turbines, 'Vicious' arrow pointing left toward a dark forest with bare trees and ruins. Two figures stand at the fork contemplating the choice." loading="eager" />
+    </figure>
+
+    <p>The healthcare industry has spent the better part of two decades half-assed attempting or outright resisting value-based care. The reasons have been understandable. The operational model is harder, the time horizons are longer, and the financial bets are real. Change is hard. Although, none of that resistance has stopped the direction of travel, and the headwinds against it are no longer something the industry can ignore.</p>
+
+    <p>Policy, economics, and consumer demand have made the change unavoidable. Technology is advancing at a pace that is reshaping every industry it touches, and healthcare is no exception. And patients, accustomed to consumer-grade experiences in every other corner of their lives, are increasingly demanding genuine health promotion rather than better-managed sick care. The cards are stacked against the old way of working.</p>
+
+    <p>Change can feel daunting. It does not have to be. We can build a virtuous cycle in which value-based care drives genuine upstream care, upstream care generates the longitudinal data healthcare has been missing, and that data finally lets evidence-based medicine catch up to and catalyze the work value-based care was designed to do.</p>
+
+    <h2>The framework for value creation</h2>
+
+    <p>Value creation in healthcare depends on three things that build on each other. You need good data; complete, accurate, longitudinal. To get that good data, we must change how patients interact with the system and how care is delivered. That means moving care and data acquisition upstream, which in turn requires a different model of patient engagement. Then you need to take the data and the engagement and turn them into something that compounds &mdash; a virtuous cycle in which evidence-based medicine and value-based care work in tandem. And the whole thing runs on a culture of continuous improvement.</p>
+
+    <p><strong>Good data.</strong> AI is going to be disruptive to healthcare. Your organization will either be disrupted by it or use it to be a disruptor. Get the data substrate right, and AI becomes the engine of a continuous-improvement system that keeps generating value over time. Get it wrong, and AI accelerates the competitors who did. Technology is mature enough to do extraordinary work, but only when it is trained on data that captures what drives health. Claims records and EHR snapshots were never going to be enough. The signals that predict disease &mdash; metabolic drift, behavioral patterns, social connection, environmental exposure, sleep, stress &mdash; exist almost entirely outside today's clinical data infrastructure. The substrate has to be built first. More in <a href="post-intelligence-first.html">part 1 of the series</a>.</p>
+
+    <p><strong>Upstream care and patient engagement.</strong> Most of what the industry currently calls "moving care upstream" is reactive care made more efficient; site-of-service shifts, top-of-license expansion, earlier disease detection. None of it is operating on the conditions that produce disease in the first place. Genuine upstream care happens on years-to-decades time horizons, intervenes on the long-arc drivers of health, and requires sustained patient engagement that the fifteen-minute clinical encounter was never built to provide. A handful of organizations have already figured out the clinical model. The barriers to scaling it are not clinical. They are economic, cultural, and infrastructural. More in <a href="post-moving-care-upstream.html">part 2</a>.</p>
+
+    <p><strong>The evidence-generation loop.</strong> Evidence-based medicine demands the kind of evidence that takes decades to generate. Value-based care demands action this year. The gap between them is where preventive medicine quietly stalls. But value-based organizations are uniquely positioned to close it. They have the capitated economics, the longitudinal data flow, and the financial incentive to invest in prevention. They are also positioned to generate the observational evidence base the field has been waiting on. VBC is not just a payment model. It is an evidence-generation model, if it is structured to capture and publish. More in <a href="post-evidence-base-healthcare-needs.html">part 3</a>.</p>
+
+    <h2>What happens once it is running</h2>
+
+    <p>The interesting thing about the framework is not any single layer. It is what happens when the three layers are working together.</p>
+
+    <p>Each round of upstream care generates new data. Each piece of data improves the next round of intervention. Each intervention produces observational evidence that refines the next round of clinical decision-making. The system stops behaving like a project and starts behaving like a continuous-improvement loop &mdash; what lean manufacturing has called Kaizen for decades, and what healthcare has talked about wanting without quite knowing how to build.</p>
+
+    <div class="pullquote">
+      <p>Value-based care is not just a payment model. It is a continuous-improvement system that gets demonstrably better the longer it runs.</p>
+    </div>
+
+    <p>The Kaizen frame matters because it reframes what value-based care actually is. The conventional view is a payment model that asks providers to absorb financial risk in exchange for the chance to do better work. The continuous-improvement view is something more &mdash; a system that gets demonstrably better at producing health outcomes the longer it operates, because each cycle generates the data that informs the next cycle. That is a fundamentally different posture from "let us see if we can hit the quality metrics this year."</p>
+
+    <p>Even before the full framework is in place, organizations operating under value-based arrangements have data today that supports this kind of work. Rate, mix, and volume analysis of MSSP or ACO REACH performance, for instance, surfaces the process metrics that point at where the next improvement cycle should focus &mdash; the kind of data-driven targeting that lets a continuous-improvement loop start running on day one.</p>
+
+    <p>That is what makes the destination feel achievable instead of theoretical. A continuous-improvement system does not require anyone to solve healthcare in a single move. It requires organizations to start where they can, learn from what happens, and let the compounding take over.</p>
+
+    <h2>Where to start</h2>
+
+    <p>Find a starting place and work upstream.</p>
+
+    <p>The data infrastructure that exists today, however imperfect, is enough to begin building on. The upstream care model that works today, however small the scale, is enough to start expanding. The longitudinal evidence that can be generated from a single value-based organization's data, however limited the population, is enough to publish.</p>
+
+    <p>The sequence matters less than the starting point. Organizations that wait for the comprehensive plan, the perfect tooling, or the right moment will still be waiting in five years. The organizations that began somewhere, anywhere, and let each layer of the framework pull the next one into focus will have built something the rest of the field is still trying to design.</p>
+
+    <p>If you want to see where your organization sits on this picture, the <a href="https://mssppuf.trynytyhealth.com" target="_blank" rel="noopener" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a> and <a href="https://reachpuf.trynytyhealth.com" target="_blank" rel="noopener" class="explorer-launch" data-explorer="reach">ACO REACH &rarr; LEAD Explorer</a> surface the rate-mix-volume patterns described above. If you want to talk about where your data infrastructure is and is not ready, or what generating publishable evidence from your value-based operations could actually look like, <a href="contact.html">we'd like to talk</a>.</p>
+
+    <div class="series-links">
+      <div class="series-links-title">Read the full series</div>
+      <ol>
+        <li><strong>Part 1:</strong> <a href="post-intelligence-first.html">We Need Better Intelligence in Healthcare Before We Can Make It Artificial</a></li>
+        <li><strong>Part 2:</strong> <a href="post-moving-care-upstream.html">You Can't Move Care Upstream by Dropping People Back Above the Rapids</a></li>
+        <li><strong>Part 3:</strong> <a href="post-evidence-base-healthcare-needs.html">Value-Based Care Generates the Evidence Base Healthcare Needs</a></li>
+      </ol>
+    </div>
+
+  </div>
+
+  <div class="author-card">
+    <div class="author-card-inner">
+      <div>
+        <div class="author-name">Andrew Smithson</div>
+        <div class="author-bio">Co-Founder, TRYNYTY health:enablement. Writing on Medicare Advantage, MSSP, value-based care, and the data infrastructure healthcare actually needs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-nav">
+    <a href="post-evidence-base-healthcare-needs.html" class="btn btn-ghost">&larr; Part 3: Evidence Base Healthcare Needs</a>
+    <a href="blog.html" class="btn btn-primary">Back to Insights &rarr;</a>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="logo.png" alt="TRYNYTY" class="logo-mark-img" />
+            <span class="logo-text">TRYNYTY <span class="logo-sub">health:enablement</span></span>
+          </div>
+          <div class="footer-tagline">Simplify Care, Create Value.</div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-col-title">Company</div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Tools &amp; Insights</div>
+            <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
+            <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH &rarr; LEAD Explorer</a>
+            <a href="blog.html">Insights</a>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-title">Contact</div>
+            <a href="mailto:Andrew@trynytyhealth.com">Andrew@trynytyhealth.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 TRYNYTY health:enablement. All rights reserved.</div>
+        <div>Chicago, IL</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>
