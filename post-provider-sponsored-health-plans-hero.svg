@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<rect width="1600" height="900" fill="#B0CBDE"/>
+<rect y="600" width="1600" height="300" fill="#FCF5E5"/>
+
+
+<defs><clipPath id="sh"><path d="M 800 170
+L 1080 232 L 1080 495
+Q 1080 672 800 805
+Q 520 672 520 495
+L 520 232 Z"/></clipPath></defs><g clip-path="url(#sh)">
+<rect x="566" y="500" width="148" height="212" fill="#192436"/>
+<rect x="886" y="500" width="148" height="212" fill="#192436"/>
+<polygon points="558,500 722,500 722,482 576,482" fill="#192436"/>
+<polygon points="878,482 1024,482 1042,500 878,500" fill="#192436"/>
+<rect x="592" y="534" width="32" height="38" fill="#FCF5E5"/>
+<rect x="646" y="534" width="32" height="38" fill="#FCF5E5"/>
+<rect x="592" y="592" width="32" height="38" fill="#FCF5E5"/>
+<rect x="646" y="592" width="32" height="38" fill="#FCF5E5"/>
+
+<rect x="912" y="534" width="32" height="38" fill="#FCF5E5"/>
+<rect x="966" y="534" width="32" height="38" fill="#FCF5E5"/>
+<rect x="912" y="592" width="32" height="38" fill="#FCF5E5"/>
+<rect x="966" y="592" width="32" height="38" fill="#FCF5E5"/>
+
+<rect x="698" y="416" width="204" height="296" fill="#192436"/>
+<polygon points="678,416 800,330 922,416" fill="#192436"/>
+<rect x="785" y="352" width="30" height="80" fill="#FCF5E5"/>
+<rect x="760" y="377" width="80" height="30" fill="#FCF5E5"/>
+<rect x="772" y="624" width="56" height="88" fill="#FCF5E5"/>
+<rect x="722" y="452" width="32" height="38" fill="#FCF5E5"/>
+<rect x="722" y="510" width="32" height="38" fill="#FCF5E5"/>
+
+<rect x="846" y="452" width="32" height="38" fill="#FCF5E5"/>
+<rect x="846" y="510" width="32" height="38" fill="#FCF5E5"/>
+
+</g>
+<path d="M 800 170
+L 1080 232 L 1080 495
+Q 1080 672 800 805
+Q 520 672 520 495
+L 520 232 Z"
+fill="none" stroke="#0B919A" stroke-width="46" stroke-linejoin="round"/></svg>
