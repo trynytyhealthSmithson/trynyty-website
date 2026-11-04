@@ -388,7 +388,7 @@ V.methods = () => `<div class="card doc">
 
 // ---- router and events
 function render() {
-  const v = (location.hash || '').slice(1) || (S.lens === 'plan' ? 'contract' : 'market');
+  const v = (location.hash || '').slice(1) || 'overview';
   const view = V[v] ? v : 'overview';
   document.querySelectorAll('nav a').forEach(a => a.classList.toggle('on', a.dataset.v === view));
   document.querySelectorAll('.lens button').forEach(b => b.classList.toggle('on', b.dataset.lens === S.lens));
