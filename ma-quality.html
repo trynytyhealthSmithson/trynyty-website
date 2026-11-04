@@ -62,6 +62,7 @@ input[type=text]{min-width:360px}
 .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .csv{float:right;font:600 11.5px var(--sans);color:var(--teal-dark);background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 9px;cursor:pointer;margin-left:8px}
 .csv:hover{border-color:var(--teal)}
+.pbar{display:inline-block;width:56px;height:7px;background:#e8ecf2;border-radius:4px;vertical-align:middle;margin-right:6px;overflow:hidden}.pbar i{display:block;height:100%;background:var(--teal)}
 .hm td,.hm th{padding:3px 4px}
 .hm .cell{min-width:26px}
 .hm td.brk,.hm th.brk{border-left:3px solid var(--amber)}
@@ -107,6 +108,7 @@ footer{max-width:1240px;margin:0 auto;padding:0 28px 40px;color:var(--slate);fon
     <a href="#market" data-v="market">My market</a>
     <a href="#contract" data-v="contract">Contract profile</a>
     <a href="#measure" data-v="measure">Measure explorer</a>
+    <a href="#cuts" data-v="cuts">Cut point trends</a>
     <a href="#bonus" data-v="bonus">Bonus at stake</a>
     <a href="#methods" data-v="methods">Methodology and docs</a>
   </nav>
@@ -135,7 +137,7 @@ const nm = c => (c.mkt||'').trim() || title(c.name);
 const srcTag = t => `<span class="src" title="${esc(t)}">source</span>`;
 const active = C.filter(c => c.hist['2027']);
 const rated = active.filter(c => ov(c) != null);
-let S = { lens: 'provider', contract: 'H3351', measure: M[0].key, state: 'NY', counties: null, src: 'All', sort: null };
+let S = { lens: 'provider', contract: 'H3351', measure: M[0].key, state: 'NY', counties: null, src: 'All', sort: null, peer: 'all' };
 try { const s = JSON.parse(localStorage.getItem('maqd') || '{}'); Object.assign(S, s); } catch(e) {}
 const save = () => { try { localStorage.setItem('maqd', JSON.stringify({lens:S.lens, contract:S.contract, state:S.state, counties:S.counties})); } catch(e) {} };
 document.getElementById('stamp').textContent = `${D.meta.stars_year} Star Ratings (released Oct 8, 2026) · Enrollment ${D.meta.enrollment_month} · ${D.meta.ratebook_year} ratebook · Built ${D.meta.built}`;
@@ -184,6 +186,33 @@ function gapTo(m, star, score) {
   return m.lower_better ? v - t : t - v;
 }
 const unit = m => (m.cut_text && /%/.test(m.cut_text[1])) ? ' pts' : '';
+// Indicative distance for CAHPS: the base cut point only. CMS also applies significance and reliability tests, so this is a flag, not a target.
+function gapCahps(m, star, score) {
+  if (!isCahps(m) || star == null || star >= 5 || !m.th) return null;
+  const v = num(score); if (v == null) return null;
+  const [t] = m.th[String(star+1)] || []; return t == null ? null : (m.lower_better ? v - t : t - v);
+}
+
+// ---- peer groups
+const topCounties = (c, n=5) => (CC[c.id]||[]).slice(0, n).map(([k]) => k);
+const PEERS = {
+  all:    {label: 'All MA contracts', f: () => true},
+  parent: {label: 'Same parent organization', f: (c, x) => x.parent === c.parent},
+  local:  {label: 'Local competitors', f: (c, x, ctx) => ctx.local.has(x.id), tip: 'Contracts with members in this contract\'s five largest counties'},
+  snp:    {label: 'Same SNP status', f: (c, x) => (x.snp||'') === (c.snp||'')},
+  size:   {label: 'Similar size', f: (c, x) => x.enr >= c.enr/2 && x.enr <= c.enr*2, tip: 'Between half and twice this contract\'s October 2026 enrollment'},
+};
+function peerSet(c, key) {
+  const tc = new Set(topCounties(c));
+  const ctx = {local: new Set(active.filter(x => (CC[x.id]||[]).some(([k]) => tc.has(k))).map(x => x.id))};
+  return active.filter(x => x.id !== c.id && x.m && PEERS[key].f(c, x, ctx));
+}
+// share of peers this score beats (ties count half); higher is better for the contract
+function pctRank(v, arr, lowerBetter) {
+  if (v == null || !arr.length) return null;
+  let w = 0; arr.forEach(a => { if (a === v) w += .5; else if (lowerBetter ? a > v : a < v) w += 1; }); return w / arr.length;
+}
+const ord = p => { if (p == null) return ''; const n = Math.round(p*100); const s = (n%100>=11&&n%100<=13) ? 'th' : ({1:'st',2:'nd',3:'rd'}[n%10]||'th'); return n + s; };
 
 // ---- bonus math
 const rebateShare = s => s == null ? null : s >= 4.5 ? .70 : s >= 3.5 ? .65 : .50;
@@ -265,12 +294,28 @@ V.market = () => {
   </tbody></table></div></div>`;
 };
 
+function peerCard(c, ms) {
+  const P = peerSet(c, S.peer), o = ov(c), po = P.map(x => ov(x)).filter(v => v != null);
+  const rows = ms.map(r => { const vals = P.map(x => num(x.m[r.i][1])).filter(v => v != null && x_ok(v)); const stars = P.map(x => x.m[r.i][0]).filter(v => v != null);
+    const v = num(r.sc); return {...r, n: vals.length, med: median(vals), pr: r.st!=null ? pctRank(v, vals, r.m.lower_better) : null, p4: stars.length ? stars.filter(s => s >= 4).length / stars.length : null}; });
+  const ranked = rows.filter(r => r.pr != null && r.n >= 5);
+  const best = ranked.slice().sort((a,b) => b.pr - a.pr).slice(0,2), worst = ranked.slice().sort((a,b) => a.pr - b.pr).slice(0,2);
+  const pctO = o != null ? pctRank(o, po, false) : null;
+  return `<div class="card" style="margin-top:16px"><h3>How this contract compares</h3><div class="sub">2027 scores against a peer group. Percentile is the share of peers this contract outscores on the measure (ties count half; lower-is-better measures are flipped). Peer groups with fewer than 5 scored contracts are not ranked.</div>
+  <div class="controls chips">${Object.entries(PEERS).map(([k,p]) => `<button class="chip ${k===S.peer?'on':''}" data-peer="${k}" ${p.tip?`data-tip="${esc(p.tip)}"`:''}>${p.label}</button>`).join('')}</div>
+  <p class="takeaway" style="font-size:1.05rem">Peer group: ${esc(PEERS[S.peer].label)}, ${P.length} contracts. ${o!=null&&po.length?`Overall rating ${o} vs a peer median of ${median(po)}, ahead of <b>${ord(pctO)} percentile</b> of rated peers. `:''}${best.length?`Strongest relative to peers: ${best.map(r=>esc(r.m.name)).join(' and ')}. `:''}${worst.length?`Weakest: ${worst.map(r=>esc(r.m.name)).join(' and ')}.`:''}</p>
+  <div class="scroll"><table><thead><tr><th>Measure</th><th class="n">Score</th><th class="n">Star</th><th class="n">Peer median</th><th class="n">Percentile</th><th class="n">Peers at 4+ stars</th><th class="n">Peers scored</th></tr></thead><tbody>
+  ${rows.map(r => `<tr><td><a href="#measure" data-m="${r.m.key}">${esc(r.m.name)}</a></td><td class="n">${esc(r.sc)}</td><td class="n">${pill(r.st)}</td><td class="n">${r.med!=null?+r.med.toFixed(1):''}</td><td class="n" style="white-space:nowrap">${r.n>=5&&r.pr!=null?`<span class="pbar"><i style="width:${Math.round(r.pr*100)}%"></i></span> ${ord(r.pr)}`:''}</td><td class="n">${r.p4!=null?pct(r.p4):''}</td><td class="n">${r.n}</td></tr>`).join('')}
+  </tbody></table></div></div>`;
+}
+const x_ok = v => isFinite(v);
+
 V.contract = () => {
   const c = byId[S.contract] || rated[0];
   const opts = active.slice().sort((a,b)=>b.enr-a.enr).map(c=>`<option value="${c.id} · ${esc(nm(c))} (${esc(c.parent)})">`).join('');
   const hist = ['c','d','o'].map((k,j)=>({name:['Part C summary','Part D summary','Overall'][j], color:['var(--teal)','#ef9a4a','var(--navy)'][j], w:j==2?3.5:2, dash:j<2, vals: YEARS.map(y=>num((c.hist[y]||{})[k]))}));
-  const ms = M.map((m,i)=>({m, st: c.m ? c.m[i][0] : null, sc: c.m ? c.m[i][1] : 'No data', gap: c.m ? gapTo(m, c.m[i][0], c.m[i][1]) : null})).filter(r=>SRC_GROUPS[S.src](r.m));
-  const sorted = S.sort==='gap' ? ms.slice().sort((a,b)=>(a.gap??1e9)-(b.gap??1e9)) : S.sort==='w' ? ms.slice().sort((a,b)=>(b.m.w||0)-(a.m.w||0)) : ms;
+  const ms = M.map((m,i)=>({m, i, st: c.m ? c.m[i][0] : null, sc: c.m ? c.m[i][1] : 'No data', gap: c.m ? gapTo(m, c.m[i][0], c.m[i][1]) : null, cg: c.m ? gapCahps(m, c.m[i][0], c.m[i][1]) : null})).filter(r=>SRC_GROUPS[S.src](r.m));
+  const sorted = S.sort==='gap' ? ms.slice().sort((a,b)=>(a.gap??a.cg??1e9)-(b.gap??b.cg??1e9)) : S.sort==='w' ? ms.slice().sort((a,b)=>(b.m.w||0)-(a.m.w||0)) : ms;
   const o = ov(c), close = ms.filter(r=>r.gap!=null && r.gap>=0 && r.gap<=2 && unit(r.m)).length;
   return `<div class="controls"><input type="text" id="cs" list="cl" placeholder="Search a contract by ID, name or parent"><datalist id="cl">${opts}</datalist><span class="small muted">${active.length} MA contracts in the 2027 file</span></div>
   <p class="takeaway">${esc(nm(c))} (${c.id}) is rated <b>${o!=null?o+' Stars':'not rated'}</b> overall for 2027${o!=null&&ov(c,'2026')!=null?`, ${o>ov(c,'2026')?'up':o<ov(c,'2026')?'down':'unchanged'} from ${ov(c,'2026')} in 2026`:''}; ${close} measures sit within 2 points of the next star.</p>
@@ -281,11 +326,12 @@ V.contract = () => {
       <p class="small muted" style="margin-top:8px">Rebate share: <b>${pct(rebateShare(qbp(c)))}</b> of savings below benchmark. Half a star higher: ${pct(rebateShare(qbp(c)!=null?qbp(c)+.5:null))}.</p>
       <p class="small" style="margin-top:12px"><a href="#bonus">See the dollar estimate by county</a></p></div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>2027 measures</h3><div class="sub">Score, star, weight and distance to the next star. Weight is the measure's multiplier in the 2027 summary and overall ratings (from the CMS Technical Notes). Distance is not computed for CAHPS measures, whose stars also depend on significance tests.</div>
+  <div class="card" style="margin-top:16px"><h3>2027 measures</h3><div class="sub">Score, star, weight and distance to the next star. Weight is the measure's multiplier in the 2027 summary and overall ratings (from the CMS Technical Notes). For CAHPS measures the distance is marked <i>indicative</i>: it uses the base cut point only, and CMS also applies significance and reliability tests.</div>
   <div class="controls chips">${Object.keys(SRC_GROUPS).map(k=>`<button class="chip ${k===S.src?'on':''}" data-src="${k}">${k}</button>`).join('')}<button class="chip ${S.sort==='gap'?'on':''}" id="sortgap">Sort by distance to next star</button><button class="chip ${S.sort==='w'?'on':''}" id="sortw">Sort by weight</button></div>
   <div class="scroll"><table><thead><tr><th>Measure</th><th>Domain</th><th>Source</th><th class="n">Score</th><th class="n">Star</th><th class="n" data-tip="Multiplier in the 2027 overall rating">Weight</th><th class="n">Next star at</th><th class="n">Distance</th></tr></thead><tbody>
-  ${sorted.map(r=>{ const nx = r.st && r.st<5 && r.m.th ? r.m.cut_text[r.st] : ''; return `<tr><td><a href="#measure" data-m="${r.m.key}">${esc(r.m.name)}</a>${r.m.note?` <span class="src" data-tip="${esc(r.m.note)}">history note</span>`:''}</td><td class="small muted">${esc(r.m.domain.replace(/^[HD]D\d: /,''))}</td><td class="small muted">${esc(r.m.source)}</td><td class="n">${esc(r.sc)}</td><td class="n">${pill(r.st)}</td><td class="n" data-tip="${esc(r.m.cat||'')}">${wt(r.m)}</td><td class="n small">${esc(nx)}</td><td class="n">${r.gap!=null?(r.gap<=0?'<span class="muted">at edge</span>':(r.m.lower_better?'-':'+')+(+r.gap.toFixed(2))+unit(r.m)):''}</td></tr>`; }).join('')}
+  ${sorted.map(r=>{ const nx = r.st && r.st<5 && r.m.th ? r.m.cut_text[r.st] : ''; return `<tr><td><a href="#measure" data-m="${r.m.key}">${esc(r.m.name)}</a>${r.m.note?` <span class="src" data-tip="${esc(r.m.note)}">history note</span>`:''}</td><td class="small muted">${esc(r.m.domain.replace(/^[HD]D\d: /,''))}</td><td class="small muted">${esc(r.m.source)}</td><td class="n">${esc(r.sc)}</td><td class="n">${pill(r.st)}</td><td class="n" data-tip="${esc(r.m.cat||'')}">${wt(r.m)}</td><td class="n small">${esc(nx)}</td><td class="n">${r.gap!=null?(r.gap<=0?'<span class="muted">at edge</span>':(r.m.lower_better?'-':'+')+(+r.gap.toFixed(2))+unit(r.m)):r.cg!=null?`<span class="muted" data-tip="CAHPS: base cut point only; CMS also applies significance and reliability tests, so the star may not change at this score">${r.cg<=0?'at edge':'+'+(+r.cg.toFixed(2))}</span> <span class="est" style="background:#eef1f6;color:#44516a">indicative</span>`:''}</td></tr>`; }).join('')}
   </tbody></table></div></div>
+  ${peerCard(c, ms)}
   <div class="card" style="margin-top:16px"><h3>Measure stars over time, 2019 through 2027</h3><div class="sub">Each row is one measure tracked across CMS code changes. Hatched cells: the measure was not part of that year's Star Ratings (display only or not yet introduced). An amber line marks a specification change, so stars before and after it are not directly comparable.</div>
   <div class="scroll"><table class="hm"><thead><tr><th>Measure</th>${YEARS.map(y=>`<th class="n">${y}</th>`).join('')}</tr></thead><tbody>
   ${ms.map(r=>`<tr><td><a href="#measure" data-m="${r.m.key}">${esc(r.m.name)}</a></td>${YEARS.map(y=>{ const v = mAt(y, r.m.key, c.id), b = r.m.brk && +r.m.brk===y ? ' class="brk"' : '';
@@ -323,15 +369,35 @@ V.measure = () => {
   </div>
   <div class="grid g32" style="margin-top:16px">
     <div class="card"><h3>Scores over time, 2019 through 2027</h3><div class="sub">Median score across rated MA contracts, the 4 star cut point${mine?`, and ${esc(mine.id)}`:''}. ${m.lower_better?'Lower is better.':'Higher is better.'}</div>${trendChart}</div>
-    <div class="card"><h3>Weight and cut points by year</h3><div class="sub">Weight in the overall rating, and the score needed for 4 stars</div>
-    <table><thead><tr><th>Year</th><th>Code</th><th class="n">Weight</th><th class="n">4 star cut point</th><th class="n">Median</th></tr></thead><tbody>
-    ${hist.map(h=>`<tr${m.brk && +m.brk===h.y?' style="border-top:3px solid var(--amber)"':''}><td>${h.y}</td><td class="small muted">${h.meta?h.meta.code:''}</td><td class="n">${h.meta?wt(h.meta):''}</td><td class="n">${h.meta?esc(h.c4??''):'<span class="muted small">not rated</span>'}</td><td class="n">${h.med!=null?+h.med.toFixed(1):''}</td></tr>`).join('')}
+    <div class="card"><h3>Weight and cut points by year</h3><div class="sub">Weight in the overall rating and the lowest score for each star (highest score for lower-is-better measures)</div>
+    <table><thead><tr><th>Year</th><th class="n">Weight</th><th class="n">2</th><th class="n">3</th><th class="n">4</th><th class="n">5</th><th class="n">Median</th></tr></thead><tbody>
+    ${hist.map(h=>`<tr${m.brk && +m.brk===h.y?' style="border-top:3px solid var(--amber)"':''}><td>${h.y} <span class="small muted">${h.meta?h.meta.code:''}</span></td>${h.meta?`<td class="n">${wt(h.meta)}</td>${['2','3','4','5'].map(s=>`<td class="n">${h.meta.th&&h.meta.th[s]?h.meta.th[s][0]:''}</td>`).join('')}`:'<td class="n muted small" colspan="5">not rated</td>'}<td class="n">${h.med!=null?+h.med.toFixed(1):''}</td></tr>`).join('')}
     </tbody></table></div>
   </div>
   <div class="card" style="margin-top:16px"><h3>Top performers</h3><div class="sub">Highest-scoring MA contracts on this measure in 2027</div>
   <table><thead><tr><th>Contract</th><th>Parent</th><th class="n">Score</th><th class="n">Star</th><th class="n">Members</th></tr></thead><tbody>
   ${top.map(x=>`<tr><td><a href="#contract" data-c="${x.c.id}">${x.c.id}</a> <span class="small muted">${esc(nm(x.c))}</span></td><td class="small">${esc(x.c.parent)}</td><td class="n">${esc(x.sc)}</td><td class="n">${pill(x.st)}</td><td class="n">${fmt(x.c.enr)}</td></tr>`).join('')}
   </tbody></table></div>`;
+};
+
+V.cuts = () => {
+  const yrs = YEARS.slice(-5), c4 = (y, m) => { const x = mMeta(y, m.key); return x && x.th && x.th['4'] ? x.th['4'][0] : null; };
+  const rows = M.filter(SRC_GROUPS[S.src]).map(m => {
+    const comp = y => !m.brk || y >= +m.brk;   // comparable with 2027 only on or after the specification change
+    const v = Object.fromEntries(YEARS.map(y => [y, c4(y, m)]));
+    const ch = (a, b) => v[a]!=null && v[b]!=null && comp(a) ? (m.lower_better ? -(v[b]-v[a]) : v[b]-v[a]) : null;  // positive = harder
+    return {m, v, comp, d1: ch(2026, 2027), d3: ch(2024, 2027)};
+  });
+  const r1 = rows.filter(r => r.d1 != null), harder = r1.filter(r => r.d1 > 0), easier = r1.filter(r => r.d1 < 0);
+  const top = harder.slice().sort((a,b) => b.d1 - a.d1).slice(0,3);
+  const fmtd = (d, m) => d == null ? '' : d === 0 ? '<span class="muted">no change</span>' : `<span style="color:${d>0?'#b4471f':'var(--teal-dark)'};font-weight:600">${d>0?'+':''}${+d.toFixed(1)}${unit(m)}</span>`;
+  return `<p class="takeaway">From 2026 to 2027, the score needed for 4 stars rose on <b>${harder.length} of ${r1.length}</b> measures and fell on ${easier.length}.${top.length?` The biggest increases: ${top.map(r=>`${esc(r.m.name)} (${+r.d1.toFixed(1)}${unit(r.m)})`).join(', ')}.`:''}</p>
+  <div class="note"><b>Reading this table.</b> Values are the lowest score that earned 4 stars (the highest score, for lower-is-better measures). Changes are shown so that a positive number always means <i>harder</i>: more performance needed for the same star. For non-CAHPS measures, CMS removes outlier contracts before setting cut points (Tukey outlier deletion) and caps each cut point's move at 5 percentage points a year (guardrails), per the Technical Notes. Guardrails do not apply to the improvement measures, or to new measures and measures returning after a substantive specification change during their first three years in the ratings. Years before a specification change are greyed and excluded from the change columns. CAHPS cut points are base thresholds only.</div>
+  <div class="controls chips">${Object.keys(SRC_GROUPS).map(k=>`<button class="chip ${k===S.src?'on':''}" data-src="${k}">${k}</button>`).join('')}</div>
+  <div class="card"><h3>4 star cut points, 2023 through 2027</h3><div class="sub">Change columns: positive means harder to reach 4 stars</div>
+  <div class="scroll"><table><thead><tr><th>Measure</th><th>Source</th>${yrs.map(y=>`<th class="n">${y}</th>`).join('')}<th class="n">Change, 2026 to 2027</th><th class="n">Change, 2024 to 2027</th></tr></thead><tbody>
+  ${rows.map(r=>`<tr><td><a href="#measure" data-m="${r.m.key}">${esc(r.m.name)}</a>${r.m.lower_better?' <span class="small muted">(lower is better)</span>':''}</td><td class="small muted">${esc(r.m.source)}</td>${yrs.map(y=>`<td class="n${r.comp(y)?'':' muted'}" ${r.comp(y)?'':'data-tip="Before a specification change; not comparable with 2027"'}>${r.v[y]??''}</td>`).join('')}<td class="n">${fmtd(r.d1, r.m)}</td><td class="n">${fmtd(r.d3, r.m)}</td></tr>`).join('')}
+  </tbody></table></div></div>`;
 };
 
 V.bonus = () => {
@@ -365,6 +431,9 @@ V.methods = () => `<div class="card doc">
   <li><b>Stable measure keys.</b> CMS reassigns measure codes from year to year (C07 meant different measures in 2020 and 2027), so every measure maps to one TRYNYTY key across years.</li>
   <li><b>Measure history.</b> Every year's measure stars and scores are linked through the stable keys. Where CMS changed a measure's specification, an amber line marks the break; values on either side are not directly comparable. Years when a measure was display only appear as hatched cells.</li>
   <li><b>Weights</b> are the MA-PD overall weights from each year's Technical Notes. New and re-introduced measures carry a weight of 1 in their first year, by CMS rule, which is why some weights rise the following year.</li>
+  <li><b>Peer comparison.</b> Five peer groups: all MA contracts, the same parent organization, local competitors (contracts with members in the selected contract's five largest counties, by October 2026 enrollment), the same SNP status, and similar size (half to twice the enrollment). Percentile is the share of scored peers the contract outscores, with ties counted half and lower-is-better measures flipped. Groups with fewer than 5 scored peers are not ranked.</li>
+  <li><b>Cut point trends</b> use the 4 star threshold from each year's data tables. Changes are signed so positive always means harder. Years before a specification change are excluded. CMS caps non-CAHPS cut point moves at 5 percentage points a year (guardrails), except for improvement measures and for new or returning measures in their first three years.</li>
+  <li><b>CAHPS distance</b> is shown as indicative: it uses the base cut point only. CMS also applies significance and reliability tests, so a contract can sit at or above a base cut point and still receive the lower star.</li>
   <li><b>Downloads.</b> Every table has a Download CSV button. Files include the rows shown and a source line.</li>
   <li><b>Distance to the next star</b> is the score change needed to reach the next 2027 cut point. Displayed scores are rounded, so contracts within a fraction of a point may already be at the edge. It is not shown for CAHPS measures, whose stars also depend on significance tests.</li>
   <li><b>Bonus value</b> is (5% bonus rate minus 0% bonus rate) times members times 12, summed over a contract's counties, at a risk score of 1.0. The 2027 ratebook stands in for 2028 rates until CMS publishes them in April 2027.</li>
@@ -375,6 +444,7 @@ V.methods = () => `<div class="card doc">
   <li>2027 rated contracts and the share at 4+ Stars match the CMS fact sheet: 508 contracts, 188 (37%) at 4 or more, 15 at five stars.</li>
   <li>Recomputing non-CAHPS stars from scores and cut points matches CMS on 99.2% of contract-measure pairs for 2027; the rest reflect rounded displayed scores.</li>
   <li>The same check for earlier years: 97.6% (2019), 99.4% (2020), 99.6% (2021), 95.1% (2022), 98.3% (2023), 99.4% (2024), 99.8% (2025), 98.6% (2026). The lower 2022 and 2023 rates are expected: under CMS's extreme and uncontrollable circumstances policy, contracts in disaster areas, which during COVID-19 meant most contracts, kept the higher of their current or prior year star on many measures.</li>
+  <li>Cut points loaded from the data tables match CMS's published Cut Point Trend reports (spot check, 2021 through 2024; for example Breast Cancer Screening 4 star thresholds of 76, 69, 70 and 71).</li>
   <li>Every rated measure in every year from 2019 through 2027 has a weight in the Technical Notes (395 of 395 measure-years).</li></ul>
   <h2>Glossary</h2><ul>
   <li><b>QBP:</b> quality bonus payment, a 5% increase to the county benchmark for contracts rated 4 Stars or higher (10% in qualifying counties), paid two years after the rating.</li>
@@ -382,6 +452,7 @@ V.methods = () => `<div class="card doc">
   <li><b>Benchmark cap:</b> a limit that can hold a county's bonus rate at the non-bonus rate.</li>
   <li><b>CAHPS, HOS, HEDIS, PDE:</b> member experience survey, Health Outcomes Survey, clinical quality measures, and Part D prescription drug event data.</li></ul>
   <h2>Release notes</h2><ul>
+  <li>Beta 1.2 (November 2026): peer comparison in the contract profile (five peer groups, percentiles and peer medians), a Cut point trends tab, full cut point history in the measure explorer, and indicative CAHPS distance to the next star.</li>
   <li>Beta 1.1 (November 2026): measure-level history for 2019 through 2027 (star heatmap by contract, score trends with the 4 star cut point and specification-change markers), measure weights for every year, and CSV downloads on every table.</li>
   <li>Beta 1.0 (November 4, 2026): first release with 2027 Star Ratings, October 2026 enrollment and the 2027 ratebook.</li></ul>
 </div>`;
@@ -400,6 +471,7 @@ document.addEventListener('click', e => {
   const a = e.target.closest('[data-c]'); if (a) { S.contract = a.dataset.c; }
   const mm = e.target.closest('[data-m]'); if (mm) { S.measure = mm.dataset.m; }
   const s = e.target.closest('[data-src]'); if (s) { S.src = s.dataset.src; render(); }
+  const pe = e.target.closest('[data-peer]'); if (pe) { S.peer = pe.dataset.peer; render(); }
   if (e.target.id === 'sortgap') { S.sort = S.sort === 'gap' ? null : 'gap'; render(); }
   if (e.target.id === 'sortw') { S.sort = S.sort === 'w' ? null : 'w'; render(); }
   const l = e.target.closest('[data-lens]'); if (l) { S.lens = l.dataset.lens; location.hash = S.lens === 'plan' ? 'contract' : 'market'; render(); }
