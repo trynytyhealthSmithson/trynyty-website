@@ -57,6 +57,30 @@ tr:hover td{background:#fafcfe}
 .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 select,input[type=text]{font:500 13px var(--sans);padding:8px 10px;border:1px solid var(--slate-light);border-radius:var(--r);background:#fff;color:var(--ink)}
 input[type=text]{min-width:360px}
+.pk{position:relative;flex:1 1 520px;max-width:760px}
+.pk-cur{display:flex;align-items:center;gap:10px;border:1px solid var(--slate-light);border-radius:var(--r);background:#fff;padding:6px 6px 6px 12px}
+.pk-cur .pk-who{flex:1;min-width:0}
+.pk-cur .pk-id{font:700 13px var(--sans);color:var(--navy)}
+.pk-cur .pk-nm{font:500 13px var(--sans);color:var(--ink)}
+.pk-cur .pk-meta{font-size:11.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk input[type=text]{min-width:0;width:100%;box-sizing:border-box}
+.pk-pop{position:absolute;z-index:40;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid var(--slate-light);border-radius:var(--r);box-shadow:0 10px 30px rgba(11,24,41,.16);padding:10px}
+.pk-pop[hidden]{display:none}
+.pk-f{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.pk-f select{padding:5px 8px;font-size:12px}
+.pk-list{max-height:340px;overflow:auto;border-top:1px solid #eef1f6}
+.pk-row{display:grid;grid-template-columns:64px 1fr auto auto;gap:10px;align-items:center;padding:7px 8px;cursor:pointer;border-bottom:1px solid #f3f5f9;font-size:12.5px}
+.pk-row:hover,.pk-row.hl{background:var(--teal-light)}
+.pk-row .i{font-weight:700;color:var(--navy)}
+.pk-row .p{font-size:11.5px;color:var(--ink-2)}
+.pk-row .r{text-align:right;white-space:nowrap}
+.pk-row .e{text-align:right;color:var(--ink-2);white-space:nowrap;min-width:84px}
+.pk-empty{padding:14px 8px;color:var(--ink-2);font-size:12.5px}
+.pk-hint{font-size:11.5px;color:var(--ink-2)}
+.kpi .v .d{font:700 14px var(--sans);margin-left:8px;vertical-align:middle}
+.kpi .s2{font-size:12px;color:var(--ink-2);margin-top:6px}
+.gauge{height:6px;background:#eef1f6;border-radius:3px;margin-top:8px;position:relative;overflow:hidden}
+.gauge i{position:absolute;left:0;top:0;bottom:0;background:var(--teal);border-radius:3px}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font:600 12px var(--sans);border:1px solid var(--slate-light);background:#fff;border-radius:999px;padding:5px 11px;cursor:pointer;color:var(--ink-2)}
 .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
@@ -353,14 +377,64 @@ function peerCard(c, ms) {
 }
 const x_ok = v => isFinite(v);
 
+// ---- Plan picker: searchable list with plan type, parent and quick-pick filters (shared by every contract view)
+const isMAPD = c => num((c.hist['2027']||{}).d) != null;
+const isSNP = c => (c.snp||'No') !== 'No';
+let BASEQ = null;
+const baseQ = id => { if (!BASEQ) { BASEQ = {}; rated.forEach(x => { const r = rateContract(x, starsOf(x)); BASEQ[x.id] = r.q; }); } return BASEQ[id]; };
+const nextHalfInfo = q => { if (q == null) return null; const R = rnd2(q); if (R >= 5) return null; const n = R + .5; return {next: n, at: n - .25, short: (n - .25) - q}; };
+const PARENTS = (() => { const t = {}; active.forEach(c => { const k = c.parent || 'Unknown'; t[k] = t[k] || {n: 0, e: 0}; t[k].n++; t[k].e += c.enr || 0; }); return Object.entries(t).sort((a,b) => b[1].e - a[1].e); })();
+const PK = {q: '', type: 'all', parent: '', mode: 'enr', hl: 0, open: false};
+const PK_MODES = {
+  enr:   {label: 'Largest plans', tip: 'Sorted by October 2026 enrollment'},
+  bonus: {label: 'Just under the 4 Star bonus line', tip: 'Rated 3.5 Stars, sorted by how little unrounded score they need to reach 3.750 (4 Stars)'},
+  near:  {label: 'Closest to the next half star', tip: 'Any rating, sorted by the unrounded score still needed to round up to the next half star'},
+};
+function pkPool(simOnly) {
+  let L = (simOnly ? rated.filter(c => c.m) : active).slice();
+  if (PK.type === 'mapd') L = L.filter(isMAPD); else if (PK.type === 'maonly') L = L.filter(c => !isMAPD(c)); else if (PK.type === 'snp') L = L.filter(isSNP);
+  if (PK.parent) L = L.filter(c => (c.parent || 'Unknown') === PK.parent);
+  const q = PK.q.trim().toLowerCase();
+  if (q) { const ws = q.split(/\s+/); L = L.filter(c => { const h = `${c.id} ${nm(c)} ${c.name} ${c.parent} ${c.org}`.toLowerCase(); return ws.every(w => h.includes(w)); });
+    L.sort((a,b) => (b.id.toLowerCase().startsWith(q) - a.id.toLowerCase().startsWith(q)) || (b.enr - a.enr)); return L; }
+  if (PK.mode === 'bonus') return L.filter(c => qbp(c) === 3.5 && baseQ(c.id) != null).sort((a,b) => baseQ(b.id) - baseQ(a.id));
+  if (PK.mode === 'near') return L.filter(c => nextHalfInfo(baseQ(c.id))).sort((a,b) => nextHalfInfo(baseQ(a.id)).short - nextHalfInfo(baseQ(b.id)).short);
+  return L.sort((a,b) => b.enr - a.enr);
+}
+function pkRows(simOnly) {
+  const L = pkPool(simOnly), shown = L.slice(0, 60);
+  if (!shown.length) return '<div class="pk-empty">No contracts match. Try fewer words or clear the filters.</div>';
+  PK.hl = Math.min(PK.hl, shown.length - 1);
+  return shown.map((c, j) => { const bq = baseQ(c.id), nh = nextHalfInfo(bq), r = qbp(c);
+    const extra = (PK.mode !== 'enr' && !PK.q.trim() && nh) ? `<span class="small muted">${bq.toFixed(3)}, needs +${nh.short.toFixed(3)}</span>` : (bq != null ? `<span class="small muted">${bq.toFixed(3)}</span>` : '');
+    return `<div class="pk-row ${j===PK.hl?'hl':''}" data-pick="${c.id}"><span class="i">${c.id}</span><span><span>${esc(nm(c))}</span><br><span class="p">${esc(c.parent)}${isSNP(c)?' · SNP':''} · ${isMAPD(c)?'MA-PD':'MA-only'}</span></span><span class="r">${r!=null?pill(r):'<span class="muted small">not rated</span>'} ${extra}</span><span class="e">${fmt(c.enr)}</span></div>`; }).join('')
+    + (L.length > shown.length ? `<div class="pk-empty">Showing 60 of ${L.length}. Type to narrow the list.</div>` : '');
+}
+function picker(c, o = {}) {
+  const sim = !!o.sim, r = qbp(c);
+  return `<div class="pk" data-sim="${sim?1:''}">
+    <div class="pk-cur"><div class="pk-who"><span class="small muted">${esc(o.label || 'Contract')}:</span> <span class="pk-id">${c.id}</span> <span class="pk-nm">${esc(nm(c))}</span>
+      <div class="pk-meta">${esc(c.parent)} · ${isMAPD(c)?'MA-PD':'MA-only'}${isSNP(c)?' · SNP':''} · ${fmt(c.enr)} members · 2027 rating ${r!=null?r+' Stars':'not rated'}</div></div>
+      <button class="chip" id="pkopen" type="button">Change plan</button></div>
+    <div class="pk-pop" ${PK.open?'':'hidden'}>
+      <input type="text" id="pkq" placeholder="Type a contract ID, plan name or parent organization" autocomplete="off" value="${esc(PK.q)}">
+      <div class="pk-f"><span class="pk-hint">Plan type</span>${[['all','All'],['mapd','MA-PD'],['maonly','MA-only'],['snp','SNP']].map(([k,l]) => `<button class="chip ${PK.type===k?'on':''}" type="button" data-pkt="${k}">${l}</button>`).join('')}
+        <select id="pkpar"><option value="">All parent organizations</option>${PARENTS.map(([p,v]) => `<option value="${esc(p)}" ${PK.parent===p?'selected':''}>${esc(p)} (${v.n})</option>`).join('')}</select></div>
+      <div class="pk-f"><span class="pk-hint">Quick picks</span>${Object.entries(PK_MODES).map(([k,m]) => `<button class="chip ${PK.mode===k&&!PK.q.trim()?'on':''}" type="button" data-pkm="${k}" data-tip="${esc(m.tip)}">${m.label}</button>`).join('')}</div>
+      <div class="pk-list">${pkRows(sim)}</div>
+      <div class="pk-hint" style="margin-top:6px">Score column is the unrounded ${sim?'2027 rating our engine calculates':'2027 rating'}; members are October 2026. Use the arrow keys and Enter, or click a row.</div>
+    </div></div>`;
+}
+const pkRefresh = (focus) => { const el = document.querySelector('.pk'); if (!el) return; if (focus) { const qi = el.querySelector('#pkq'); qi && qi.focus(); } const L = el.querySelector('.pk-list'); if (L) L.innerHTML = pkRows(!!el.dataset.sim); el.querySelectorAll('[data-pkm]').forEach(b => b.classList.toggle('on', b.dataset.pkm === PK.mode && !PK.q.trim())); el.querySelectorAll('[data-pkt]').forEach(b => b.classList.toggle('on', b.dataset.pkt === PK.type)); };
+const pkPick = id => { if (!byId[id]) return; S.contract = id; PK.open = false; PK.q = ''; PK.hl = 0; render(); };
+
 V.contract = () => {
   const c = byId[S.contract] || rated[0];
-  const opts = active.slice().sort((a,b)=>b.enr-a.enr).map(c=>`<option value="${c.id} · ${esc(nm(c))} (${esc(c.parent)})">`).join('');
   const hist = ['c','d','o'].map((k,j)=>({name:['Part C summary','Part D summary','Overall'][j], color:['var(--teal)','#ef9a4a','var(--navy)'][j], w:j==2?3.5:2, dash:j<2, vals: YEARS.map(y=>num((c.hist[y]||{})[k]))}));
   const ms = M.map((m,i)=>({m, i, st: c.m ? c.m[i][0] : null, sc: c.m ? c.m[i][1] : 'No data', gap: c.m ? gapTo(m, c.m[i][0], c.m[i][1]) : null, cg: c.m ? gapCahps(m, c.m[i][0], c.m[i][1]) : null})).filter(r=>SRC_GROUPS[S.src](r.m));
   const sorted = S.sort==='gap' ? ms.slice().sort((a,b)=>(a.gap??a.cg??1e9)-(b.gap??b.cg??1e9)) : S.sort==='w' ? ms.slice().sort((a,b)=>(b.m.w||0)-(a.m.w||0)) : ms;
   const o = ov(c), close = ms.filter(r=>r.gap!=null && r.gap>=0 && r.gap<=2 && unit(r.m)).length;
-  return `<div class="controls"><input type="text" id="cs" list="cl" placeholder="Search a contract by ID, name or parent"><datalist id="cl">${opts}</datalist><span class="small muted">${active.length} MA contracts in the 2027 file</span></div>
+  return `<div class="controls">${picker(c)}</div>
   <p class="takeaway">${esc(nm(c))} (${c.id}) is rated <b>${o!=null?o+' Stars':'not rated'}</b> overall for 2027${o!=null&&ov(c,'2026')!=null?`, ${o>ov(c,'2026')?'up':o<ov(c,'2026')?'down':'unchanged'} from ${ov(c,'2026')} in 2026`:''}; ${close} measures sit within 2 points of the next star.</p>
   <div class="grid g32">
     <div class="card"><h3>Star history, 2019 through 2027</h3><div class="sub">${esc(c.parent)} · ${esc(c.org)} · ${fmt(c.enr)} members (October 2026)</div>${lineChart(hist,{ymin:1,ymax:5,ystep:1})}</div>
@@ -424,7 +498,8 @@ V.measure = () => {
 };
 
 V.sim = () => {
-  const c = byId[S.contract] || rated[0];
+  const c0 = byId[S.contract], c = c0 && c0.m && baseQ(c0.id) != null ? c0 : rated.filter(x => x.m)[0];
+  const swapped = c0 && c0 !== c;
   if (!S.sim || S.sim.id !== c.id) S.sim = {id: c.id, stars: starsOf(c)};
   const base = rateContract(c, starsOf(c)), cur = rateContract(c, S.sim.stars);
   const pubQ = qbp(c), repro = base.Q, ok = pubQ != null && repro === pubQ;
@@ -435,17 +510,21 @@ V.sim = () => {
     let lift = null; if (s != null && s < 5 && !IMPC.has(m.code)) { const t = {...S.sim.stars, [m.code]: s+1}; const r = rateContract(c, t); if (r.q != null && cur.q != null) lift = r.q - cur.q; }
     return {m, i, s, orig, lift, sc: c.m ? c.m[i][1] : '', gap: c.m ? gapTo(m, orig, c.m[i][1]) : null}; }).filter(r => SRC_GROUPS[S.src](r.m));
   const sorted = S.sort === 'lift' ? rows.slice().sort((a,b) => (b.lift ?? -1) - (a.lift ?? -1)) : rows;
-  const opts = active.slice().sort((a,b)=>b.enr-a.enr).map(x=>`<option value="${x.id} · ${esc(nm(x))} (${esc(x.parent)})">`).join('');
   const lbl = cur.mapd ? 'overall' : 'Part C summary';
   const dq = cur.Q != null && base.Q != null ? cur.Q - base.Q : 0;
-  return `<div class="controls"><input type="text" id="cs" list="cl" placeholder="Search a contract by ID, name or parent"><datalist id="cl">${opts}</datalist>
-    <button class="chip" id="simreset" ${changed?'':'disabled'}>Reset to 2027 stars</button>${cur.Q!=null&&cur.Q<5?`<button class="chip" id="simpath" data-tip="Adds one star at a time to the measures with the largest lift (ties go to the measure closest to its next cut point) until the rating reaches the next half star. A starting point for discussion, not a plan.">Suggest a path to ${nextHalf} Stars</button>`:''}<span class="small muted">${changed} measure${changed===1?'':'s'} changed</span></div>
-  <p class="takeaway">${esc(nm(c))} (${c.id}): with the stars below, the ${lbl} rating would be <b>${cur.Q ?? 'n/a'} Stars</b>${dq?` (${dq>0?'up':'down'} from ${base.Q})`:''}. ${cur.Q!=null&&cur.Q<5?`The unrounded score is ${cur.q.toFixed(3)} (2027 actual: ${base.q.toFixed(3)}); ${nextHalf} Stars starts at ${need.toFixed(2)}.`:''}</p>
+  const dqq = cur.q != null && base.q != null && Math.abs(cur.q - base.q) >= .0005 ? cur.q - base.q : 0, nh = nextHalfInfo(cur.q);
+  return `<div class="controls">${picker(c, {sim: true, label: 'Simulating'})}</div>
+  <div class="controls"><button class="chip" id="simreset" ${changed?'':'disabled'}>Reset to 2027 stars</button>${cur.Q!=null&&cur.Q<5?`<button class="chip" id="simpath" data-tip="Adds one star at a time to the measures with the largest lift (ties go to the measure closest to its next cut point) until the rating reaches the next half star. A starting point for discussion, not a plan.">Suggest a path to ${nextHalf} Stars</button>`:''}<span class="small muted">${changed} measure${changed===1?'':'s'} changed</span></div>
+  <p class="takeaway">${esc(nm(c))} (${c.id}): with the stars below, the unrounded ${lbl} score would be <b>${cur.q!=null?cur.q.toFixed(3):'n/a'}</b>${cur.q!=null&&base.q!=null&&Math.abs(cur.q-base.q)>=.0005?` (${cur.q>base.q?'up':'down'} ${Math.abs(cur.q-base.q).toFixed(3)} from ${base.q.toFixed(3)})`:''}, which rounds to <b>${cur.Q ?? 'n/a'} Stars</b>${dq?` (${dq>0?'up':'down'} from ${base.Q})`:''}. ${nh?`${nh.next} Stars starts at ${nh.at.toFixed(3)}, ${nh.short.toFixed(3)} away.`:cur.Q===5?'That is the top rating.':''}</p>
+  ${swapped ? `<div class="note">${esc(c0.id)} has no 2027 measure stars to simulate, so the simulator is showing ${c.id}. Pick another plan above.</div>` : ''}
   ${!ok ? `<div class="note"><b>Caution.</b> Our calculation gives ${repro ?? 'no rating'} for this contract, but CMS published ${pubQ ?? 'no rating'}. This usually means a disaster adjustment or another special rule applies, so treat the simulation as approximate.</div>` : ''}
   <div class="grid g4">
-    <div class="card kpi"><div class="v">${pubQ ?? 'n/a'}</div><div class="l">CMS published 2027 ${lbl} rating</div>${srcTag('2027 Summary Ratings data table')}</div>
-    <div class="card kpi"><div class="v">${cur.Q ?? 'n/a'}</div><div class="l">simulated ${lbl} rating<span class="est">estimate</span></div>${srcTag('Recalculated with CMS 2027 weights, reward factor thresholds, CAI and improvement measure rules')}</div>
-    <div class="card kpi"><div class="v">${cur.Q!=null ? (cur.Q>=4?'<span style="color:var(--teal-dark)">Earns</span>':'Misses') : 'n/a'}</div><div class="l">2028 quality bonus at the simulated rating${base.Q!=null && (base.Q>=4)!==(cur.Q>=4) ? ` (changed from ${base.Q>=4?'earns':'misses'})` : ''}</div></div>
+    <div class="card kpi"><div class="v">${base.q!=null?base.q.toFixed(3):'n/a'}</div><div class="l">2027 ${lbl} score, unrounded</div>
+      <div class="s2">Rounds to <b>${base.Q ?? 'n/a'} Stars</b>; CMS published ${pubQ!=null?pubQ+' Stars':'no rating'}</div>${srcTag('Our recalculation of the 2027 rating from the published measure stars, CMS weights, reward factor, CAI and improvement measure rules. CMS rounds this score to the nearest half star.')}</div>
+    <div class="card kpi" style="${dq>0?'box-shadow:inset 0 0 0 2px var(--teal)':dq<0?'box-shadow:inset 0 0 0 2px #ef9a4a':''}"><div class="v">${cur.q!=null?cur.q.toFixed(3):'n/a'}${dqq?`<span class="d" style="color:${dqq>0?'var(--teal-dark)':'#b4471f'}">${dqq>0?'+':'−'}${Math.abs(dqq).toFixed(3)}</span>`:''}</div><div class="l">simulated ${lbl} score, unrounded<span class="est">estimate</span></div>
+      <div class="s2">Rounds to <b>${cur.Q ?? 'n/a'} Stars</b>${dq?` (${dq>0?'up':'down'} from ${base.Q})`:''}${nh?`; ${nh.short.toFixed(3)} short of ${nh.next} Stars at ${nh.at.toFixed(3)}`:''}</div>
+      ${nh?`<div class="gauge" data-tip="Position between the ${nh.next-.5} Star floor (${(nh.at-.5).toFixed(3)}) and the ${nh.next} Star floor (${nh.at.toFixed(3)})"><i style="width:${Math.max(0,Math.min(100,(cur.q-(nh.at-.5))/.5*100)).toFixed(1)}%"></i></div>`:''}</div>
+    <div class="card kpi"><div class="v">${cur.Q!=null ? (cur.Q>=4?'<span style="color:var(--teal-dark)">Earns</span>':'Misses') : 'n/a'}</div><div class="l">2028 quality bonus at the simulated rating${base.Q!=null && (base.Q>=4)!==(cur.Q>=4) ? ` (changed from ${base.Q>=4?'earns':'misses'})` : ''}</div>${cur.Q!=null&&cur.Q<4&&cur.q!=null?`<div class="s2">The bonus needs 4 Stars, a score of 3.750 or more: ${(3.75-cur.q).toFixed(3)} to go</div>`:''}</div>
     <div class="card kpi"><div class="v">${usd(cur.Q>=4 ? bonus : 0)}</div><div class="l">annual benchmark bonus at the simulated rating; rebate share ${pct(rebateShare(cur.Q))}<span class="est">estimate</span></div>${srcTag('Same method as Bonus at stake: 2027 ratebook, October 2026 enrollment, risk score 1.0')}</div>
   </div>
   <div class="card" style="margin-top:16px"><h3>Measure stars to simulate</h3><div class="sub">Use the buttons to move a measure's star. <b>Lift</b> is how much one more star on that measure would add to the unrounded ${lbl} score from where the simulation stands now; it accounts for weights, the reward factor and the improvement measure rule. Improvement measures are fixed because CMS calculates them from year-over-year change.</div>
@@ -498,9 +577,8 @@ V.hedis = () => {
     const ch = v != null && pv != null && !(x.brk||[]).includes(last) ? (x.lb ? pv - v : v - pv) : null;
     return {x, v, nat: x.nat[ly], med: vs.length ? median(vs) : null, pr: v != null ? pctRank(v, vs, x.lb) : null, ch, n: vs.length}; });
   const have = card.filter(r => r.v != null), top = have.filter(r => r.n >= 5).sort((a,b) => b.pr - a.pr);
-  const opts = active.slice().sort((a,b)=>b.enr-a.enr).map(x=>`<option value="${x.id} · ${esc(nm(x))} (${esc(x.parent)})">`).join('');
   return `<div class="controls"><select id="hsel">${HD.ind.map(x => `<option value="${x.k}" ${x.k===I.k?'selected':''}>${esc(x.code)}: ${esc(x.name)}${x.star?' (Star Ratings)':''}</option>`).join('')}</select>
-    <input type="text" id="cs" list="cl" placeholder="Search a contract by ID, name or parent"><datalist id="cl">${opts}</datalist></div>
+    ${picker(c)}</div>
   <p class="takeaway">${esc(I.name)}: the national MA rate was <b>${I.nat[ly] != null ? I.nat[ly].toFixed(1)+'%' : 'not published'}</b> in HEDIS ${last} (care delivered in ${last-1}). ${mine != null ? `${esc(nm(c))} (${c.id}) reported ${mine.toFixed(1)}%, at the <b>${ord(pr)} percentile</b> of ${vals.length} reporting MA contracts.` : `${esc(nm(c))} (${c.id}) did not report this measure in ${last}.`} ${I.lb ? 'Lower rates are better.' : 'Higher rates are better.'}</p>
   ${I.star ? `<div class="note"><b>Linked to the Star Ratings:</b> ${esc(I.star)}. HEDIS ${last} results feed the ${last+1} Star Ratings.</div>` : ''}
   <div class="grid g32">
@@ -508,7 +586,7 @@ V.hedis = () => {
     ${lineChart([{name:'National MA rate', vals: nat, color:'#ef9a4a', dash:true, w:2}, {name:'Median, MA contracts', vals: med, color:'var(--teal)'}, {name: c.id, vals: mc, color:'var(--navy)', w:3}], {xs: ys, ymin: lo, ymax: lo+step*4, ystep: step, yfmt: v => +(+v).toFixed(1), brk: I.brk})}</div>
     <div class="card"><h3>Distribution, HEDIS ${last}</h3><div class="sub">MA contracts by reported rate, in 10 point bands${mine!=null?`; ${esc(c.id)} highlighted`:''}</div>${barChart(bins, {h: 240})}</div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>HEDIS scorecard for ${esc(c.id)}, HEDIS ${last}</h3><div class="sub">${have.length} of ${HD.ind.length} indicators reported. Percentile is against all reporting MA contracts (lower-is-better indicators flipped). Change compares with HEDIS ${prevY} and is signed so positive means better.${top.length ? ` Strongest: ${top.slice(0,2).map(r=>esc(r.x.name)).join(' and ')}. Weakest: ${top.slice(-2).reverse().map(r=>esc(r.x.name)).join(' and ')}.` : ''}</div>
+  <div class="card" style="margin-top:16px"><h3>HEDIS scorecard for ${esc(c.id)}, HEDIS ${last}</h3><div class="sub">${have.length} of ${HD.ind.length} indicators reported. Percentile is against all reporting MA contracts (lower-is-better indicators flipped). Change compares with HEDIS ${prevY} and is signed so positive means better. Click an indicator name to show its trend and distribution at the top of the page.${top.length ? ` Strongest: ${top.slice(0,2).map(r=>esc(r.x.name)).join(' and ')}. Weakest: ${top.slice(-2).reverse().map(r=>esc(r.x.name)).join(' and ')}.` : ''}</div>
   <div class="scroll"><table><thead><tr><th>Indicator</th><th class="n">${esc(c.id)}</th><th class="n">National</th><th class="n">MA median</th><th class="n">Percentile</th><th class="n">Change vs ${prevY}</th><th class="n">Contracts reporting</th></tr></thead><tbody>
   ${card.map(r => `<tr><td><a href="#hedis" data-hi="${r.x.k}">${esc(r.x.name)}</a>${r.x.star?' <span class="src" data-tip="'+esc(r.x.star)+'">Star Ratings</span>':''}${r.x.lb?' <span class="small muted">(lower is better)</span>':''}</td><td class="n">${r.v!=null?r.v.toFixed(1):''}</td><td class="n">${r.nat!=null?r.nat.toFixed(1):''}</td><td class="n">${r.med!=null?(+r.med).toFixed(1):''}</td><td class="n" style="white-space:nowrap">${r.pr!=null&&r.n>=5?`<span class="pbar"><i style="width:${Math.round(r.pr*100)}%"></i></span> ${ord(r.pr)}`:''}</td><td class="n">${r.ch!=null?`<span style="color:${r.ch>0?'var(--teal-dark)':r.ch<0?'#b4471f':'inherit'};font-weight:600">${r.ch>0?'+':''}${r.ch.toFixed(1)}</span>`:''}</td><td class="n">${r.n}</td></tr>`).join('')}
   </tbody></table></div></div>
@@ -594,6 +672,7 @@ V.methods = () => `<div class="card doc">
   <li><b>Benchmark cap:</b> a limit that can hold a county's bonus rate at the non-bonus rate.</li>
   <li><b>CAHPS, HOS, HEDIS, PDE:</b> member experience survey, Health Outcomes Survey, clinical quality measures, and Part D prescription drug event data.</li></ul>
   <h2>Release notes</h2><ul>
+  <li>Beta 1.5 (November 2026): Rating Simulator shows the unrounded current and simulated scores to three decimals, with the distance to the next half star; a new plan picker on every contract view with search, plan type (MA-PD, MA-only, SNP) and parent organization filters, and quick picks for the largest plans, plans just under the 4 Star bonus line and plans closest to the next half star. HEDIS scorecard indicator links now load that indicator's charts.</li>
   <li>Beta 1.4 (November 2026): HEDIS explorer with 49 HEDIS indicators from the CMS public use files (2019 and 2021 through 2025): national and contract trends, distributions, and a full HEDIS scorecard with percentiles and year-over-year change for any contract.</li>
   <li>Beta 1.3 (November 2026): Rating simulator. Move measure stars and see the recalculated summary and overall ratings, 2028 bonus status and bonus dollars; lift per star for every measure; a suggested path to the next half star.</li>
   <li>Beta 1.2 (November 2026): peer comparison in the contract profile (five peer groups, percentiles and peer medians), a Cut point trends tab, full cut point history in the measure explorer, and indicative CAHPS distance to the next star.</li>
@@ -615,7 +694,12 @@ document.addEventListener('click', e => {
   const a = e.target.closest('[data-c]'); if (a) { S.contract = a.dataset.c; }
   const mm = e.target.closest('[data-m]'); if (mm) { S.measure = mm.dataset.m; }
   const s = e.target.closest('[data-src]'); if (s) { S.src = s.dataset.src; render(); }
-  const hk = e.target.closest('[data-hi]'); if (hk) { S.hi = hk.dataset.hi; }
+  const hk = e.target.closest('[data-hi]'); if (hk) { e.preventDefault(); S.hi = hk.dataset.hi; if (location.hash !== '#hedis') location.hash = 'hedis'; else render(); window.scrollTo({top: 0, behavior: 'smooth'}); return; }
+  const pkp = e.target.closest('[data-pick]'); if (pkp) { pkPick(pkp.dataset.pick); return; }
+  if (e.target.id === 'pkopen') { PK.open = !PK.open; const pop = document.querySelector('.pk-pop'); if (pop) { pop.hidden = !PK.open; if (PK.open) { pkRefresh(); document.getElementById('pkq').focus(); } } return; }
+  const pkt = e.target.closest('[data-pkt]'); if (pkt) { PK.type = pkt.dataset.pkt; PK.hl = 0; pkRefresh(true); return; }
+  const pkm = e.target.closest('[data-pkm]'); if (pkm) { PK.mode = pkm.dataset.pkm; PK.q = ''; const qi = document.getElementById('pkq'); if (qi) qi.value = ''; PK.hl = 0; pkRefresh(true); return; }
+  if (PK.open && !e.target.closest('.pk')) { PK.open = false; const pop = document.querySelector('.pk-pop'); if (pop) pop.hidden = true; }
   const pe = e.target.closest('[data-peer]'); if (pe) { S.peer = pe.dataset.peer; render(); }
   if (e.target.id === 'sortgap') { S.sort = S.sort === 'gap' ? null : 'gap'; render(); }
   const sm = e.target.closest('[data-sm]'); if (sm) { const k = sm.dataset.sm; S.sim.stars[k] = Math.max(1, Math.min(5, S.sim.stars[k] + (+sm.dataset.d))); render(); }
@@ -631,7 +715,15 @@ document.addEventListener('change', e => {
   if (e.target.id === 'ms') { S.measure = e.target.value; render(); }
   if (e.target.id === 'hsel') { S.hi = e.target.value; render(); }
   if (e.target.id === 'bc') { S.contract = e.target.value; render(); }
-  if (e.target.id === 'cs') { const id = e.target.value.split(' ')[0]; if (byId[id]) { S.contract = id; render(); } }
+  if (e.target.id === 'pkpar') { PK.parent = e.target.value; PK.hl = 0; pkRefresh(true); }
+});
+document.addEventListener('input', e => { if (e.target.id === 'pkq') { PK.q = e.target.value; PK.hl = 0; pkRefresh(); } });
+document.addEventListener('keydown', e => {
+  if (e.target.id !== 'pkq') return;
+  const rows = [...document.querySelectorAll('.pk-row')];
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); PK.hl = Math.max(0, Math.min(rows.length - 1, PK.hl + (e.key === 'ArrowDown' ? 1 : -1))); rows.forEach((r,j) => r.classList.toggle('hl', j === PK.hl)); rows[PK.hl] && rows[PK.hl].scrollIntoView({block: 'nearest'}); }
+  if (e.key === 'Enter' && rows[PK.hl]) { e.preventDefault(); pkPick(rows[PK.hl].dataset.pick); }
+  if (e.key === 'Escape') { PK.open = false; document.querySelector('.pk-pop').hidden = true; }
 });
 window.addEventListener('hashchange', render);
 render();
