@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — TRYNYTY health:enablement</title>
+  <title>Contact | TRYNYTY health:enablement</title>
   <meta name="description" content="Get in touch with TRYNYTY. Request a demo of the MSSP Explorer, ask about consulting engagements, or just start a conversation." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
-  <meta property="og:image" content="logo.png" />
+  <meta property="og:image" content="https://www.trynytyhealth.com/og-image.png" />
   <link rel="stylesheet" href="styles.css" />
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZG2KKV4BG"></script>
@@ -26,6 +26,12 @@
   </script>
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
+  <meta property="og:title" content="Contact | TRYNYTY health:enablement" />
+  <meta property="og:description" content="Get in touch with TRYNYTY. Request a demo of the MSSP Explorer, ask about consulting engagements, or just start a conversation." />
+  <meta property="og:url" content="https://www.trynytyhealth.com/contact" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TRYNYTY health:enablement" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body>
 
@@ -63,8 +69,8 @@
           <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px;">
             <div style="padding: 20px; background: var(--navy-mid); border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.07);">
               <div style="font-size: 11px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;">Most Common</div>
-              <div style="font-weight: 600; color: var(--white); margin-bottom: 6px;">MSSP Explorer Demo</div>
-              <div style="font-size: 13px; color: var(--slate-light);">See the tool in action with your own ACO data highlighted. We'll walk through the benchmarking views, quality measures, and peer comparisons most relevant to your organization.</div>
+              <div style="font-weight: 600; color: var(--white); margin-bottom: 6px;">Tool Walkthrough</div>
+              <div style="font-size: 13px; color: var(--slate-light);">See any of the six tools with your own organization pulled up: your ACO, health plan contract, hospital or physician group, and the peers that matter most to you.</div>
             </div>
             <div style="padding: 20px; background: var(--navy-mid); border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.07);">
               <div style="font-size: 11px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;">Consulting</div>
@@ -108,46 +114,55 @@
           <div class="form-sub">We'll follow up by email to set up a time to connect.</div>
           <form class="contact-form" action="https://formsubmit.co/Andrew@trynytyhealth.com" method="POST">
             <input type="hidden" name="_subject" value="TRYNYTY Website Inquiry" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://trynytyhealth.com/thanks.html" />
+                        <input type="hidden" name="_next" value="https://trynytyhealth.com/thanks.html" />
             <input type="hidden" name="_template" value="table" />
 
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">First Name *</label>
-                <input type="text" name="first_name" class="form-input" placeholder="Jane" required />
+                <label class="form-label" for="f-first_name">First Name *</label>
+                <input type="text" id="f-first_name" name="first_name" class="form-input" placeholder="Jane" required />
               </div>
               <div class="form-group">
-                <label class="form-label">Last Name *</label>
-                <input type="text" name="last_name" class="form-input" placeholder="Smith" required />
+                <label class="form-label" for="f-last_name">Last Name *</label>
+                <input type="text" id="f-last_name" name="last_name" class="form-input" placeholder="Smith" required />
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Email Address *</label>
-              <input type="email" name="email" class="form-input" placeholder="jane@healthsystem.org" required />
+              <label class="form-label" for="f-email">Email Address *</label>
+              <input type="email" id="f-email" name="email" class="form-input" placeholder="jane@healthsystem.org" required />
             </div>
 
             <div class="form-group">
-              <label class="form-label">Organization</label>
-              <input type="text" name="organization" class="form-input" placeholder="Your ACO, health system, or health plan" />
+              <label class="form-label" for="f-organization">Organization</label>
+              <input type="text" id="f-organization" name="organization" class="form-input" placeholder="Your ACO, health system, or health plan" />
             </div>
 
             <div class="form-group">
-              <label class="form-label">I'm interested in</label>
-              <select name="interest" class="form-select">
+              <label class="form-label" for="f-interest">I'm interested in</label>
+              <select id="f-interest" name="interest" class="form-select">
                 <option value="">Select one...</option>
-                <option value="demo">MSSP Explorer Demo</option>
-                <option value="consulting">Consulting Engagement</option>
-                <option value="custom-tool">Custom Analytics / Tool</option>
-                <option value="mailing-list">Joining the Mailing List</option>
+                <optgroup label="Tool walkthrough">
+                  <option value="demo-mssp">MSSP ACO Explorer</option>
+                  <option value="demo-reach">ACO REACH Explorer</option>
+                  <option value="demo-ma-quality">MA Quality Dashboard</option>
+                  <option value="demo-ma-enrollment">MA Enrollment Explorer</option>
+                  <option value="demo-hospital">Hospital Financial Explorer</option>
+                  <option value="demo-physician">Physician &amp; Practice Explorer</option>
+                </optgroup>
+                <option value="beta">Beta feedback or a data issue</option>
+                <option value="subscription">Subscriptions or team pricing</option>
+                <option value="consulting">Consulting: ACO, MA or contract strategy</option>
+                <option value="custom-tool">Custom analytics or a custom tool</option>
+                <option value="partnership">Partnership or data licensing</option>
+                <option value="mailing-list">Joining the mailing list</option>
                 <option value="other">Something Else</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Message</label>
-              <textarea name="message" class="form-textarea" placeholder="Tell us about your organization, what you're working on, or what questions you have..."></textarea>
+              <label class="form-label" for="f-message">Message</label>
+              <textarea id="f-message" name="message" class="form-textarea" placeholder="Tell us about your organization, what you're working on, or what questions you have..."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary form-submit">Send Message →</button>
@@ -181,6 +196,10 @@
             <div class="footer-col-title">Tools</div>
             <a href="https://mssppuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="mssp">MSSP ACO Explorer</a>
             <a href="https://reachpuf.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="reach">ACO REACH Explorer</a>
+            <a href="/ma-quality" class="explorer-launch" data-explorer="ma-quality">MA Quality Dashboard</a>
+            <a href="https://maenroll.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="ma-enrollment">MA Enrollment Explorer</a>
+            <a href="https://hospitals.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="hospitals">Hospital Financial Explorer</a>
+            <a href="https://physicians.trynytyhealth.com" target="_blank" class="explorer-launch" data-explorer="physicians">Physician &amp; Practice Explorer</a>
             <a href="tools.html">All Tools</a>
             <a href="blog.html">Insights</a>
           </div>
