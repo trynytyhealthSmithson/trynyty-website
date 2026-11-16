@@ -563,3 +563,13 @@ a { color: inherit; text-decoration: none; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
   .section-divider::before, .section-divider::after { flex-basis: 40px; }
 }
+
+/* Phone layout: collapse inline multi-column grids and let wide tables scroll */
+@media (max-width: 768px) {
+  div[style*="repeat(3, 1fr)"], div[style*="repeat(3,1fr)"], div[style*="repeat(2, 1fr)"],
+  div[style*="grid-template-columns: 1fr 380px"], div[style*="grid-template-columns: 1fr auto"],
+  div[style*="grid-template-columns: 1fr 280px"] { grid-template-columns: 1fr !important; }
+  div[style*="padding: 48px"] { padding: 28px !important; }
+  .btn { white-space: normal; max-width: 100%; text-align: center; }
+  .risk-table, .data-table, .hcc-table, .post-body table, article table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+}
