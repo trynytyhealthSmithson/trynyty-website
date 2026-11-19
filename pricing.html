@@ -29,6 +29,8 @@
   <style>
     .price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 48px 0; }
     .price-card { background: var(--navy-light, rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 32px; }
+    .price-grid, .price-card { scroll-margin-top: 110px; }
+    .price-card:target { border-color: rgba(32,178,170,0.8) !important; box-shadow: 0 0 0 2px rgba(32,178,170,0.25); }
     .price-card h3 { font-size: 1.4rem; margin-bottom: 8px; }
     .price-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.08); }
     .price-row b { font-family: var(--font-serif); font-weight: 400; font-size: 1.6rem; color: var(--teal); }
@@ -74,14 +76,14 @@
   </div>
 
   <div class="container" style="padding-bottom: 80px;">
-    <div class="price-grid">
-      <div class="price-card">
+    <div class="price-grid" id="plans">
+      <div class="price-card" id="one-explorer">
         <h3>One explorer</h3>
         <p style="color: var(--slate-light); margin-bottom: 16px;">MA Enrollment, Hospital Financial, or Physician &amp; Practice.</p>
         <div class="price-row"><span>1 user</span><b>$500 <small style="font-size: 0.9rem; color: var(--slate);">per year</small></b></div>
         <div class="price-row"><span>Team of up to 5 users</span><b>$1,500 <small style="font-size: 0.9rem; color: var(--slate);">per year</small></b></div>
       </div>
-      <div class="price-card" style="border-color: rgba(32,178,170,0.35);">
+      <div class="price-card" id="all-three" style="border-color: rgba(32,178,170,0.35);">
         <h3>All three explorers</h3>
         <p style="color: var(--slate-light); margin-bottom: 16px;">Plans, hospitals and physicians, linked across all three.</p>
         <div class="price-row"><span>1 user</span><b>$1,200 <small style="font-size: 0.9rem; color: var(--slate);">per year</small></b></div>
