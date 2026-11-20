@@ -42,6 +42,13 @@
     .free-row a { display: block; padding: 18px; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); color: var(--white); text-decoration: none; }
     .free-row a span { display: block; font-size: 13px; color: var(--slate); margin-top: 4px; }
     .faq h3 { font-size: 1.05rem; margin: 24px 0 6px; }
+    .buy { display: none; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .billing-on .buy { display: block; }
+    .buy select { width: 100%; padding: 10px 12px; margin-bottom: 12px; border-radius: var(--radius); background: var(--navy); color: var(--white); border: 1px solid rgba(255,255,255,0.2); font: inherit; }
+    .buy-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .buy-status { min-height: 20px; margin-top: 10px; font-size: 13px; color: var(--slate-light); }
+    .account-link { display: none; }
+    .billing-on .account-link { display: inline; }
     @media (max-width: 820px) { .price-grid, .free-row { grid-template-columns: 1fr; } }
   </style>
   <meta property="og:title" content="Pricing | TRYNYTY health:enablement" />
@@ -82,12 +89,31 @@
         <p style="color: var(--slate-light); margin-bottom: 16px;">MA Enrollment, Hospital Financial, or Physician &amp; Practice.</p>
         <div class="price-row"><span>1 user</span><b>$500 <small style="font-size: 0.9rem; color: var(--slate);">per year</small></b></div>
         <div class="price-row"><span>Team of up to 5 users</span><b>$1,500 <small style="font-size: 0.9rem; color: var(--slate);">per year</small></b></div>
+        <div class="buy">
+          <select id="buy-tool" aria-label="Choose an explorer">
+            <option value="ma">MA Enrollment Explorer</option>
+            <option value="hospital">Hospital Financial Explorer</option>
+            <option value="physician">Physician &amp; Practice Explorer</option>
+          </select>
+          <div class="buy-btns">
+            <button class="btn btn-primary" data-buy="one" data-seats="1">Buy for 1 user</button>
+            <button class="btn btn-ghost" data-buy="one" data-seats="5">Buy for a team of 5</button>
+          </div>
+          <div class="buy-status" aria-live="polite"></div>
+        </div>
       </div>
       <div class="price-card" id="all-three" style="border-color: rgba(32,178,170,0.35);">
         <h3>All three explorers</h3>
         <p style="color: var(--slate-light); margin-bottom: 16px;">Plans, hospitals and physicians, linked across all three.</p>
         <div class="price-row"><span>1 user</span><b>$1,200 <small style="font-size: 0.9rem; color: var(--slate);">per year</small></b></div>
         <div class="price-row"><span>Team of up to 5 users</span><b>$3,500 <small style="font-size: 0.9rem; color: var(--slate);">per year</small></b></div>
+        <div class="buy">
+          <div class="buy-btns">
+            <button class="btn btn-primary" data-buy="all" data-seats="1">Buy for 1 user</button>
+            <button class="btn btn-ghost" data-buy="all" data-seats="5">Buy for a team of 5</button>
+          </div>
+          <div class="buy-status" aria-live="polite"></div>
+        </div>
       </div>
     </div>
 
@@ -99,11 +125,14 @@
     <div class="offer" id="beta-offer">
       <div class="section-eyebrow">Beta offer</div>
       <h2>50% off your first year for beta feedback</h2>
+      <p id="beta-yes" hidden style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">You qualify: your 50% beta discount will be applied automatically at checkout.</p>
+      <p id="beta-used" hidden style="color: var(--slate-light); margin-bottom: 12px;">Your beta discount has already been used on a plan.</p>
       <ul style="padding-left: 20px;">
         <li>Send feedback through the feedback button in the MA Enrollment, Hospital Financial or Physician &amp; Practice explorer while the beta is running.</li>
         <li>The discount applies to your first annual subscription: one explorer or all three, 1 user or a team of 5.</li>
         <li>The beta runs until subscriptions begin in December. We will announce the date here and email everyone who signed up for the beta.</li>
         <li>After the first year, the subscription renews at the list price in effect at renewal.</li>
+        <li class="account-link">Sign in with the email you used for feedback, and the discount is applied at checkout automatically. Already subscribed? <a href="/account" style="color: var(--teal);">Go to your account →</a></li>
       </ul>
     </div>
 
@@ -176,5 +205,30 @@
   </footer>
 
   <script src="nav.js"></script>
+  <script src="/billing.js"></script>
+  <script>
+    (function () {
+      var B = window.TrynytyBilling, q = new URLSearchParams(location.search), sel = document.getElementById('buy-tool');
+      if (q.get('tool') && sel.querySelector('option[value="' + q.get('tool') + '"]')) sel.value = q.get('tool');
+      document.querySelectorAll('[data-buy]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var tool = b.dataset.buy === 'all' ? 'all' : sel.value;
+          B.buy(tool, b.dataset.seats, b.closest('.buy').querySelector('.buy-status'));
+        });
+      });
+      B.boot().then(function (clerk) {
+        if (clerk && clerk.user) B.api('/api/beta-status').then(function (b) {
+          if (b.apply) document.getElementById('beta-yes').hidden = false;
+          else if (b.used) document.getElementById('beta-used').hidden = false;
+        }, function () {});
+        var pending = q.get('buy');
+        if (!clerk || !clerk.user || !pending) return;
+        var parts = pending.split(':'); history.replaceState(null, '', location.pathname + '#plans');
+        var card = parts[0] === 'all' ? document.getElementById('all-three') : document.getElementById('one-explorer');
+        if (parts[0] !== 'all') sel.value = parts[0];
+        B.buy(parts[0], parts[1], card.querySelector('.buy-status'));
+      });
+    })();
+  </script>
 </body>
 </html>
