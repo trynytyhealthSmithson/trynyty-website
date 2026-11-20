@@ -1,0 +1,9 @@
+{
+  "name": "trynyty-website",
+  "private": true,
+  "description": "Static site plus serverless functions for sign-in and billing.",
+  "dependencies": {
+    "@clerk/backend": "^3.31.3",
+    "stripe": "^23.2.0"
+  }
+}
