@@ -20,6 +20,15 @@ const BETA_COUPON = 'trynyty_beta50';
 const BETA_CODE = 'BETA50';
 const SEATS = 5;
 
+// Which plan a Stripe subscription is on, from its price's lookup key.
+const planOfSub = sub => {
+  const item = ((sub && sub.items && sub.items.data) || [])[0];
+  const key = item && item.price && item.price.lookup_key;
+  return key && PLANS[key] ? key : null;
+};
+// Does plan a include everything in plan b, at the same team size?
+const covers = (a, b) => PLANS[a] && PLANS[b] && PLANS[a].seats === PLANS[b].seats && PLANS[b].tools.every(t => PLANS[a].tools.includes(t));
+
 const planKey = (tool, seats) => `trynyty_${tool === 'all' ? 'all' : tool}_${Number(seats) === 5 ? 5 : 1}`;
 
-module.exports = { TOOLS, PLANS, TAX_CODE, BETA_COUPON, BETA_CODE, SEATS, planKey };
+module.exports = { TOOLS, PLANS, TAX_CODE, BETA_COUPON, BETA_CODE, SEATS, planKey, planOfSub, covers };

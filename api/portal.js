@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     }
     if (!customer) return send(res, 404, { error: 'There is no billing account here yet.' });
     const returnUrl = `${siteUrl(req)}/account`;
-    const configuration = await ensurePortal(returnUrl);
+    const configuration = await ensurePortal(returnUrl, 'manage');
     const session = await getStripe().billingPortal.sessions.create({ customer, configuration, return_url: returnUrl });
     return send(res, 200, { url: session.url });
   } catch (e) {

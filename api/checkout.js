@@ -1,7 +1,7 @@
 // Start a Stripe Checkout for a plan. Body: { tool: 'ma'|'hospital'|'physician'|'all', seats: 1|5 }.
 // The buyer must be signed in (Clerk session token in the Authorization header).
-const { enabled, getStripe, getClerk, siteUrl, sessionOf, ensureCatalog, send } = require('./_lib/clients');
-const { PLANS, planKey, BETA_COUPON } = require('./_lib/plans');
+const { enabled, getStripe, getClerk, siteUrl, sessionOf, ensureCatalog, ensurePortal, send } = require('./_lib/clients');
+const { PLANS, planKey, planOfSub, covers, BETA_COUPON } = require('./_lib/plans');
 const { betaStatus } = require('./_lib/beta');
 
 const adminOf = claims => {
@@ -37,8 +37,34 @@ module.exports = async (req, res) => {
       } else { ownerType = 'pending_org'; ownerId = ''; customer = null; }
     }
     if (customer) {
-      const live = await s.subscriptions.list({ customer, status: 'active', price: prices[key], limit: 1 });
-      if (live.data.length) return send(res, 409, { error: 'You already have this plan. You can manage it from your account page.' });
+      const live = (await s.subscriptions.list({ customer, status: 'active', limit: 100 })).data.filter(planOfSub);
+      if (live.some(sub => covers(planOfSub(sub), key))) {
+        return send(res, 409, { error: 'Your plan already includes this. You can manage it from your account page.' });
+      }
+      // Upgrade: move an existing plan of the same team size to this one, charging only the difference
+      // for the rest of the year (Stripe shows the amount and asks to confirm). Plans this one fully
+      // includes are ended with credit once the upgrade goes through (see endCoveredPlans).
+      const from = live.find(sub => covers(key, planOfSub(sub)));
+      if (from) {
+        const item = from.items.data[0];
+        const firstYear = !item.current_period_start || !from.start_date || item.current_period_start - from.start_date < 86400;
+        const beta = (from.metadata || {}).beta === 'auto' && firstYear;      // the beta 50% covers the first year, upgrades included
+        const site = siteUrl(req);
+        const configuration = await ensurePortal(`${site}/account`, plan.seats === 5 ? 'upgrade5' : 'upgrade1');
+        const portal = await s.billingPortal.sessions.create({
+          customer, configuration, return_url: `${site}/account`,
+          flow_data: {
+            type: 'subscription_update_confirm',
+            subscription_update_confirm: {
+              subscription: from.id,
+              items: [{ id: item.id, price: prices[key], quantity: 1 }],
+              ...(beta ? { discounts: [{ coupon: BETA_COUPON }] } : {}),
+            },
+            after_completion: { type: 'redirect', redirect: { return_url: `${site}/welcome?upgraded=1` } },
+          },
+        });
+        return send(res, 200, { url: portal.url, upgrade: true });
+      }
     }
     if (!customer && ownerType === 'user') {
       const c = await s.customers.create({ email, name: [user.firstName, user.lastName].filter(Boolean).join(' ') || undefined, metadata: { owner_type: 'user', owner_id: user.id } });
