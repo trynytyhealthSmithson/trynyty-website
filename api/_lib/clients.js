@@ -41,8 +41,10 @@ async function ensureCatalog() {
   try { await s.coupons.retrieve(BETA_COUPON); } catch (e) {
     await s.coupons.create({ id: BETA_COUPON, name: 'Beta tester: 50% off the first year', percent_off: 50, duration: 'once' });
   }
-  const codes = await s.promotionCodes.list({ code: BETA_CODE, limit: 1 });
-  if (!codes.data.length) await s.promotionCodes.create({ code: BETA_CODE, promotion: { type: 'coupon', coupon: BETA_COUPON } });
+  // The shared BETA50 code is retired: the discount now applies automatically to people who sent
+  // feedback, and exceptions get personal one-time codes made in the Stripe dashboard.
+  const codes = await s.promotionCodes.list({ code: BETA_CODE, active: true, limit: 5 });
+  for (const c of codes.data) await s.promotionCodes.update(c.id, { active: false });
   catalog = byKey;
   return catalog;
 }

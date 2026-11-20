@@ -125,12 +125,14 @@
     <div class="offer" id="beta-offer">
       <div class="section-eyebrow">Beta offer</div>
       <h2>50% off your first year for beta feedback</h2>
+      <p id="beta-yes" hidden style="color: var(--teal); font-weight: 600; margin-bottom: 12px;">You qualify: your 50% beta discount will be applied automatically at checkout.</p>
+      <p id="beta-used" hidden style="color: var(--slate-light); margin-bottom: 12px;">Your beta discount has already been used on a plan.</p>
       <ul style="padding-left: 20px;">
         <li>Send feedback through the feedback button in the MA Enrollment, Hospital Financial or Physician &amp; Practice explorer while the beta is running.</li>
         <li>The discount applies to your first annual subscription: one explorer or all three, 1 user or a team of 5.</li>
         <li>The beta runs until subscriptions begin in December. We will announce the date here and email everyone who signed up for the beta.</li>
         <li>After the first year, the subscription renews at the list price in effect at renewal.</li>
-        <li class="account-link">Beta testers: enter the code we sent you on the checkout page. Already subscribed? <a href="/account" style="color: var(--teal);">Go to your account →</a></li>
+        <li class="account-link">Sign in with the email you used for feedback, and the discount is applied at checkout automatically. Already subscribed? <a href="/account" style="color: var(--teal);">Go to your account →</a></li>
       </ul>
     </div>
 
@@ -215,6 +217,10 @@
         });
       });
       B.boot().then(function (clerk) {
+        if (clerk && clerk.user) B.api('/api/beta-status').then(function (b) {
+          if (b.apply) document.getElementById('beta-yes').hidden = false;
+          else if (b.used) document.getElementById('beta-used').hidden = false;
+        }, function () {});
         var pending = q.get('buy');
         if (!clerk || !clerk.user || !pending) return;
         var parts = pending.split(':'); history.replaceState(null, '', location.pathname + '#plans');

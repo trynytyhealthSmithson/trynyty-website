@@ -4,6 +4,7 @@
   "description": "Static site plus serverless functions for sign-in and billing.",
   "dependencies": {
     "@clerk/backend": "^3.31.3",
+    "@neondatabase/serverless": "^1.2.1",
     "stripe": "^23.2.0"
   }
 }

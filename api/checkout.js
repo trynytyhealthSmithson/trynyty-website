@@ -1,7 +1,8 @@
 // Start a Stripe Checkout for a plan. Body: { tool: 'ma'|'hospital'|'physician'|'all', seats: 1|5 }.
 // The buyer must be signed in (Clerk session token in the Authorization header).
 const { enabled, getStripe, getClerk, siteUrl, sessionOf, ensureCatalog, send } = require('./_lib/clients');
-const { PLANS, planKey } = require('./_lib/plans');
+const { PLANS, planKey, BETA_COUPON } = require('./_lib/plans');
+const { betaStatus } = require('./_lib/beta');
 
 const adminOf = claims => {
   const o = claims.o || {};
@@ -45,12 +46,12 @@ module.exports = async (req, res) => {
       await clerk.users.updateUserMetadata(user.id, { privateMetadata: { stripe_customer: customer } });
     }
 
-    const meta = { plan: key, tools: plan.tools.join(','), seats: String(plan.seats), owner_type: ownerType, owner_id: ownerId, buyer: user.id };
+    const beta = await betaStatus(email);
+    const meta = { plan: key, tools: plan.tools.join(','), seats: String(plan.seats), owner_type: ownerType, owner_id: ownerId, buyer: user.id, beta: beta.apply ? 'auto' : '' };
     const site = siteUrl(req);
     const params = {
       mode: 'subscription',
       line_items: [{ price: prices[key], quantity: 1 }],
-      allow_promotion_codes: true,
       billing_address_collection: 'required',
       tax_id_collection: { enabled: true },
       automatic_tax: { enabled: process.env.STRIPE_TAX === 'on' },
@@ -60,6 +61,8 @@ module.exports = async (req, res) => {
       success_url: `${site}/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${site}/pricing?tool=${tool}#plans`,
     };
+    if (beta.apply) params.discounts = [{ coupon: BETA_COUPON }];   // earned by sending feedback
+    else params.allow_promotion_codes = true;                         // personal codes for exceptions
     if (customer) { params.customer = customer; params.customer_update = { address: 'auto', name: 'auto' }; }
     else params.customer_email = email;
     if (ownerType === 'pending_org') {
