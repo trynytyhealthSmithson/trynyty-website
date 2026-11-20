@@ -97,9 +97,9 @@
       <div id="w-body"><p>This usually takes a few seconds.</p></div>
       <div class="acct-btns"><a class="btn btn-ghost" href="/account">Go to your account</a></div>
     </div>
-    <div class="acct-card">
-      <h2>Bought a team plan?</h2>
-      <p>Your team was created with you as its admin. From <a class="tool" href="/account">your account</a>, choose <b>Invite or remove people</b> to add up to four more people. Each person signs in with their own email.</p>
+    <div class="acct-card" id="w-team" hidden>
+      <h2>Your team is ready</h2>
+      <p>Your team was set up with you as its admin. From <a class="tool" href="/account">your account</a>, choose <b>Invite or remove people</b> to add up to four more people. Each person signs in with their own email.</p>
     </div>
   </div>
 
@@ -154,6 +154,7 @@
       var show = function (p) {
         var tools = p.mine.tools.concat(p.team.tools).filter(function (v, i, a) { return a.indexOf(v) === i; });
         if (!tools.length) return false;
+        if (p.team.id && p.team.admin) document.getElementById('w-team').hidden = false;
         document.getElementById('w-title').textContent = 'Your explorers are ready';
         document.getElementById('w-body').innerHTML = '<ul>' + tools.map(function (k) { return '<li><a class="tool" href="' + B.TOOL_URLS[k] + '">' + B.TOOL_NAMES[k] + ' →</a></li>'; }).join('') + '</ul>';
         return true;
