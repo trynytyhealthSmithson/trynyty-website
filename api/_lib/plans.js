@@ -32,3 +32,14 @@ const covers = (a, b) => PLANS[a] && PLANS[b] && PLANS[a].seats === PLANS[b].sea
 const planKey = (tool, seats) => `trynyty_${tool === 'all' ? 'all' : tool}_${Number(seats) === 5 ? 5 : 1}`;
 
 module.exports = { TOOLS, PLANS, TAX_CODE, BETA_COUPON, BETA_CODE, SEATS, planKey, planOfSub, covers };
+
+// Team plans are for organizations: the buyer needs a work email, and the team's plan covers people
+// whose email is on the team's domain (exceptions: add domains to the team's "team_domains").
+const FREE_EMAIL = new Set(['gmail.com', 'googlemail.com', 'yahoo.com', 'ymail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com',
+  'icloud.com', 'me.com', 'mac.com', 'aol.com', 'proton.me', 'protonmail.com', 'pm.me', 'gmx.com', 'gmx.net', 'mail.com', 'yandex.com',
+  'zoho.com', 'zohomail.com', 'fastmail.com', 'hey.com', 'tutanota.com', 'comcast.net', 'att.net', 'sbcglobal.net', 'verizon.net',
+  'bellsouth.net', 'cox.net', 'charter.net', 'earthlink.net', 'rocketmail.com']);
+const domainOf = email => String(email || '').toLowerCase().split('@')[1] || '';
+const isWorkEmail = email => { const d = domainOf(email); return !!d && !FREE_EMAIL.has(d); };
+module.exports.domainOf = domainOf;
+module.exports.isWorkEmail = isWorkEmail;
