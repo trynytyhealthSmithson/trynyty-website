@@ -28,12 +28,22 @@ async function endCoveredPlans(customerId) {
   }
 }
 
+// An invoiced plan's first year starts when its first invoice is paid, unless access was given
+// before payment (for example, against a purchase order).
+const awaitingFirstPayment = sub => {
+  if (sub.collection_method !== 'send_invoice' || (sub.metadata || {}).access_before_payment === 'yes') return false;
+  const inv = sub.latest_invoice;
+  const first = inv && typeof inv === 'object' && inv.billing_reason === 'subscription_create';
+  return !!first && inv.status !== 'paid';
+};
+
 async function accessFor(customerId) {
   const s = getStripe();
-  const subs = await s.subscriptions.list({ customer: customerId, status: 'all', limit: 100 });
+  const subs = await s.subscriptions.list({ customer: customerId, status: 'all', limit: 100, expand: ['data.latest_invoice'] });
   const tools = new Set(); let end = 0;
   for (const sub of subs.data) {
     if (!LIVE.has(sub.status)) continue;
+    if (awaitingFirstPayment(sub)) continue;
     toolsOf(sub).forEach(t => tools.add(t));
     end = Math.max(end, endOf(sub));
   }
